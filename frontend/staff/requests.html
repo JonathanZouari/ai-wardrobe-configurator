@@ -10,7 +10,7 @@
   
   
   
-<title>Quotation requests | Atelier Joinery Studio</title><link href="../css/styles.css" rel="stylesheet"/></head>
+<title>Quotation requests | Atelier Joinery Studio</title><link href="../css/styles.css" rel="stylesheet"/><link href="../css/a11y.css" rel="stylesheet"/></head>
 <body class="min-h-screen flex flex-col bg-linen text-bark">
 
   <!-- 1. HEADER (Top bar matching Staff Sign-In style) -->
@@ -361,14 +361,14 @@
       <div class="flex items-center space-x-3">
         <span class="font-medium text-bark">1–6 of 6</span>
         <div class="inline-flex rounded-custom border border-outline-variant bg-white overflow-hidden shadow-xs">
-          <button type="button" disabled class="px-2.5 py-1.5 text-outline-variant cursor-not-allowed bg-[#fcf9f5]">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button type="button" disabled aria-label="Previous page" class="px-2.5 py-1.5 text-outline-variant cursor-not-allowed bg-[#fcf9f5]">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
           </button>
           <div class="w-[1px] bg-outline-variant"></div>
-          <button type="button" disabled class="px-2.5 py-1.5 text-outline-variant cursor-not-allowed bg-[#fcf9f5]">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button type="button" disabled aria-label="Next page" class="px-2.5 py-1.5 text-outline-variant cursor-not-allowed bg-[#fcf9f5]">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </button>
@@ -391,5 +391,5 @@
     </div>
   </footer>
 
-<script defer src="../js/staff/requests.js"></script></body>
+<script defer src="../js/staff/requests.js"></script><script type="module" src="../js/a11y.js"></script></body>
 </html>

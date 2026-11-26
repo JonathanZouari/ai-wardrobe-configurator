@@ -1,0 +1,216 @@
+/* Accessibility menu, skip link and the modes it toggles. Loaded on every page after styles.css. */
+
+/* ---- Baseline (always on) ---- */
+:focus-visible {
+  outline: 3px solid #1a5fb4 !important;
+  outline-offset: 2px !important;
+}
+
+.a11y-skip {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  background: #1f1a17;
+  color: #fff;
+  font: 600 1rem/1.2 Manrope, Arial, sans-serif;
+  border-radius: 0.375rem;
+  transform: translateY(-200%);
+}
+.a11y-skip:focus {
+  transform: none;
+}
+
+main:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Menu ---- */
+#a11y-root {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #1f1a17;
+}
+
+.a11y-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  background: #8f4518;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+.a11y-trigger:hover {
+  background: #6f3410;
+}
+
+.a11y-panel {
+  position: absolute;
+  right: 0;
+  bottom: 4rem;
+  width: 18rem;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #b9ada3;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.a11y-panel[hidden] {
+  display: none;
+}
+
+.a11y-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+.a11y-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.875em;
+  font-weight: 600;
+}
+
+.a11y-size {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.a11y-size-value {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+}
+
+.a11y-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.a11y-btn {
+  min-height: 2.75rem;
+  padding: 0.5rem;
+  border: 1px solid #6b5f56;
+  border-radius: 0.5rem;
+  background: #faf5ee;
+  color: #1f1a17;
+  font: inherit;
+  font-size: 0.875em;
+  cursor: pointer;
+}
+.a11y-btn:hover:not(:disabled) {
+  background: #efe5d9;
+}
+.a11y-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.a11y-size .a11y-btn {
+  min-width: 3rem;
+  font-weight: 700;
+}
+.a11y-toggle[aria-pressed='true'] {
+  background: #8f4518;
+  border-color: #8f4518;
+  color: #fff;
+}
+.a11y-reset {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.a11y-statement {
+  display: block;
+  text-align: center;
+  color: #1a5fb4;
+  text-decoration: underline;
+  font-size: 0.875em;
+}
+
+.a11y-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Modes ---- */
+/* Filters go on body's children, not body, so fixed headers keep working and the menu stays readable. */
+html.a11y-grayscale body > *:not(#a11y-root) {
+  filter: grayscale(1);
+}
+
+html.a11y-contrast body *:not(#a11y-root):not(#a11y-root *):not(img):not(canvas):not(svg *) {
+  background-color: #000 !important;
+  background-image: none !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+html.a11y-contrast body {
+  background: #000 !important;
+}
+html.a11y-contrast body a:not(#a11y-root *),
+html.a11y-contrast body a:not(#a11y-root *) * {
+  color: #ffeb3b !important;
+}
+
+html.a11y-links a:not(#a11y-root *) {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  outline: 2px dashed currentColor;
+  outline-offset: 2px;
+}
+
+html.a11y-font body *:not(.material-symbols-outlined):not(.material-symbols-rounded) {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+html.a11y-spacing body *:not(#a11y-root *) {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.5 !important;
+}
+html.a11y-spacing body p {
+  margin-bottom: 2em;
+}
+
+html.a11y-motion *, html.a11y-motion *::before, html.a11y-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-cursor, html.a11y-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l16 11-7 1 4 8-3 1-4-8-6 5z' fill='%23000' stroke='%23fff' stroke-width='1.2'/%3E%3C/svg%3E") 4 2, auto !important;
+}

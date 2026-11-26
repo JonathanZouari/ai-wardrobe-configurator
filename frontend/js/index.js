@@ -34,6 +34,7 @@ function showExistingDraft(draft) {
 const launch = document.getElementById('btn-launch-studio');
 const problem = document.createElement('p');
 problem.className = 'text-xs text-error';
+problem.id = 'start-problem';
 problem.setAttribute('role', 'alert');
 launch.parentElement.appendChild(problem);
 

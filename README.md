@@ -34,7 +34,7 @@ pytest
 Frontend unit tests (Node 22):
 
 ```bash
-node --test frontend/tests/geometry.test.mjs
+node --test frontend/tests/*.test.mjs
 ```
 
 Health check: <http://127.0.0.1:8000/api/health>. The 3D configurator page needs the backend running: it asks `POST /api/designs` for the design it renders.

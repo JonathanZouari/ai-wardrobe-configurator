@@ -9,6 +9,7 @@ tabs.forEach((tab) => {
     rows.forEach((row) => { row.hidden = status !== '' && row.dataset.status !== status; });
     tabs.forEach((t) => {
       const on = t === tab;
+      t.setAttribute('aria-pressed', String(on));
       t.classList.add(...(on ? ACTIVE : IDLE));
       t.classList.remove(...(on ? IDLE : ACTIVE));
     });

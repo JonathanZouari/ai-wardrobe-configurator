@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סיכום שינויי הנגישות</title>
+<style>
+  body { font-family: system-ui, Arial, sans-serif; max-width: 52rem; margin: 0 auto; padding: 1.5rem; line-height: 1.6; color: #3a302a; background: #faf5ee; }
+  h1 { margin-bottom: .25rem; } h2 { margin-top: 2rem; border-bottom: 2px solid #9e4d1c; }
+  table { border-collapse: collapse; width: 100%; background: #fff; } th, td { border: 1px solid #d8d0c8; padding: .5rem .75rem; text-align: right; vertical-align: top; }
+  .sw { display: inline-block; width: 1em; height: 1em; vertical-align: middle; border-radius: 3px; }
+</style>
+</head>
+<body>
+<main>
+<h1>סיכום שינויי הנגישות</h1>
+<p>26 בנובמבר 2026 · ענף <bdi>feature/accessibility</bdi> · יעד: ת"י 5568 חלק 1 (2021), רמה AA, המבוסס על <bdi>WCAG 2.0</bdi></p>
+
+<h2>מה השתנה</h2>
+<table>
+<thead><tr><th scope="col">תחום</th><th scope="col">לפני</th><th scope="col">אחרי</th></tr></thead>
+<tbody>
+<tr><th scope="row">צבע ראשי</th><td><span class="sw" style="background:#c2652a"></span> <bdi>#c2652a</bdi>, ניגודיות נמוכה מ-4.5</td><td><span class="sw" style="background:#9e4d1c"></span> <bdi>#9e4d1c</bdi>, וגם טקסט אפור חלש הוכהה</td></tr>
+<tr><th scope="row">מקלדת</th><td>מגירות, סיבוב והזזה בתלת-ממד רק בעכבר; סימון מוקד חלקי</td><td>כפתורים לכל פעולה, קישור דילוג, מסגרת מוקד אחידה, חצים בלשוניות</td></tr>
+<tr><th scope="row">קוראי מסך</th><td>אייקונים הוקראו כטקסט; חסרו תוויות; לתלת-ממד לא היה תיאור</td><td>אייקונים מוסתרים, תוויות ושמות, מבנה כותרות, תיאור מילולי של הארון, הודעות מצב</td></tr>
+<tr><th scope="row">עורך פנים</th><td>המוקד אבד אחרי כל פעולה</td><td>המוקד נשמר, בחירת תא בכפתור, הוראות מקלדת, הודעה אחרי כל שינוי</td></tr>
+<tr><th scope="row">עוזר העיצוב</th><td>לוח קבוע שמסתיר תוכן; מוצגות 4 שורות אחרונות</td><td>אפשר לכווץ (מכווץ במסך צר), תמלול מלא, ניהול מוקד</td></tr>
+<tr><th scope="row">הגדלה 200%</th><td>הניווט נעלם ואזורים נחתכו</td><td>הניווט תמיד זמין; הכותרת העליונה נגללת עם העמוד במסך צר</td></tr>
+<tr><th scope="row">הפחתת תנועה</th><td>לא נתמכה</td><td>נתמכת לפי הגדרת מערכת ההפעלה</td></tr>
+<tr><th scope="row">הצהרה</th><td>לא הייתה</td><td>עמוד <bdi>accessibility.html</bdi> וקישור אליו בכל עמוד</td></tr>
+<tr><th scope="row">כפתורים בלי פעולה</th><td>בחירת ידית והורדת PDF נראו פעילים</td><td>הידיות מוצגות כמידע; כפתור ה-PDF מושבת עם הסבר</td></tr>
+</tbody>
+</table>
+
+<h2>מה נבדק</h2>
+<ul>
+<li>סריקת <bdi>axe-core 4.10.2 (WCAG 2.0 A/AA)</bdi> ב-12 העמודים, ברוחב 1440 ו-640 פיקסלים: מ-220 רכיבים מפרים ל-0.</li>
+<li>בדיקות דפדפן אוטומטיות במקלדת, בהגדלה ובמצב שבו השרת לא זמין: 56 מתוך 56 עברו. בחלק מההרצות שרת הפיתוח המקומי ניתק את טעינת קובץ העיצוב.</li>
+<li>231 בדיקות <bdi>pytest</bdi> ובדיקות <bdi>JavaScript</bdi> עברו.</li>
+<li>סקירת אבטחה של השינויים (בוצעה על ידי מחבר השינויים): לא נמצאו ממצאים.</li>
+</ul>
+
+<h2>מה עדיין פתוח</h2>
+<ul>
+<li><strong>לא בוצעה בדיקה עם קורא מסך</strong>, ואין אישור של מורשה נגישות. אין להצהיר על עמידה מלאה.</li>
+<li>בהצהרה יש להשלים: שם העסק, טלפון, דוא"ל ורכז נגישות (חובה מ-25 עובדים).</li>
+<li>יש לבדוק אם חל על העסק פטור (למשל עוסק פטור או מחזור עד 100,000 ש"ח).</li>
+<li>העוזר הקולי עם מיקרופון והצעות ממנו לא נבדקו.</li>
+<li>הלוח של עוזר העיצוב עדיין צף מעל התוכן כשהוא פתוח.</li>
+<li>במסך צר תוויות המידות בתלת-ממד עלולות לחפוף לכפתורים.</li>
+<li>תיאור הארון מוקרא במלואו אחרי כל שינוי, וזה עלול להיות ארוך.</li>
+<li>בעתיד: קובצי PDF יידרשו לעמוד בת"י 5568 חלק 2.</li>
+</ul>
+</main>
+</body>
+</html>

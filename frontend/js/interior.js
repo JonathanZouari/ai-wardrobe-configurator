@@ -40,15 +40,19 @@ const labelOf = (type) => catalog.components[type].label;
 async function run(operations, selectNew = false) {
   const before = new Set(items().map((item) => item.id));
   $('editor-status').textContent = '';
+  let outcome = 'Design updated.';
   try {
     design = await applyDraftOperations(operations);
     if (selectNew) selectedId = items().find((item) => !before.has(item.id))?.id ?? selectedId;
     if (!items().some((item) => item.id === selectedId)) selectedId = null;
     selectedBay = Math.min(selectedBay, design.layout.bays.length - 1);
   } catch (error) {
-    $('editor-status').textContent = error.message;
+    outcome = error.message;
   }
   render();
+  const item = items().find((candidate) => candidate.id === selectedId);
+  const where = item ? ` ${labelOf(item.type)}: bay ${item.compartment + 1}, ${heightAboveFloor(item)} mm from base.` : '';
+  $('editor-status').textContent = `${outcome}${where}`;
 }
 
 const add = (type, bay, y) => run([{ op: 'add_component', type, bay, y_mm: Math.max(0, snap(y)) }], true);
@@ -65,11 +69,13 @@ function renderCatalog(filter = '') {
     card.addEventListener('dragstart', (e) => e.dataTransfer.setData(DRAG_TYPE, type));
     const icon = el('div', 'w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0');
     icon.append(el('span', 'material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors', ICONS[type]));
+    icon.setAttribute('aria-hidden', 'true');
     const text = el('div', 'flex flex-col flex-1 min-w-0');
     text.append(el('span', 'font-medium text-xs text-on-surface truncate', entry.label), el('p', 'text-[11px] text-on-surface-variant mt-0.5', HINTS[type]));
     const button = el('button', 'px-2.5 py-1.5 text-xs font-label bg-surface-container hover:bg-surface-container-high text-on-surface rounded', 'Add');
     button.type = 'button';
     button.setAttribute('aria-label', `Add ${entry.label} to bay ${selectedBay + 1}`);
+    button.dataset.focusKey = `add-${type}`;
     button.addEventListener('click', () => add(type, selectedBay, type === 'drawer' ? 0 : design.layout.interior_height_mm / 2));
     card.append(icon, text, button);
     return card;
@@ -89,6 +95,7 @@ function itemButton(item) {
   const button = el('button', `absolute left-1 right-1 min-h-[8px] flex items-center px-2 cursor-grab ${ITEM_LOOK[item.type]} ${selected ? 'ring-2 ring-primary' : ''}`);
   button.type = 'button';
   button.draggable = true;
+  button.dataset.focusKey = `item-${item.id}`;
   button.style.bottom = `${(heightAboveFloor(item) / interior) * 100}%`;
   button.style.height = `${(item.size_mm.y / interior) * 100}%`;
   button.setAttribute('aria-label', `${labelOf(item.type)}, bay ${item.compartment + 1}, ${heightAboveFloor(item)} mm from base`);
@@ -122,7 +129,11 @@ function renderCanvas() {
     const active = index === selectedBay;
     const column = el('div', `relative rounded ${active ? 'bg-surface-container-lowest shadow-inner ring-2 ring-primary/40' : 'bg-surface-container'}`);
     column.style.flex = `${bay.width_mm} 1 0`;
-    column.append(el('div', `absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-mono ${active ? 'text-primary font-bold' : 'text-on-surface-variant font-medium'}`, `Bay ${index + 1} · ${bay.width_mm} mm`));
+    const heading = el('button', `absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-mono ${active ? 'text-primary font-bold underline' : 'text-on-surface-variant font-medium'}`, `Bay ${index + 1} · ${bay.width_mm} mm`);
+    heading.type = 'button';
+    heading.dataset.focusKey = `bay-${index}`;
+    heading.setAttribute('aria-pressed', String(active));
+    column.append(heading); // its click bubbles to the column, which selects the bay
     items().filter((item) => item.compartment === index).forEach((item) => column.append(itemButton(item)));
     column.addEventListener('click', () => {
       selectedBay = index;
@@ -165,12 +176,14 @@ function renderProperties() {
   title.append(el('span', 'font-medium text-xs text-on-surface', labelOf(item.type)),
     el('span', 'text-[10px] font-label uppercase px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-bold', 'Selected'));
 
-  const position = el('input', 'w-full px-2 py-1 font-mono text-xs bg-surface-container rounded text-on-surface focus:outline-none focus:ring-1 focus:ring-primary');
+  const position = el('input', 'w-full px-2 py-1 font-mono text-xs bg-surface-container rounded text-on-surface focus:ring-1 focus:ring-primary');
   Object.assign(position, { type: 'number', min: 0, max, step: step(), value: heightAboveFloor(item) });
+  position.dataset.focusKey = 'position';
   position.addEventListener('change', () => move(item.id, { y_mm: Math.max(0, Math.min(max, Number(position.value) || 0)) }));
   const slider = el('input', 'accent-primary cursor-pointer w-full');
   Object.assign(slider, { type: 'range', min: 0, max, step: step(), value: heightAboveFloor(item) });
-  slider.setAttribute('aria-label', 'Position from base');
+  slider.setAttribute('aria-label', 'Position from base slider, mm');
+  slider.dataset.focusKey = 'slider';
   slider.addEventListener('change', () => move(item.id, { y_mm: Number(slider.value) }));
 
   const bays = el('div', 'grid grid-cols-3 gap-1.5');
@@ -179,6 +192,7 @@ function renderProperties() {
     const button = el('button', `py-1 text-xs font-label rounded ${current ? 'bg-primary text-on-primary font-medium' : 'bg-surface-container text-on-surface-variant hover:text-on-surface'}`, `Bay ${index + 1}`);
     button.type = 'button';
     button.setAttribute('aria-pressed', String(current));
+    button.dataset.focusKey = `move-bay-${index}`;
     button.addEventListener('click', () => { selectedBay = index; move(item.id, { bay: index }); });
     bays.append(button);
   });
@@ -186,19 +200,32 @@ function renderProperties() {
   const actions = el('div', 'grid grid-cols-2 gap-2 pt-1');
   const duplicate = el('button', 'px-2.5 py-1.5 text-xs font-label bg-surface-container hover:bg-surface-container-high text-on-surface rounded', 'Duplicate');
   duplicate.type = 'button';
+  duplicate.dataset.focusKey = 'duplicate';
   duplicate.addEventListener('click', () => add(item.type, item.compartment, Math.min(max, heightAboveFloor(item) + item.size_mm.y + GRID_STEP_MM)));
   const remove = el('button', 'px-2.5 py-1.5 text-xs font-label bg-surface-container hover:bg-error-container hover:text-error text-on-surface rounded', 'Remove');
   remove.type = 'button';
+  remove.dataset.focusKey = 'remove';
   remove.addEventListener('click', () => run([{ op: 'remove_component', id: item.id }]));
   actions.append(duplicate, remove);
 
-  panel.replaceChildren(title, field('Position from base (mm)', position), slider, field('Bay', bays), actions);
+  const bayGroup = el('div', 'flex flex-col gap-1 text-xs font-label text-on-surface-variant');
+  bayGroup.setAttribute('role', 'group');
+  bayGroup.setAttribute('aria-label', 'Move to bay');
+  bayGroup.append(el('span', '', 'Bay'), bays);
+  panel.replaceChildren(title, field('Position from base (mm)', position), slider, bayGroup, actions);
 }
 
+// Rebuilding the view drops focus, so remember which control had it and give it back.
 function render() {
+  const key = document.activeElement?.dataset?.focusKey;
   renderCanvas();
   renderProperties();
+  renderCatalog($('catalog-search').value);
   $('accessory-led_lighting').checked = design.accessories.includes('led_lighting');
+  if (!key) return;
+  const target = document.querySelector(`[data-focus-key="${key}"]`)
+    ?? document.querySelector(`[data-focus-key="bay-${selectedBay}"]`);
+  target?.focus();
 }
 
 // ---------- controls ----------
@@ -214,7 +241,6 @@ Promise.all([getCatalog(), ensureDraft()])
     catalog = loadedCatalog;
     design = draft;
     $('editor-status').textContent = '';
-    renderCatalog();
     render();
     mountAssistant({ onApplied: (next) => { design = next; selectedId = null; render(); } });
   })

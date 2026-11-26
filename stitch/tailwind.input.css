@@ -16,11 +16,6 @@ body {
       font-family: 'Manrope', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    input:focus {
-      outline: none;
-      border-color: #c2652a;
-      box-shadow: 0 0 0 3px rgba(194, 101, 42, 0.15);
-    }
 body {
       background-color: #faf5ee;
       color: #3a302a;
@@ -43,3 +38,20 @@ body {
       background: #faf5ee;
     }
 }
+
+/* accessibility (SI 5568) */
+@layer base {
+  :focus-visible { outline: 3px solid #3a302a; outline-offset: 2px; }
+  main:focus { outline: none; }
+  input[type="date"]:focus-within { outline: 3px solid #3a302a; outline-offset: 2px; }
+  label:has(> input.sr-only:focus-visible) { outline: 3px solid #3a302a; outline-offset: 2px; }
+  @media (min-width: 1280px) { html { scroll-padding-top: 6rem; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+}
+.skip-link { position: absolute; left: 0.5rem; top: -10rem; z-index: 100; padding: 0.75rem 1rem; border-radius: 0.5rem; background: #3a302a; color: #ffffff; }
+.skip-link:focus { top: 0.5rem; }
+/* the selected choice is marked by a visible tick, not by colour alone */
+label:has(> input.sr-only:not(:checked)) .choice-mark { visibility: hidden; }
+[aria-pressed="false"] .choice-check { visibility: hidden; }

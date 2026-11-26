@@ -48,24 +48,44 @@ export function mountAssistant({ onApplied }) {
   panel.setAttribute('aria-label', 'Design assistant');
   const status = el('p', 'text-[11px] text-on-surface-variant min-h-[1rem]');
   status.setAttribute('role', 'status');
-  const transcript = el('p', 'text-xs text-on-surface-variant max-h-24 overflow-y-auto whitespace-pre-line');
+  const transcript = el('div', 'text-xs text-on-surface-variant max-h-24 overflow-y-auto whitespace-pre-line');
+  transcript.setAttribute('role', 'log');
+  transcript.setAttribute('aria-label', 'Conversation transcript');
+  transcript.tabIndex = 0; // scrollable with the keyboard
+  transcript.hidden = true; // an empty box would be an invisible tab stop
   transcript.dir = 'auto'; // Hebrew or English, whichever the conversation is in
   const card = el('div', 'bg-surface-container-low rounded-lg p-3 flex flex-col gap-2');
   card.hidden = true;
   const talk = button('Start talking', PRIMARY);
   const form = el('form', 'flex gap-2');
-  const input = el('input', 'flex-1 min-w-0 px-2.5 py-2 text-xs bg-surface-container rounded-lg text-on-surface focus:outline-none focus:ring-1 focus:ring-primary');
+  const input = el('input', 'flex-1 min-w-0 px-2.5 py-2 text-xs bg-surface-container rounded-lg text-on-surface focus:ring-1 focus:ring-primary');
   Object.assign(input, { type: 'text', placeholder: 'Or type a request (English or Hebrew)', maxLength: 300, dir: 'auto' });
   input.setAttribute('aria-label', 'Request for the design assistant');
   const send = button('Send', QUIET);
   send.type = 'submit';
   form.append(input, send);
-  panel.append(el('h2', 'font-headline text-lg', 'Design assistant'), status, transcript, card, talk, form);
-  document.body.append(panel);
+  // The panel floats over the page, so it can be collapsed to uncover what is behind it.
+  const body = el('div', 'flex flex-col gap-3');
+  body.id = 'assistant-body';
+  body.append(status, transcript, card, talk, form);
+  const toggle = button('Hide', QUIET);
+  toggle.setAttribute('aria-controls', body.id);
+  const setOpen = (open) => {
+    body.hidden = !open;
+    toggle.textContent = open ? 'Hide' : 'Show';
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+  toggle.addEventListener('click', () => setOpen(body.hidden));
+  const header = el('div', 'flex items-center justify-between gap-2');
+  header.append(el('h2', 'font-headline text-lg', 'Design assistant'), toggle);
+  panel.append(header, body);
+  setOpen(window.matchMedia('(min-width: 1280px)').matches);
+  (document.getElementById('main') ?? document.body).append(panel);
 
   const say = (message) => { status.textContent = message; };
   function showTranscript() {
-    transcript.textContent = conversation().split('\n').slice(-4).join('\n');
+    transcript.textContent = conversation();
+    transcript.hidden = !transcript.textContent;
     transcript.scrollTop = transcript.scrollHeight;
   }
 
@@ -79,10 +99,13 @@ export function mountAssistant({ onApplied }) {
     actions.append(accept, reject);
     card.replaceChildren(el('p', 'text-[11px] font-label uppercase tracking-widest text-primary font-semibold', 'Proposed change'), list, actions);
     card.hidden = false;
+    setOpen(true);
+    accept.focus();
 
     reject.addEventListener('click', () => {
       card.hidden = true;
       say('Proposal rejected. Your design was not changed.');
+      input.focus();
       tellVoice('The customer rejected the proposal. The design was not changed.');
     });
     accept.addEventListener('click', async () => {
@@ -90,6 +113,7 @@ export function mountAssistant({ onApplied }) {
       if (before?.revision !== proposal.base_revision) {
         card.hidden = true;
         say('The design changed since this proposal. Please ask again.');
+        input.focus();
         return;
       }
       try {
@@ -103,10 +127,12 @@ export function mountAssistant({ onApplied }) {
         onApplied(restoreDraft(before));
         card.hidden = true;
         say('Change undone.');
+        input.focus();
         tellVoice('The customer undid the change. The design is back to how it was.');
       });
       card.replaceChildren(el('p', 'text-xs text-on-surface', 'Proposal applied. You can undo this change.'), undo);
-      say('');
+      say('Proposal applied.');
+      undo.focus();
       tellVoice('The customer accepted the proposal and it has been applied.');
     });
   }

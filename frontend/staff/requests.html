@@ -11,11 +11,11 @@
   
   
 <title>Quotation requests | Atelier Joinery Studio</title><link href="../css/styles.css" rel="stylesheet"/></head>
-<body class="min-h-screen flex flex-col bg-linen text-bark">
+<body class="min-h-screen flex flex-col bg-linen text-bark"><a class="skip-link" href="#main">Skip to content</a>
 
   <!-- 1. HEADER (Top bar matching Staff Sign-In style) -->
-  <header class="w-full bg-white border-b border-outline-variant sticky top-0 z-30 shadow-sm">
-    <div class="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+  <header class="w-full bg-white border-b border-outline-variant relative xl:sticky top-0 z-30 shadow-sm">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10 min-h-[4rem] flex-wrap xl:flex-nowrap py-2 flex items-center justify-between">
       
       <!-- Brand & Section Label -->
       <div class="flex items-center space-x-6">
@@ -27,8 +27,8 @@
         </div>
 
         <!-- Navigation -->
-        <nav class="hidden md:flex items-center ml-4 pl-6 border-l border-outline-variant">
-          <a href="requests.html" class="inline-flex items-center text-sm font-semibold text-sienna border-b-2 border-sienna pb-4 pt-4 -mb-[1px]">
+        <nav aria-label="Staff" class="flex flex-wrap xl:flex-nowrap xl:whitespace-nowrap items-center ml-4 pl-6 border-l border-outline-variant">
+          <a aria-current="page" href="requests.html" class="inline-flex items-center text-sm font-semibold text-sienna border-b-2 border-sienna pb-4 pt-4 -mb-[1px]">
             Requests
           </a>
         </nav>
@@ -37,7 +37,7 @@
       <!-- Right Staff Info & Logout -->
       <div class="flex items-center space-x-5 text-sm">
         <span class="text-bark font-medium">Staff Member</span>
-        <span class="text-outline-variant">|</span>
+        <span class="text-on-surface-variant">|</span>
         <a href="sign-in.html" class="text-muted-text hover:text-sienna transition-colors duration-150 font-medium">
           Sign out
         </a>
@@ -47,7 +47,7 @@
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="flex-1 max-w-[1400px] w-full mx-auto px-6 lg:px-10 py-8 flex flex-col">
+  <main id="main" tabindex="-1" class="flex-1 max-w-[1400px] w-full mx-auto px-6 lg:px-10 py-8 flex flex-col">
 
     <!-- 2. PAGE TITLE ROW -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6">
@@ -63,14 +63,14 @@
       <!-- Search input -->
       <div class="w-full sm:w-80 relative">
         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-subtle-text">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
-        <input 
+        <input aria-label="Search requests" 
           type="text" 
           placeholder="Search by name, email or request ID" 
-          class="w-full pl-10 pr-4 py-2.5 bg-white border border-outline-variant rounded-custom text-sm text-bark placeholder:text-subtle-text focus:outline-none focus:border-sienna focus:ring-1 focus:ring-sienna transition-all shadow-sm"
+          class="w-full pl-10 pr-4 py-2.5 bg-white border border-outline-variant rounded-custom text-sm text-bark placeholder:text-subtle-text focus:border-sienna focus:ring-1 focus:ring-sienna transition-all shadow-sm"
         />
       </div>
     </div>
@@ -78,31 +78,31 @@
     <!-- 3. STATUS FILTER TABS WITH COUNTS -->
     <div class="flex items-center space-x-1 border-b border-outline-variant mb-6 overflow-x-auto">
       <!-- Tab: All (Active) -->
-      <button type="button" data-status="" class="flex items-center space-x-2 px-4 py-3 text-sm font-semibold text-sienna border-b-2 border-sienna -mb-[1px] whitespace-nowrap transition-colors">
+      <button aria-pressed="true" type="button" data-status="" class="flex items-center space-x-2 px-4 py-3 text-sm font-semibold text-sienna border-b-2 border-sienna -mb-[1px] whitespace-nowrap transition-colors">
         <span>All</span>
         <span class="text-xs px-2 py-0.5 rounded-full bg-sienna-subtle text-sienna font-medium">6</span>
       </button>
 
       <!-- Tab: New -->
-      <button type="button" data-status="New" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
+      <button type="button" aria-pressed="false" data-status="New" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
         <span>New</span>
         <span class="text-xs px-2 py-0.5 rounded-full bg-[#eee7de] text-muted-text font-medium">2</span>
       </button>
 
       <!-- Tab: Under review -->
-      <button type="button" data-status="Under review" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
+      <button type="button" aria-pressed="false" data-status="Under review" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
         <span>Under review</span>
         <span class="text-xs px-2 py-0.5 rounded-full bg-[#eee7de] text-muted-text font-medium">2</span>
       </button>
 
       <!-- Tab: Quoted -->
-      <button type="button" data-status="Quoted" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
+      <button type="button" aria-pressed="false" data-status="Quoted" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
         <span>Quoted</span>
         <span class="text-xs px-2 py-0.5 rounded-full bg-[#eee7de] text-muted-text font-medium">1</span>
       </button>
 
       <!-- Tab: Closed -->
-      <button type="button" data-status="Closed" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
+      <button type="button" aria-pressed="false" data-status="Closed" class="flex items-center space-x-2 px-4 py-3 text-sm font-medium text-muted-text hover:text-bark border-b-2 border-transparent -mb-[1px] whitespace-nowrap transition-colors">
         <span>Closed</span>
         <span class="text-xs px-2 py-0.5 rounded-full bg-[#eee7de] text-muted-text font-medium">1</span>
       </button>
@@ -361,14 +361,14 @@
       <div class="flex items-center space-x-3">
         <span class="font-medium text-bark">1–6 of 6</span>
         <div class="inline-flex rounded-custom border border-outline-variant bg-white overflow-hidden shadow-xs">
-          <button type="button" disabled class="px-2.5 py-1.5 text-outline-variant cursor-not-allowed bg-[#fcf9f5]">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button aria-label="Previous page" type="button" disabled class="px-2.5 py-1.5 text-on-surface-variant cursor-not-allowed bg-[#fcf9f5]">
+            <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
           </button>
           <div class="w-[1px] bg-outline-variant"></div>
-          <button type="button" disabled class="px-2.5 py-1.5 text-outline-variant cursor-not-allowed bg-[#fcf9f5]">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button aria-label="Next page" type="button" disabled class="px-2.5 py-1.5 text-on-surface-variant cursor-not-allowed bg-[#fcf9f5]">
+            <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
           </button>
@@ -389,7 +389,7 @@
     <div class="max-w-[1400px] mx-auto px-6 lg:px-10 text-xs text-subtle-text">
       Staff internal workspace. Sample data only.
     </div>
-  </footer>
+  <p class="w-full text-center text-xs py-3"><a class="underline" href="../accessibility.html">Accessibility statement / <span lang="he" dir="rtl">הצהרת נגישות</span></a></p></footer>
 
 <script defer src="../js/staff/requests.js"></script></body>
 </html>

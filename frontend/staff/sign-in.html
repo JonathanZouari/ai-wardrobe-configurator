@@ -11,11 +11,11 @@
   
   
 <title>Staff sign in | Atelier Joinery Studio</title><link href="../css/styles.css" rel="stylesheet"/></head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-[#c2652a]/15 selection:text-[#3a302a]">
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#9e4d1c]/15 selection:text-[#3a302a]"><a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Header -->
   <header class="w-full border-b border-[#d8d0c8]/60 bg-[#faf5ee]/80 backdrop-blur-sm">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 min-h-[5rem] flex-wrap xl:flex-nowrap py-2 flex items-center justify-between">
       <!-- Brand & Workspace Label -->
       <div class="flex items-center gap-3.5">
         <span class="font-serif text-2xl tracking-normal text-[#3a302a] font-normal">
@@ -27,8 +27,8 @@
       </div>
 
       <!-- Back Link -->
-      <a href="../index.html" class="inline-flex items-center gap-2 text-sm text-[#605850] hover:text-[#c2652a] transition-colors py-2 group">
-        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <a href="../index.html" class="inline-flex items-center gap-2 text-sm text-[#605850] hover:text-[#9e4d1c] transition-colors py-2 group">
+        <svg aria-hidden="true" class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
         <span>Back to configurator</span>
@@ -37,7 +37,7 @@
   </header>
 
   <!-- Main Content -->
-  <main class="flex-1 flex items-center justify-center px-6 py-12">
+  <main id="main" tabindex="-1" class="flex-1 flex items-center justify-center px-6 py-12">
     <div class="w-full max-w-[420px]">
       
       <!-- Card Container -->
@@ -55,7 +55,7 @@
 
         <!-- Error state example: hidden by default, shown when a field is empty -->
         <div id="signInError" hidden class="mb-6 p-3.5 rounded-custom bg-[#fdf2f2] border border-[#c0392b]/25 flex items-start gap-2.5" role="alert">
-          <svg class="w-4 h-4 text-[#c0392b] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg aria-hidden="true" class="w-4 h-4 text-[#c0392b] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="9" stroke-width="1.75" />
             <line x1="12" y1="8" x2="12" y2="12" stroke-width="1.75" stroke-linecap="round" />
             <circle cx="12" cy="16" r="0.75" fill="currentColor" stroke-width="1" />
@@ -72,7 +72,7 @@
             <label for="email" class="block text-xs font-medium uppercase tracking-wider text-[#605850] mb-2">
               Email
             </label>
-            <input 
+            <input autocomplete="username" aria-describedby="signInError" 
               type="email" 
               id="email" 
               name="email"
@@ -88,7 +88,7 @@
               Password
             </label>
             <div class="relative">
-              <input 
+              <input aria-describedby="signInError" 
                 type="password" 
                 id="password" 
                 name="password"
@@ -96,18 +96,18 @@
                 class="w-full pl-3.5 pr-11 py-2.5 bg-white border border-[#d8d0c8] rounded-custom text-sm text-[#3a302a] placeholder-[#605850]/50 transition-all duration-150"
                 autocomplete="current-password"
               >
-              <button 
+              <button aria-pressed="false" 
                 type="button" 
                 id="togglePassword"
-                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#605850] hover:text-[#3a302a] transition-colors focus:outline-none"
+                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#605850] hover:text-[#3a302a] transition-colors "
                 aria-label="Toggle password visibility"
               >
                 <!-- Eye Icon (Hide / Show) -->
-                <svg id="eyeIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" id="eyeIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
-                <svg id="eyeSlashIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" id="eyeSlashIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
                 </svg>
               </button>
@@ -118,7 +118,7 @@
           <div class="pt-2">
             <button 
               type="submit" 
-              class="w-full bg-[#c2652a] hover:bg-[#aa5420] text-white font-medium py-3 px-4 rounded-custom text-sm transition duration-150 ease-in-out shadow-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#c2652a]/40 focus:ring-offset-2"
+              class="w-full bg-[#9e4d1c] hover:bg-[#aa5420] text-white font-medium py-3 px-4 rounded-custom text-sm transition duration-150 ease-in-out shadow-sm flex items-center justify-center focus:ring-2 focus:ring-[#9e4d1c]/40 focus:ring-offset-2"
             >
               Sign in
             </button>
@@ -131,10 +131,10 @@
 
   <!-- Footer -->
   <footer class="w-full py-8 text-center">
-    <p class="text-xs text-[#605850]/80 tracking-wide font-normal">
+    <p class="text-xs text-[#605850] tracking-wide font-normal">
       Access is restricted to authorised staff.
     </p>
-  </footer>
+  <p class="w-full text-center text-xs py-3"><a class="underline" href="../accessibility.html">Accessibility statement / <span lang="he" dir="rtl">הצהרת נגישות</span></a></p></footer>
 
   <!-- Interactive script for password toggle -->
   

@@ -6,12 +6,15 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import { mountAssistant } from './ai/assistant.js';
 import { applyDraftOperations, ensureDraft } from './state/draft.js';
+import { describeDesign } from './three/describe.js';
 import { buildWardrobe, disposeWardrobe } from './three/wardrobe.js';
 
 // Example limits, mirrored from the backend catalog only to clamp the inputs before a request.
 const LIMITS = { width: [1200, 3600], height: [1800, 2800], depth: [450, 750] };
 const DEFAULTS = { width: 2400, height: 2400, depth: 600 };
-const EASE = 0.14;
+// Reduced motion: doors and camera jump straight to the target.
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const EASE = REDUCED_MOTION ? 1 : 0.14;
 const REQUEST_DELAY_MS = 120;
 
 const $ = (id) => document.getElementById(id);
@@ -41,10 +44,11 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
+renderer.domElement.setAttribute('aria-hidden', 'true'); // described in text instead
 container.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
+controls.enableDamping = !REDUCED_MOTION;
 controls.dampingFactor = 0.05;
 controls.maxPolarAngle = Math.PI / 2 + 0.02;
 controls.minDistance = 1.8;
@@ -105,6 +109,7 @@ function renderDesign() {
     if (mover.type === 'door') mover.object.visible = !view.doorsHidden;
   });
   scene.add(wardrobe.group);
+  showDrawerControls();
   controls.target.set(0, design.dimensions_mm.height / 2000, 0);
   updateLabels();
 }
@@ -117,6 +122,10 @@ function showDesign(next) {
   showType();
   showMaterials();
   renderDesign();
+  $('design-description').textContent = describeDesign(design, {
+    carcass: TITLES.carcass[design.material_selections.carcass],
+    doors: TITLES.doors[design.material_selections.doors],
+  });
 }
 
 // Queue an edit; rapid edits of the same kind collapse into the latest one.
@@ -183,6 +192,7 @@ function showMaterials() {
   document.querySelectorAll('[data-carcass]').forEach((btn) => {
     btn.classList.toggle('ring-2', btn.dataset.carcass === carcass);
     btn.classList.toggle('ring-primary', btn.dataset.carcass === carcass);
+    btn.setAttribute('aria-pressed', String(btn.dataset.carcass === carcass));
   });
   document.querySelectorAll('input[name="door-finish"]').forEach((radio) => { radio.checked = radio.value === doors; });
 }
@@ -197,6 +207,7 @@ function showType() {
     const active = key === design?.wardrobe_type;
     ['bg-surface-container-high', 'text-on-surface', 'font-semibold'].forEach((c) => btn.classList.toggle(c, active));
     btn.classList.toggle('text-on-surface-variant', !active);
+    btn.setAttribute('aria-pressed', String(active));
   });
 }
 Object.entries(typeButtons).forEach(([key, btn]) => {
@@ -208,6 +219,8 @@ function showDoorState() {
   $('door-action-text').textContent = view.doorsOpen ? 'Close Doors' : 'Open Doors';
   $('btn-inspect-interior').classList.toggle('bg-primary', view.doorsHidden);
   $('btn-inspect-interior').classList.toggle('text-on-primary', view.doorsHidden);
+  $('btn-inspect-interior').classList.toggle('text-on-surface-variant', !view.doorsHidden);
+  $('btn-inspect-interior').setAttribute('aria-pressed', String(view.doorsHidden));
 }
 
 function toggleDoors() {
@@ -236,11 +249,72 @@ container.addEventListener('pointerup', (e) => {
   const mover = hit && wardrobe.movers.find((m) => m.object === hit.object.parent);
   if (!mover) return;
   if (mover.type === 'door') toggleDoors();
-  else openness.get(mover.id).target = 1 - openness.get(mover.id).target;
+  else toggleDrawer(mover.id);
 });
+
+function toggleDrawer(id) {
+  const state = openness.get(id);
+  state.target = 1 - state.target;
+  document.querySelector(`[data-drawer="${id}"]`)?.setAttribute('aria-pressed', String(state.target === 1));
+}
+
+// A button per drawer: the keyboard equivalent of clicking it in the 3D view.
+function showDrawerControls() {
+  const focused = document.activeElement?.dataset?.drawer;
+  const perBay = new Map();
+  $('drawer-controls').replaceChildren(...wardrobe.movers.filter((m) => m.type === 'drawer').map((mover) => {
+    const bay = design.components.find((c) => c.id === mover.id).compartment + 1;
+    perBay.set(bay, (perBay.get(bay) ?? 0) + 1);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'px-3 py-2 rounded-lg bg-surface hover:bg-surface-container-high text-on-surface aria-pressed:bg-primary aria-pressed:text-on-primary';
+    button.dataset.drawer = mover.id;
+    button.textContent = `Open drawer ${perBay.get(bay)}, bay ${bay}`;
+    button.setAttribute('aria-pressed', String(openness.get(mover.id).target === 1));
+    button.addEventListener('click', () => {
+      if (!view.doorsOpen && !view.doorsHidden) toggleDoors();
+      toggleDrawer(mover.id);
+    });
+    return button;
+  }));
+  if (focused) document.querySelector(`[data-drawer="${focused}"]`)?.focus();
+}
+
+// Rotate, zoom and pan without a pointer.
+const ROTATE_STEP = Math.PI / 12;
+const ZOOM_STEP = 0.85;
+const PAN_STEP_M = 0.2;
+const PANS = { 'pan-left': [-1, 0], 'pan-right': [1, 0], 'pan-up': [0, 1], 'pan-down': [0, -1] };
+function moveView(action) {
+  cameraGoal = null;
+  if (PANS[action]) {
+    const [x, y] = PANS[action];
+    // Move camera and target together along the screen's own axes.
+    const shift = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0).multiplyScalar(x * PAN_STEP_M)
+      .addScaledVector(new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1), y * PAN_STEP_M);
+    camera.position.add(shift);
+    controls.target.add(shift);
+    return;
+  }
+  const offset = camera.position.clone().sub(controls.target);
+  if (action === 'left' || action === 'right') {
+    offset.applyAxisAngle(new THREE.Vector3(0, 1, 0), action === 'left' ? -ROTATE_STEP : ROTATE_STEP);
+  } else {
+    const length = offset.length() * (action === 'in' ? ZOOM_STEP : 1 / ZOOM_STEP);
+    offset.setLength(Math.min(controls.maxDistance, Math.max(controls.minDistance, length)));
+  }
+  camera.position.copy(controls.target).add(offset);
+}
+document.querySelectorAll('[data-view]').forEach((btn) => btn.addEventListener('click', () => moveView(btn.dataset.view)));
 
 // ---------- camera ----------
 function setCameraPreset(mode) {
+  ['persp', 'front', 'bays', 'iso'].forEach((other) => {
+    const on = other === mode;
+    $(`cam-${other}`).setAttribute('aria-pressed', String(on));
+    ['text-on-surface', 'font-semibold', 'bg-surface-container-high'].forEach((c) => $(`cam-${other}`).classList.toggle(c, on));
+    $(`cam-${other}`).classList.toggle('text-on-surface-variant', !on);
+  });
   const h = (design?.dimensions_mm.height ?? DEFAULTS.height) / 1000;
   const positions = { persp: [2.8, h * 0.85, 3.8], front: [0, h / 2, 4.4], bays: [0, h / 2, 2.9], iso: [3.4, h * 1.3, 3.4] };
   cameraGoal = { position: new THREE.Vector3(...positions[mode]), target: new THREE.Vector3(0, h / 2, 0) };
@@ -264,11 +338,23 @@ function switchTab(active) {
     const on = tab === active;
     ACTIVE_TAB.forEach((c) => $(`tab-${tab}-btn`).classList.toggle(c, on));
     $(`tab-${tab}-btn`).classList.toggle('text-on-surface-variant', !on);
+    $(`tab-${tab}-btn`).setAttribute('aria-selected', String(on));
+    $(`tab-${tab}-btn`).tabIndex = on ? 0 : -1;
     $(`tab-${tab}-content`).classList.toggle('hidden', !on);
     $(`tab-${tab}-content`).classList.toggle('flex', on);
   });
 }
-TABS.forEach((tab) => $(`tab-${tab}-btn`).addEventListener('click', () => switchTab(tab)));
+TABS.forEach((tab, index) => {
+  $(`tab-${tab}-btn`).addEventListener('click', () => switchTab(tab));
+  $(`tab-${tab}-btn`).addEventListener('keydown', (e) => {
+    const next = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: TABS.length - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    const target = TABS[(next + TABS.length) % TABS.length];
+    switchTab(target);
+    $(`tab-${target}-btn`).focus();
+  });
+});
 
 // ---------- loop ----------
 function resize() {
@@ -299,5 +385,8 @@ function frame() {
 resize();
 showDoorState();
 status.textContent = 'Loading design…';
-ensureDraft().then(showDesign).then(() => mountAssistant({ onApplied: showDesign })).catch((error) => { status.textContent = `Could not load the design: ${error.message}`; });
+ensureDraft().then(showDesign).then(() => mountAssistant({ onApplied: showDesign })).catch((error) => {
+  status.textContent = `Could not load the design: ${error.message}`;
+  $('design-description').textContent = 'No description is available because the design did not load.';
+});
 frame();

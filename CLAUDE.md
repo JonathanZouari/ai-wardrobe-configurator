@@ -14,7 +14,7 @@ When the code for a task is written, before anything is pushed, run both:
 
 - **Regression:** the full existing suites, not only the new tests.
   - `cd backend && .venv/Scripts/python -m pytest -q`
-  - `node --test frontend/tests/geometry.test.mjs`
+  - `node --test frontend/tests/*.test.mjs`
 - **End to end:** exercise the affected user flow in a real browser against the running backend
   (`uvicorn app.main:app --port 8000` in `backend/`, and
   `python -m http.server 5500 --directory frontend`). Record what was exercised and the result.

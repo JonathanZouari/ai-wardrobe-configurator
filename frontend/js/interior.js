@@ -93,6 +93,8 @@ function itemButton(item) {
   button.style.height = `${(item.size_mm.y / interior) * 100}%`;
   button.setAttribute('aria-label', `${labelOf(item.type)}, bay ${item.compartment + 1}, ${heightAboveFloor(item)} mm from base`);
   button.setAttribute('aria-pressed', String(selected));
+  button.setAttribute('aria-keyshortcuts', 'ArrowUp ArrowDown Delete');
+  button.dataset.focusKey = `item:${item.id}`;
   if (item.type === 'drawer') button.append(el('span', 'text-[9px] font-medium text-on-surface', 'Drawer'));
   button.addEventListener('dragstart', (e) => e.dataTransfer.setData(DRAG_ID, item.id));
   button.addEventListener('click', (e) => {
@@ -122,7 +124,13 @@ function renderCanvas() {
     const active = index === selectedBay;
     const column = el('div', `relative rounded ${active ? 'bg-surface-container-lowest shadow-inner ring-2 ring-primary/40' : 'bg-surface-container'}`);
     column.style.flex = `${bay.width_mm} 1 0`;
-    column.append(el('div', `absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-mono ${active ? 'text-primary font-bold' : 'text-on-surface-variant font-medium'}`, `Bay ${index + 1} · ${bay.width_mm} mm`));
+    // The bay name is a button so the target bay can be chosen without a mouse.
+    const name = el('button', `absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-mono rounded px-1 ${active ? 'text-primary font-bold' : 'text-on-surface-variant font-medium'}`, `Bay ${index + 1} · ${bay.width_mm} mm`);
+    name.type = 'button';
+    name.setAttribute('aria-pressed', String(active));
+    name.setAttribute('aria-label', `Bay ${index + 1}, ${bay.width_mm} mm wide${active ? ', selected for new components' : ''}`);
+    name.dataset.focusKey = `bay:${index}`;
+    column.append(name);
     items().filter((item) => item.compartment === index).forEach((item) => column.append(itemButton(item)));
     column.addEventListener('click', () => {
       selectedBay = index;
@@ -179,6 +187,8 @@ function renderProperties() {
     const button = el('button', `py-1 text-xs font-label rounded ${current ? 'bg-primary text-on-primary font-medium' : 'bg-surface-container text-on-surface-variant hover:text-on-surface'}`, `Bay ${index + 1}`);
     button.type = 'button';
     button.setAttribute('aria-pressed', String(current));
+    button.setAttribute('aria-label', `Move to bay ${index + 1}`);
+    button.dataset.focusKey = `move-bay:${index}`;
     button.addEventListener('click', () => { selectedBay = index; move(item.id, { bay: index }); });
     bays.append(button);
   });
@@ -192,13 +202,20 @@ function renderProperties() {
   remove.addEventListener('click', () => run([{ op: 'remove_component', id: item.id }]));
   actions.append(duplicate, remove);
 
+  [[position, 'position'], [slider, 'slider'], [duplicate, 'duplicate'], [remove, 'remove']].forEach(([node, key]) => { node.dataset.focusKey = key; });
   panel.replaceChildren(title, field('Position from base (mm)', position), slider, field('Bay', bays), actions);
 }
 
+// Re-rendering replaces the buttons, so put keyboard focus back on the same control afterwards.
 function render() {
+  const focusKey = document.activeElement?.dataset?.focusKey;
   renderCanvas();
   renderProperties();
   $('accessory-led_lighting').checked = design.accessories.includes('led_lighting');
+  if (!focusKey) return;
+  // A removed component's button is gone: fall back to its bay.
+  const target = document.querySelector(`[data-focus-key="${CSS.escape(focusKey)}"]`) ?? document.querySelector(`[data-focus-key="bay:${selectedBay}"]`);
+  target?.focus();
 }
 
 // ---------- controls ----------

@@ -42,8 +42,13 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
 container.appendChild(renderer.domElement);
+// The canvas is focusable so the keyboard can pan the view, and it carries a text description.
+renderer.domElement.tabIndex = 0;
+renderer.domElement.setAttribute('role', 'img');
+renderer.domElement.setAttribute('aria-label', '3D preview of your wardrobe');
 
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.listenToKeyEvents(renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.maxPolarAngle = Math.PI / 2 + 0.02;
@@ -149,6 +154,8 @@ function updateLabels() {
     if (label) label.textContent = `${bay.width_mm}mm`;
   });
   $('door-count-text').textContent = `${count} ${design.wardrobe_type} doors`;
+  const { carcass, doors } = design.material_selections;
+  renderer.domElement.setAttribute('aria-label', `3D preview: ${design.wardrobe_type} wardrobe, ${width} by ${height} by ${depth} mm, ${bays} bays, ${count} doors, carcass ${TITLES.carcass[carcass] ?? carcass}, doors ${TITLES.doors[doors] ?? doors}`);
 }
 
 function syncInputs() {
@@ -183,6 +190,7 @@ function showMaterials() {
   document.querySelectorAll('[data-carcass]').forEach((btn) => {
     btn.classList.toggle('ring-2', btn.dataset.carcass === carcass);
     btn.classList.toggle('ring-primary', btn.dataset.carcass === carcass);
+    btn.setAttribute('aria-pressed', String(btn.dataset.carcass === carcass));
   });
   document.querySelectorAll('input[name="door-finish"]').forEach((radio) => { radio.checked = radio.value === doors; });
 }
@@ -197,6 +205,7 @@ function showType() {
     const active = key === design?.wardrobe_type;
     ['bg-surface-container-high', 'text-on-surface', 'font-semibold'].forEach((c) => btn.classList.toggle(c, active));
     btn.classList.toggle('text-on-surface-variant', !active);
+    btn.setAttribute('aria-pressed', String(active));
   });
 }
 Object.entries(typeButtons).forEach(([key, btn]) => {
@@ -208,6 +217,7 @@ function showDoorState() {
   $('door-action-text').textContent = view.doorsOpen ? 'Close Doors' : 'Open Doors';
   $('btn-inspect-interior').classList.toggle('bg-primary', view.doorsHidden);
   $('btn-inspect-interior').classList.toggle('text-on-primary', view.doorsHidden);
+  $('btn-inspect-interior').setAttribute('aria-pressed', String(view.doorsHidden));
 }
 
 function toggleDoors() {
@@ -264,11 +274,24 @@ function switchTab(active) {
     const on = tab === active;
     ACTIVE_TAB.forEach((c) => $(`tab-${tab}-btn`).classList.toggle(c, on));
     $(`tab-${tab}-btn`).classList.toggle('text-on-surface-variant', !on);
+    $(`tab-${tab}-btn`).setAttribute('aria-selected', String(on));
+    $(`tab-${tab}-btn`).tabIndex = on ? 0 : -1;
     $(`tab-${tab}-content`).classList.toggle('hidden', !on);
     $(`tab-${tab}-content`).classList.toggle('flex', on);
   });
 }
-TABS.forEach((tab) => $(`tab-${tab}-btn`).addEventListener('click', () => switchTab(tab)));
+TABS.forEach((tab, index) => {
+  $(`tab-${tab}-btn`).addEventListener('click', () => switchTab(tab));
+  // Arrow keys, Home and End move between tabs, as in the WAI-ARIA tabs pattern.
+  $(`tab-${tab}-btn`).addEventListener('keydown', (e) => {
+    const next = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: TABS.length - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    const target = TABS[(next + TABS.length) % TABS.length];
+    switchTab(target);
+    $(`tab-${target}-btn`).focus();
+  });
+});
 
 // ---------- loop ----------
 function resize() {

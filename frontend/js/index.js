@@ -25,6 +25,26 @@ function readDimensions() {
   }));
 }
 
+// The check marks on the option cards follow the selected radio button, so what is shown
+// matches what a screen reader announces.
+function showSelectionMarks() {
+  document.querySelectorAll('input[name="typology"]').forEach((radio) => {
+    const mark = radio.closest('label').querySelector('[data-type-mark]');
+    mark.classList.toggle('bg-primary', radio.checked);
+    mark.classList.toggle('text-on-primary', radio.checked);
+    mark.classList.toggle('bg-surface-container', !radio.checked);
+    mark.classList.toggle('text-on-surface-variant', !radio.checked);
+    mark.firstElementChild.textContent = radio.checked ? 'check' : 'circle';
+  });
+  document.querySelectorAll('input[name="start_pathway"]').forEach((radio) => {
+    const mark = radio.closest('label').querySelector('[data-path-mark]');
+    mark.classList.toggle('text-primary', radio.checked);
+    mark.classList.toggle('text-outline', !radio.checked);
+    mark.classList.remove('text-outline-variant');
+    mark.textContent = radio.checked ? 'check_circle' : 'radio_button_unchecked';
+  });
+}
+
 function showExistingDraft(draft) {
   Object.keys(LIMITS).forEach((field) => { input(field).value = draft.dimensions_mm[field]; });
   const radio = document.getElementById(`type-${draft.wardrobe_type}`);
@@ -60,6 +80,8 @@ async function start(event) {
 if (new URLSearchParams(location.search).has('new')) clearDraft();
 const existing = loadDraft();
 if (existing) showExistingDraft(existing);
+showSelectionMarks();
+document.querySelectorAll('input[name="typology"], input[name="start_pathway"]').forEach((radio) => radio.addEventListener('change', showSelectionMarks));
 
 document.querySelectorAll('button[data-field]').forEach((btn) => {
   btn.addEventListener('click', () => {

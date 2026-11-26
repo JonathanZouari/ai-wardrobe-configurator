@@ -1,0 +1,63 @@
+/* Accessibility layer shared by every page (IS 5568 / WCAG 2.0 AA).
+   Kept outside the generated Tailwind stylesheet so regenerating styles.css does not drop it. */
+
+/* Skip link: hidden until it receives keyboard focus. */
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #3a302a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* The skip link target must not show a ring when focused programmatically. */
+main:focus {
+  outline: none;
+}
+
+/* A clearly visible keyboard focus indicator on everything, overriding utilities such as
+   focus:outline-none that the design export put on inputs. */
+:focus-visible {
+  outline: 3px solid #3a302a !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 5px #faf5ee !important;
+}
+
+/* Card-style radio buttons hide the real input (sr-only); show focus on the card instead. */
+label:has(> input.sr-only:focus-visible) {
+  outline: 3px solid #3a302a;
+  outline-offset: 2px;
+}
+
+/* Users who ask the system for less motion get no transitions or smooth scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Windows high contrast and forced-colors modes: keep focus and selection visible. */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight !important;
+  }
+  [aria-pressed='true'],
+  [aria-selected='true'] {
+    outline: 2px solid Highlight;
+  }
+}

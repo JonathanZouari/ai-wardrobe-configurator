@@ -7,6 +7,9 @@ and merge into `dev`.
 
 ## Done
 - Branch `feature/accessibility` from `dev`. Commit `6f99b4e` (feature) plus this log.
+- No write access to JonathanZouari/ai-wardrobe-configurator (READ only), so the branch is pushed to
+  the fork (tomerhal88-code) and PR #5 is open into JonathanZouari:dev for the owner to merge:
+  https://github.com/JonathanZouari/ai-wardrobe-configurator/pull/5
 - `frontend/js/a11y.js` (ES module, loaded on all 12 pages): accessibility menu bottom-right
   (text size 100–160%, high contrast, grayscale, highlight links, readable font, text spacing,
   stop animations, large cursor, reset, link to the statement). Keyboard operable, Escape closes

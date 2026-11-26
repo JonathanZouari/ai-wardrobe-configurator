@@ -1,6 +1,7 @@
 // Interior layout editor: a front view of the bays built from the draft design. Every edit is a
 // typed operation sent to the backend; the page re-renders from the design that comes back.
 // Each drag action also has a button or keyboard equivalent.
+import { mountAssistant } from './ai/assistant.js';
 import { getCatalog } from './api/client.js';
 import { applyDraftOperations, ensureDraft } from './state/draft.js';
 
@@ -215,5 +216,6 @@ Promise.all([getCatalog(), ensureDraft()])
     $('editor-status').textContent = '';
     renderCatalog();
     render();
+    mountAssistant({ onApplied: (next) => { design = next; selectedId = null; render(); } });
   })
   .catch((error) => { $('editor-status').textContent = `Could not load the editor: ${error.message}`; });

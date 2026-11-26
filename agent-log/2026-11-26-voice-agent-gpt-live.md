@@ -74,3 +74,18 @@ PR #1 (phase 3) was merged into `dev`, and PR #2 brought `main` level with `dev`
   is still English, and the change list on the proposal card is English like the rest of the UI.
 - `backend/.env.example` shows as deleted in the working tree (the owner appears to have renamed
   it to `.env`); left as is, not committed. Restore with `git checkout -- backend/.env.example`.
+
+## Follow-up: scope guardrail
+- Asked: the assistant may only answer about the app and building the wardrobe; anything else gets
+  a very short polite refusal.
+- Backend agent: the model must return `"in_scope"`. When false, its reply and operations are
+  discarded and a fixed sentence is returned (`OUT_OF_SCOPE`, English and Hebrew). An answer with
+  no verdict is treated as malformed. This part is enforced in code, not only by the prompt.
+- Voice model: its instructions now forbid answering from its own knowledge and give the same
+  fixed sentence for off-topic subjects. This part is prompt-only: GPT-Live speaks directly, so
+  nothing in our code can stop it if it ignores the instruction.
+- Verified against the real text model: 8 off-topic or mixed requests (general knowledge, weather,
+  poem, code, "ignore your instructions", questions about itself, a kitchen, a mixed request) and
+  7 in-scope ones (materials, how to use the editor, an edit, greeting, thanks, quotation process,
+  a question about the design) all behaved as intended. Backend tests: 73 passed.
+- Not verified: the voice model's behaviour on off-topic speech (needs a microphone).

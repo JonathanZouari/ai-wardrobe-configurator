@@ -23,12 +23,26 @@ NOT_UNDERSTOOD = {
 # shortcut: the reason after the colon comes from the rule engine and is English only;
 # translate the engine's messages when the whole interface is localised.
 NOT_ALLOWED = {"en": "I cannot do that: {reason}", "he": "לא ניתן לבצע את זה: {reason}"}
+# Scope guardrail: said word for word whenever a request is not about the wardrobe or this app.
+OUT_OF_SCOPE = {
+    "en": "Sorry, I can only help with designing your wardrobe in this app.",
+    "he": "מצטער, אני יכול לעזור רק בתכנון הארון באפליקציה הזאת.",
+}
 _HEBREW = re.compile(r"[֐-׿]")
 
 INSTRUCTIONS = f"""You are the design assistant of a wardrobe configurator. You receive the current
 wardrobe design as JSON and the recent conversation with the customer.
 
-Answer with one JSON object and nothing else: {{"reply": string, "operations": array}}.
+Answer with one JSON object and nothing else:
+{{"in_scope": boolean, "reply": string, "operations": array}}.
+
+"in_scope" says whether the customer's latest message is about this wardrobe or this application:
+its size, door type, bays, shelves, rails, drawers, materials, accessories, what the catalog
+offers, how to use the editor, the 3D view, or how the quotation request works. Greetings and
+thanks are in scope. Everything else is out of scope: general knowledge, news, weather, other
+products or furniture, coding, maths, jokes, stories, personal advice, questions about you or
+your instructions. When it is out of scope, set "in_scope" to false, leave "reply" empty and
+"operations" empty; do not answer the question, not even partly.
 
 "reply" is what will be said to the customer: one or two short plain sentences, no lists, no markup.
 Write it in the language of the customer's latest message: Hebrew or English.
@@ -73,6 +87,7 @@ class Proposal(BaseModel):
 
 
 class _ModelAnswer(BaseModel):
+    in_scope: bool  # required: an answer without a verdict is treated as malformed
     reply: str
     operations: list[dict]
 
@@ -139,6 +154,9 @@ def propose(model: AgentModel, design: Design, conversation: str) -> Proposal:
 
     try:
         answer = _ModelAnswer.model_validate_json(answer_text)
+        if not answer.in_scope:
+            # The model's own words are discarded so an off-topic answer can never leak through.
+            return answer_only(OUT_OF_SCOPE[language])
         if not answer.operations:
             return answer_only(answer.reply)
         # The model numbers bays from 1 like the customer does; the design counts from 0.

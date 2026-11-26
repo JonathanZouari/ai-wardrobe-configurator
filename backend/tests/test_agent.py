@@ -27,7 +27,7 @@ class FakeModel:
 
 
 def test_valid_operations_become_a_validated_proposal_without_touching_the_design():
-    model = FakeModel({"reply": "I can add a shelf in bay two.", "operations": [
+    model = FakeModel({"in_scope": True, "reply": "I can add a shelf in bay two.", "operations": [
         {"op": "add_component", "type": "shelf", "bay": 2, "y_mm": 900}]})
 
     proposal = propose(model, DESIGN, "Customer: add a shelf in the second bay")
@@ -41,7 +41,7 @@ def test_valid_operations_become_a_validated_proposal_without_touching_the_desig
 
 
 def test_the_model_sees_the_current_design_and_the_request():
-    model = FakeModel({"reply": "ok", "operations": []})
+    model = FakeModel({"in_scope": True, "reply": "ok", "operations": []})
 
     propose(model, DESIGN, "Customer: what do I have?")
 
@@ -52,7 +52,7 @@ def test_the_model_sees_the_current_design_and_the_request():
 
 
 def test_a_clarifying_answer_has_no_operations_and_no_preview():
-    proposal = propose(FakeModel({"reply": "Which bay do you mean?", "operations": []}), DESIGN, "Customer: add a drawer")
+    proposal = propose(FakeModel({"in_scope": True, "reply": "Which bay do you mean?", "operations": []}), DESIGN, "Customer: add a drawer")
 
     assert (proposal.reply, proposal.operations, proposal.preview) == ("Which bay do you mean?", [], None)
 
@@ -61,9 +61,9 @@ def test_a_clarifying_answer_has_no_operations_and_no_preview():
     "answer",
     [
         "this is not json",
-        {"reply": "sure", "operations": [{"op": "delete_everything"}]},  # not a supported operation
-        {"reply": "sure", "operations": [{"op": "add_component", "type": "jacuzzi", "bay": 1, "y_mm": 0}]},
-        {"reply": "sure", "operations": "add a shelf"},
+        {"in_scope": True, "reply": "sure", "operations": [{"op": "delete_everything"}]},  # not a supported operation
+        {"in_scope": True, "reply": "sure", "operations": [{"op": "add_component", "type": "jacuzzi", "bay": 1, "y_mm": 0}]},
+        {"in_scope": True, "reply": "sure", "operations": "add a shelf"},
         {"operations": []},
     ],
 )
@@ -83,7 +83,7 @@ def test_the_models_are_told_to_answer_in_the_customers_language():
 
 def test_fallback_replies_follow_the_language_of_the_latest_customer_line():
     hebrew = "Customer: hello\nAssistant: hi\nCustomer: תוסיף מדף בתא תשע"
-    rejected = FakeModel({"reply": "מוסיף.", "operations": [{"op": "add_component", "type": "shelf", "bay": 9, "y_mm": 100}]})
+    rejected = FakeModel({"in_scope": True, "reply": "מוסיף.", "operations": [{"op": "add_component", "type": "shelf", "bay": 9, "y_mm": 100}]})
 
     assert propose(FakeModel("not json"), DESIGN, hebrew).reply == "לא הצלחתי להפוך את הבקשה לשינוי בעיצוב. אפשר לנסח אותה אחרת?"
     assert propose(rejected, DESIGN, hebrew).reply.startswith("לא ניתן לבצע את זה: ")
@@ -91,7 +91,7 @@ def test_fallback_replies_follow_the_language_of_the_latest_customer_line():
 
 
 def test_operations_the_rules_reject_are_explained_and_dropped():
-    model = FakeModel({"reply": "Adding it to bay nine.", "operations": [
+    model = FakeModel({"in_scope": True, "reply": "Adding it to bay nine.", "operations": [
         {"op": "add_component", "type": "shelf", "bay": 9, "y_mm": 100}]})
 
     proposal = propose(model, DESIGN, "Customer: add a shelf in bay nine")
@@ -101,7 +101,7 @@ def test_operations_the_rules_reject_are_explained_and_dropped():
 
 
 def test_reply_is_capped_so_it_fits_the_voice_channel():
-    proposal = propose(FakeModel({"reply": "word " * 2000, "operations": []}), DESIGN, "Customer: talk")
+    proposal = propose(FakeModel({"in_scope": True, "reply": "word " * 2000, "operations": []}), DESIGN, "Customer: talk")
 
     assert len(proposal.reply) <= 600
 
@@ -117,7 +117,7 @@ def body(conversation="Customer: add a shelf"):
 
 
 def test_propose_endpoint_returns_the_proposal():
-    model = FakeModel({"reply": "Adding a rail.", "operations": [{"op": "add_component", "type": "rail", "bay": 1, "y_mm": 1500}]})
+    model = FakeModel({"in_scope": True, "reply": "Adding a rail.", "operations": [{"op": "add_component", "type": "rail", "bay": 1, "y_mm": 1500}]})
 
     response = app_client(model=model).post("/api/agent/proposals", json=body())
 
@@ -185,7 +185,7 @@ def test_voice_session_rejects_an_oversized_offer():
 
 def test_ai_endpoints_are_rate_limited_per_client():
     settings = Settings(environment="test", openai_api_key="test-key", ai_requests_per_minute=2)
-    client = app_client(settings=settings, model=FakeModel({"reply": "ok", "operations": []}))
+    client = app_client(settings=settings, model=FakeModel({"in_scope": True, "reply": "ok", "operations": []}))
 
     statuses = [client.post("/api/agent/proposals", json=body()).status_code for _ in range(3)]
 
@@ -195,7 +195,7 @@ def test_ai_endpoints_are_rate_limited_per_client():
 def test_the_model_talks_in_bay_numbers_as_people_say_them():
     """Customers say "bay one" for the leftmost bay, so the model works 1-based and we convert."""
     design = build_design("hinged", Dimensions(width=2400, height=2400, depth=600))
-    model = FakeModel({"reply": "Moving it to bay one.", "operations": [
+    model = FakeModel({"in_scope": True, "reply": "Moving it to bay one.", "operations": [
         {"op": "add_component", "type": "rail", "bay": 1, "y_mm": 1500},
         {"op": "move_component", "id": "shelf-1", "bay": 3},
     ]})
@@ -207,3 +207,41 @@ def test_the_model_talks_in_bay_numbers_as_people_say_them():
     seen = json.loads(model.calls[0][1].split("\n", 1)[1])["design"]["components"]
     assert {part["bay"] for part in seen} == {1, 2, 3}
     assert "numbered from 1" in model.calls[0][0]
+
+
+# ---------- scope guardrail ----------
+def test_off_topic_requests_get_the_fixed_short_refusal_and_no_operations():
+    from app.ai.agent import OUT_OF_SCOPE
+
+    # Even if the model chats or proposes edits, an out-of-scope verdict wins.
+    model = FakeModel({"in_scope": False, "reply": "The capital of France is Paris.", "operations": [
+        {"op": "add_component", "type": "shelf", "bay": 1, "y_mm": 100}]})
+
+    english = propose(model, DESIGN, "Customer: what is the capital of France?")
+    hebrew = propose(model, DESIGN, "Customer: מה בירת צרפת?")
+
+    assert english.reply == OUT_OF_SCOPE["en"] == "Sorry, I can only help with designing your wardrobe in this app."
+    assert hebrew.reply == OUT_OF_SCOPE["he"]
+    assert english.operations == [] and english.preview is None
+    assert "Paris" not in english.reply + hebrew.reply
+
+
+def test_in_scope_answers_are_unaffected_by_the_guardrail():
+    model = FakeModel({"in_scope": True, "reply": "You can choose oak, walnut or linen.", "operations": []})
+
+    assert propose(model, DESIGN, "Customer: which materials are there?").reply == "You can choose oak, walnut or linen."
+
+
+def test_an_answer_without_a_scope_verdict_is_not_trusted():
+    proposal = propose(FakeModel({"reply": "Sure, here is a poem.", "operations": []}), DESIGN, "Customer: write a poem")
+
+    assert proposal.reply.startswith("I could not turn that into a change")
+
+
+def test_both_models_are_told_to_stay_on_topic():
+    from app.ai.agent import INSTRUCTIONS
+    from app.ai.openai_provider import VOICE_INSTRUCTIONS
+
+    assert '"in_scope"' in INSTRUCTIONS
+    assert "only" in VOICE_INSTRUCTIONS and "Sorry, I can only help with designing your wardrobe in this app." in VOICE_INSTRUCTIONS
+    assert "מצטער, אני יכול לעזור רק בתכנון הארון באפליקציה הזאת." in VOICE_INSTRUCTIONS

@@ -49,12 +49,13 @@ export function mountAssistant({ onApplied }) {
   const status = el('p', 'text-[11px] text-on-surface-variant min-h-[1rem]');
   status.setAttribute('role', 'status');
   const transcript = el('p', 'text-xs text-on-surface-variant max-h-24 overflow-y-auto whitespace-pre-line');
+  transcript.dir = 'auto'; // Hebrew or English, whichever the conversation is in
   const card = el('div', 'bg-surface-container-low rounded-lg p-3 flex flex-col gap-2');
   card.hidden = true;
   const talk = button('Start talking', PRIMARY);
   const form = el('form', 'flex gap-2');
   const input = el('input', 'flex-1 min-w-0 px-2.5 py-2 text-xs bg-surface-container rounded-lg text-on-surface focus:outline-none focus:ring-1 focus:ring-primary');
-  Object.assign(input, { type: 'text', placeholder: 'Or type a request', maxLength: 300 });
+  Object.assign(input, { type: 'text', placeholder: 'Or type a request (English or Hebrew)', maxLength: 300, dir: 'auto' });
   input.setAttribute('aria-label', 'Request for the design assistant');
   const send = button('Send', QUIET);
   send.type = 'submit';
@@ -150,7 +151,7 @@ export function mountAssistant({ onApplied }) {
     const event = JSON.parse(message.data);
     switch (event.type) {
       case 'session.started':
-        say('Listening. Tell me what you would like to change.');
+        say('Listening. Speak in English or Hebrew.');
         break;
       case 'session.input_transcript.delta':
         hear('Customer', event.delta ?? '');

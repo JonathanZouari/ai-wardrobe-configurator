@@ -53,3 +53,24 @@ PR #1 (phase 3) was merged into `dev`, and PR #2 brought `main` level with `dev`
   one address until forwarded headers are trusted.
 - Phase 4 (deterministic validation) still does not exist; today the dry run enforces only schema,
   catalog membership, bay ranges and clamping.
+
+## Follow-up the same day: first real run, Hebrew, bay numbering
+- The owner added `OPENAI_API_KEY` to `backend/.env`. First real call failed with 400: the
+  Responses API requires the word "json" in the input when `text.format` is `json_object`.
+  Fixed by prefixing the input; the provider module now logs the upstream status only.
+- The owner confirmed voice works in English in the browser, then asked for Hebrew conversation.
+  Both prompts now say to answer in the customer's language (Hebrew or English); the agent's own
+  fallback replies exist in both languages; the panel's transcript and input use `dir="auto"`.
+  The interface itself stays English and left-to-right.
+- Bug found while testing with the real model: "bay one" produced an operation on bay index 1
+  (the second bay) while the spoken reply said "bay 1". The model now works with bay numbers
+  from 1, as customers say them, and the agent converts to the design's 0-based index.
+- Verified against the real text model (`gpt-5.6-terra`): ten typed requests in Hebrew and
+  English gave correct proposals, clarifying questions, a price refusal and a refusal to break
+  the size limit. Backend tests: 69 passed.
+- Not verified by me: Hebrew through the voice session (needs a microphone), including how well
+  GPT-Live transcribes Hebrew. The docs read do not mention language support.
+- Known limit: when the rule engine rejects a Hebrew request, the reason after "לא ניתן לבצע את זה:"
+  is still English, and the change list on the proposal card is English like the rest of the UI.
+- `backend/.env.example` shows as deleted in the working tree (the owner appears to have renamed
+  it to `.env`); left as is, not committed. Restore with `git checkout -- backend/.env.example`.

@@ -28,7 +28,7 @@ class FakeModel:
 
 def test_valid_operations_become_a_validated_proposal_without_touching_the_design():
     model = FakeModel({"reply": "I can add a shelf in bay two.", "operations": [
-        {"op": "add_component", "type": "shelf", "bay": 1, "y_mm": 900}]})
+        {"op": "add_component", "type": "shelf", "bay": 2, "y_mm": 900}]})
 
     proposal = propose(model, DESIGN, "Customer: add a shelf in the second bay")
 
@@ -62,7 +62,7 @@ def test_a_clarifying_answer_has_no_operations_and_no_preview():
     [
         "this is not json",
         {"reply": "sure", "operations": [{"op": "delete_everything"}]},  # not a supported operation
-        {"reply": "sure", "operations": [{"op": "add_component", "type": "jacuzzi", "bay": 0, "y_mm": 0}]},
+        {"reply": "sure", "operations": [{"op": "add_component", "type": "jacuzzi", "bay": 1, "y_mm": 0}]},
         {"reply": "sure", "operations": "add a shelf"},
         {"operations": []},
     ],
@@ -74,9 +74,25 @@ def test_malformed_model_output_never_yields_operations(answer):
     assert proposal.reply == "I could not turn that into a change to the design. Please try saying it another way."
 
 
+def test_the_models_are_told_to_answer_in_the_customers_language():
+    from app.ai.agent import INSTRUCTIONS
+    from app.ai.openai_provider import VOICE_INSTRUCTIONS
+
+    assert "Hebrew or English" in INSTRUCTIONS and "Hebrew or English" in VOICE_INSTRUCTIONS
+
+
+def test_fallback_replies_follow_the_language_of_the_latest_customer_line():
+    hebrew = "Customer: hello\nAssistant: hi\nCustomer: תוסיף מדף בתא תשע"
+    rejected = FakeModel({"reply": "מוסיף.", "operations": [{"op": "add_component", "type": "shelf", "bay": 9, "y_mm": 100}]})
+
+    assert propose(FakeModel("not json"), DESIGN, hebrew).reply == "לא הצלחתי להפוך את הבקשה לשינוי בעיצוב. אפשר לנסח אותה אחרת?"
+    assert propose(rejected, DESIGN, hebrew).reply.startswith("לא ניתן לבצע את זה: ")
+    assert propose(FakeModel("not json"), DESIGN, "Customer: שלום\nCustomer: add a shelf").reply.startswith("I could not")
+
+
 def test_operations_the_rules_reject_are_explained_and_dropped():
     model = FakeModel({"reply": "Adding it to bay nine.", "operations": [
-        {"op": "add_component", "type": "shelf", "bay": 8, "y_mm": 100}]})
+        {"op": "add_component", "type": "shelf", "bay": 9, "y_mm": 100}]})
 
     proposal = propose(model, DESIGN, "Customer: add a shelf in bay nine")
 
@@ -101,7 +117,7 @@ def body(conversation="Customer: add a shelf"):
 
 
 def test_propose_endpoint_returns_the_proposal():
-    model = FakeModel({"reply": "Adding a rail.", "operations": [{"op": "add_component", "type": "rail", "bay": 0, "y_mm": 1500}]})
+    model = FakeModel({"reply": "Adding a rail.", "operations": [{"op": "add_component", "type": "rail", "bay": 1, "y_mm": 1500}]})
 
     response = app_client(model=model).post("/api/agent/proposals", json=body())
 
@@ -174,3 +190,20 @@ def test_ai_endpoints_are_rate_limited_per_client():
     statuses = [client.post("/api/agent/proposals", json=body()).status_code for _ in range(3)]
 
     assert statuses == [200, 200, 429]
+
+
+def test_the_model_talks_in_bay_numbers_as_people_say_them():
+    """Customers say "bay one" for the leftmost bay, so the model works 1-based and we convert."""
+    design = build_design("hinged", Dimensions(width=2400, height=2400, depth=600))
+    model = FakeModel({"reply": "Moving it to bay one.", "operations": [
+        {"op": "add_component", "type": "rail", "bay": 1, "y_mm": 1500},
+        {"op": "move_component", "id": "shelf-1", "bay": 3},
+    ]})
+
+    proposal = propose(model, design, "Customer: put a rail in bay one and move the shelf to bay three")
+
+    assert [op.bay for op in proposal.operations] == [0, 2]
+    assert proposal.changes == ["Add hanging rail in bay 1, 1500 mm from the base", "Move shelf-1 to bay 3"]
+    seen = json.loads(model.calls[0][1].split("\n", 1)[1])["design"]["components"]
+    assert {part["bay"] for part in seen} == {1, 2, 3}
+    assert "numbered from 1" in model.calls[0][0]

@@ -6,6 +6,7 @@ Nothing here can change a design: applying a proposal is a separate, explicit re
 """
 
 import json
+import re
 from typing import Protocol
 
 from pydantic import BaseModel, ValidationError
@@ -15,7 +16,14 @@ from app.domain.operations import DomainError, apply_operations
 from app.schemas.design import ApplyOperationsRequest, Design, Operation
 
 MAX_REPLY_CHARS = 600  # the voice channel accepts short plain-text appends
-NOT_UNDERSTOOD = "I could not turn that into a change to the design. Please try saying it another way."
+NOT_UNDERSTOOD = {
+    "en": "I could not turn that into a change to the design. Please try saying it another way.",
+    "he": "לא הצלחתי להפוך את הבקשה לשינוי בעיצוב. אפשר לנסח אותה אחרת?",
+}
+# shortcut: the reason after the colon comes from the rule engine and is English only;
+# translate the engine's messages when the whole interface is localised.
+NOT_ALLOWED = {"en": "I cannot do that: {reason}", "he": "לא ניתן לבצע את זה: {reason}"}
+_HEBREW = re.compile(r"[֐-׿]")
 
 INSTRUCTIONS = f"""You are the design assistant of a wardrobe configurator. You receive the current
 wardrobe design as JSON and the recent conversation with the customer.
@@ -23,10 +31,12 @@ wardrobe design as JSON and the recent conversation with the customer.
 Answer with one JSON object and nothing else: {{"reply": string, "operations": array}}.
 
 "reply" is what will be said to the customer: one or two short plain sentences, no lists, no markup.
+Write it in the language of the customer's latest message: Hebrew or English.
 Describe what you propose. Never say a change was made; the customer must approve it on screen first.
 
 "operations" is the list of edits you propose, or [] when you are answering a question or need
-to ask one. Supported operations (heights are millimetres above the interior floor, bays count from 0):
+to ask one. Supported operations (heights are millimetres above the interior floor; bays are numbered from 1, left to right,
+exactly as the customer says them, so "bay one" or "the first bay" is 1):
 - {{"op": "add_component", "type": "shelf" | "rail" | "drawer", "bay": int, "y_mm": int}}
 - {{"op": "move_component", "id": string, "bay": int (optional), "y_mm": int (optional)}}
 - {{"op": "remove_component", "id": string}}
@@ -79,7 +89,7 @@ def _design_summary(design: Design) -> dict:
         "materials": design.material_selections,
         "accessories": design.accessories,
         "components": [
-            {"id": part.id, "type": part.type, "bay": part.compartment, "y_mm": part.position_mm.y - floor}
+            {"id": part.id, "type": part.type, "bay": part.compartment + 1, "y_mm": part.position_mm.y - floor}
             for part in design.components if part.type in catalog.COMPONENTS
         ],
     }
@@ -110,7 +120,15 @@ def _describe(op) -> str:
             return f"Start from the '{op.template}' template"
 
 
+def _language(conversation: str) -> str:
+    """Language of the customer's latest line, for the replies this module writes itself."""
+    customer_lines = [line for line in conversation.splitlines() if line.startswith("Customer:")]
+    latest = customer_lines[-1] if customer_lines else conversation
+    return "he" if _HEBREW.search(latest) else "en"
+
+
 def propose(model: AgentModel, design: Design, conversation: str) -> Proposal:
+    language = _language(conversation)
     # The provider's JSON mode requires the word "json" in the input itself, not only in the instructions.
     message = "Current design and conversation, as JSON:\n" + json.dumps(
         {"design": _design_summary(design), "conversation": conversation})
@@ -123,14 +141,16 @@ def propose(model: AgentModel, design: Design, conversation: str) -> Proposal:
         answer = _ModelAnswer.model_validate_json(answer_text)
         if not answer.operations:
             return answer_only(answer.reply)
-        operations = ApplyOperationsRequest(design=design, operations=answer.operations).operations
+        # The model numbers bays from 1 like the customer does; the design counts from 0.
+        zero_based = [{**op, "bay": op["bay"] - 1} if isinstance(op.get("bay"), int) else op for op in answer.operations]
+        operations = ApplyOperationsRequest(design=design, operations=zero_based).operations
     except ValidationError:
-        return answer_only(NOT_UNDERSTOOD)
+        return answer_only(NOT_UNDERSTOOD[language])
 
     try:
         preview = apply_operations(design, operations)
     except DomainError as error:
-        return answer_only(f"I cannot do that: {error}")
+        return answer_only(NOT_ALLOWED[language].format(reason=error))
 
     return Proposal(
         reply=answer.reply[:MAX_REPLY_CHARS],

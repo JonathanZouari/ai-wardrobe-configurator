@@ -49,6 +49,9 @@ export function mountAssistant({ onApplied }) {
   const status = el('p', 'text-[11px] text-on-surface-variant min-h-[1rem]');
   status.setAttribute('role', 'status');
   const transcript = el('p', 'text-xs text-on-surface-variant max-h-24 overflow-y-auto whitespace-pre-line');
+  transcript.tabIndex = 0; // scrollable, so it must be reachable by keyboard
+  transcript.setAttribute('role', 'region');
+  transcript.setAttribute('aria-label', 'Conversation');
   transcript.dir = 'auto'; // Hebrew or English, whichever the conversation is in
   const card = el('div', 'bg-surface-container-low rounded-lg p-3 flex flex-col gap-2');
   card.hidden = true;
@@ -82,6 +85,7 @@ export function mountAssistant({ onApplied }) {
 
     reject.addEventListener('click', () => {
       card.hidden = true;
+      input.focus(); // the focused button just disappeared
       say('Proposal rejected. Your design was not changed.');
       tellVoice('The customer rejected the proposal. The design was not changed.');
     });
@@ -89,6 +93,7 @@ export function mountAssistant({ onApplied }) {
       const before = loadDraft();
       if (before?.revision !== proposal.base_revision) {
         card.hidden = true;
+        input.focus();
         say('The design changed since this proposal. Please ask again.');
         return;
       }
@@ -102,11 +107,13 @@ export function mountAssistant({ onApplied }) {
       undo.addEventListener('click', () => {
         onApplied(restoreDraft(before));
         card.hidden = true;
+        input.focus();
         say('Change undone.');
         tellVoice('The customer undid the change. The design is back to how it was.');
       });
       card.replaceChildren(el('p', 'text-xs text-on-surface', 'Proposal applied. You can undo this change.'), undo);
-      say('');
+      undo.focus();
+      say('Proposal applied.');
       tellVoice('The customer accepted the proposal and it has been applied.');
     });
   }

@@ -18,8 +18,8 @@ body {
     }
     input:focus {
       outline: none;
-      border-color: #c2652a;
-      box-shadow: 0 0 0 3px rgba(194, 101, 42, 0.15);
+      border-color: #9a4817;
+      box-shadow: 0 0 0 3px rgba(154, 72, 23, 0.15);
     }
 body {
       background-color: #faf5ee;

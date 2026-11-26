@@ -34,3 +34,29 @@ MATERIALS = {
     "doors": ("cashmere", "fluted", "umber"),
 }
 DEFAULT_MATERIALS = {"carcass": "oak", "doors": "cashmere"}
+
+MIN_BAY_WIDTH_MM = 300
+
+# Interior components the customer can add, move and remove. Heights in millimetres.
+COMPONENTS = {
+    "shelf": {"label": "Shelf", "height_mm": BOARD_THICKNESS_MM, "catalog_ref": "carcass-board"},
+    "rail": {"label": "Hanging rail", "height_mm": RAIL_DIAMETER_MM, "catalog_ref": "hanging-rail"},
+    "drawer": {"label": "Drawer", "height_mm": DRAWER_HEIGHT_MM - DRAWER_SIDE_CLEARANCE_MM, "catalog_ref": "soft-close-drawer"},
+}
+
+ACCESSORIES = {"led_lighting": "LED lighting", "soft_close": "Soft-close mechanism"}
+
+# Starting layouts: name -> list of (component type, bay selector, height above the interior floor).
+# A negative height is measured down from the interior ceiling. Bay selector "all" or a bay index.
+TEMPLATES = {
+    "empty": [],
+    "hanging": [("shelf", "all", -TOP_SHELF_DROP_MM), ("rail", "all", -(TOP_SHELF_DROP_MM + RAIL_DROP_MM + RAIL_DIAMETER_MM))],
+    "mixed": [
+        ("shelf", "all", -TOP_SHELF_DROP_MM),
+        ("rail", "all", -(TOP_SHELF_DROP_MM + RAIL_DROP_MM + RAIL_DIAMETER_MM)),
+        ("drawer", 0, 0),
+        ("drawer", 0, DRAWER_HEIGHT_MM),
+        ("shelf", 0, 2 * DRAWER_HEIGHT_MM),
+    ],
+}
+DEFAULT_TEMPLATE = "mixed"

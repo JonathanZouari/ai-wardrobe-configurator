@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Staff Requests Dashboard — Atelier Joinery Studio</title>
+<!-- Google Fonts: EB Garamond & Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen: '#faf5ee',
+            sienna: '#c2652a',
+            'sienna-hover': '#aa5420',
+            'sienna-subtle': '#fbeee6',
+            bark: '#3a302a',
+            'muted-text': '#605850',
+            'subtle-text': '#8c827a',
+            outline: '#d8d0c8',
+            'outline-subtle': '#ece6df',
+            'error-custom': '#c0392b'
+          },
+          fontFamily: {
+            serif: ['"EB Garamond"', 'serif'],
+            sans: ['"Manrope"', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          },
+          boxShadow: {
+            'soft': '0 2px 12px -2px rgba(58, 48, 42, 0.05), 0 1px 4px -1px rgba(58, 48, 42, 0.03)',
+            'card': '0 4px 20px -4px rgba(58, 48, 42, 0.06), 0 1px 3px rgba(58, 48, 42, 0.03)',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #faf5ee;
+      color: #3a302a;
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-garamond {
+      font-family: 'EB Garamond', serif;
+    }
+    /* Custom scrollbar styling if needed */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d8d0c8;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #faf5ee;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen flex flex-col bg-linen text-bark">
+<!-- 1. HEADER (Top bar matching Staff Sign-In style) -->
+<header class="w-full bg-white border-b border-outline sticky top-0 z-30 shadow-sm">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+<!-- Brand & Section Label -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-3">
+<span class="font-garamond text-2xl font-normal tracking-tight text-bark">Atelier Joinery Studio</span>
+<span class="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded bg-[#f3ede4] text-muted-text border border-outline-subtle">
+            Staff Workspace
+          </span>
+</div>
+<!-- Navigation -->
+<nav class="hidden md:flex items-center ml-4 pl-6 border-l border-outline">
+<a class="inline-flex items-center text-sm font-semibold text-sienna border-b-2 border-sienna pb-4 pt-4 -mb-[1px]" href="#">
+            Requests
+          </a>
+</nav>
+</div>
+<!-- Right Staff Info & Logout -->
+<div class="flex items-center space-x-5 text-sm">
+<span class="text-bark font-medium">Staff Member</span>
+<span class="text-outline">|</span>
+<button class="text-muted-text hover:text-sienna transition-colors duration-150 font-medium" type="button">
+          Sign out
+        </button>
+</div>
+</div>
+</header>
+<!-- MAIN CONTAINER -->
+<main class="flex-1 max-w-[1400px] w-full mx-auto px-6 lg:px-10 py-8 flex flex-col"><div class="flex flex-col w-full">
+<!-- Title & Controls Header Row -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
+<div>
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-xs text-on-surface-variant font-medium mb-1.5">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[15px]">arrow_back</span>
+          Requests
+        </a>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">REQ-0001</span>
+</nav>
+<!-- Main Title + Badge -->
+<div class="flex items-center gap-3 flex-wrap">
+<h1 class="font-headline text-3xl md:text-[34px] font-normal tracking-tight text-on-surface leading-none">
+          Request REQ-0001
+        </h1>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
+          Sample data
+        </span>
+</div>
+</div>
+<!-- Right Controls: Status & Version Switcher -->
+<div class="flex items-center gap-3 self-start md:self-auto flex-wrap">
+<!-- Status select dropdown -->
+<div class="relative inline-flex items-center">
+<label class="sr-only" for="request-status">Status</label>
+<span class="material-symbols-outlined absolute left-2.5 text-[18px] text-primary pointer-events-none">pending</span>
+<select class="appearance-none bg-surface-container-lowest text-on-surface text-sm font-medium pl-8 pr-9 py-2 rounded-lg shadow-sm hover:bg-surface-container-low transition focus:outline-none cursor-pointer" id="request-status">
+<option value="new">New</option>
+<option selected="" value="under_review">Under review</option>
+<option value="quoted">Quoted</option>
+<option value="closed">Closed</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Version Switcher -->
+<div class="inline-flex items-center gap-2 bg-surface-container-lowest px-3 py-2 rounded-lg shadow-sm text-sm text-on-surface">
+<span class="material-symbols-outlined text-[17px] text-on-surface-variant">history</span>
+<span class="font-medium text-xs md:text-sm">Viewing v2</span>
+<span class="text-[10px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed-variant">
+          Staff revision
+        </span>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" title="Switch Version" type="button">
+<span class="material-symbols-outlined text-[18px]">unfold_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Info Banner -->
+<div class="w-full bg-surface-container-low rounded-lg p-3.5 mb-6 flex items-start sm:items-center gap-3 text-sm text-on-surface-variant shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5 sm:mt-0">info</span>
+<p class="leading-relaxed">
+      The original customer submission (v1) is preserved. Saving your edits creates a new version.
+    </p>
+</div>
+<!-- Two-Column Editorial Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT COLUMN (Wide: 8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- 1. 3D PREVIEW CARD -->
+<section class="bg-surface-container-lowest rounded-lg p-6 shadow-sm">
+<div class="flex items-center justify-between pb-4 mb-4">
+<div class="flex items-center gap-2.5">
+<h2 class="font-headline text-2xl font-normal text-on-surface tracking-tight">
+              Interactive 3D Preview
+            </h2>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">
+              Parametric Model — v2
+            </span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">2400 × 2400 × 600 mm</span>
+</div>
+<!-- Viewport Container with Architectural Vector Wardrobe -->
+<div class="relative w-full h-[400px] bg-surface-container-high rounded-lg overflow-hidden flex items-center justify-center select-none shadow-inner">
+<!-- Floor plane perspective lines -->
+<div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface-dim/40 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-6 inset-x-12 h-1 bg-surface-dim/50 rounded-full blur-[2px]"></div>
+<!-- Wardrobe Vector Schematic Graphic -->
+<div class="relative z-10 transition-transform duration-300 hover:scale-[1.01]" id="wardrobe-stage">
+<svg class="w-[340px] sm:w-[420px] h-[310px] drop-shadow-md text-bark" fill="none" viewbox="0 0 420 310" xmlns="http://www.w3.org/2000/svg">
+<!-- Outer Carcass / Shadow Box -->
+<rect fill="#eae2d6" height="250" rx="3" width="360" x="30" y="20"></rect>
+<rect fill="#dfd6c8" height="244" width="354" x="33" y="23"></rect>
+<!-- Subtle Oak Grain Texture Emulation -->
+<line stroke="#d5cbba" stroke-dasharray="8 12" stroke-width="0.5" x1="33" x2="387" y1="60" y2="60"></line>
+<line stroke="#d5cbba" stroke-dasharray="14 18" stroke-width="0.5" x1="33" x2="387" y1="120" y2="120"></line>
+<line stroke="#d5cbba" stroke-dasharray="10 16" stroke-width="0.5" x1="33" x2="387" y1="190" y2="190"></line>
+<!-- Plinth / Base Kickboard -->
+<rect fill="#c8bea8" height="9" width="352" x="34" y="258"></rect>
+<!-- Door Panels (4-door configuration) -->
+<!-- Door 1 (Bay 1 - Left) -->
+<g class="transition-all duration-500 origin-left" id="door-panel-1">
+<rect fill="#f8f4ed" height="230" rx="1.5" stroke="#ece4d8" stroke-width="1.5" width="84" x="36" y="26"></rect>
+<rect fill="#c2652a" height="70" rx="1.5" width="3" x="110" y="105"></rect>
+<line stroke="#ffffff" stroke-opacity="0.8" stroke-width="0.75" x1="38" x2="38" y1="28" y2="254"></line>
+</g>
+<!-- Door 2 (Bay 2 - Center Left) -->
+<g class="transition-all duration-500 origin-right" id="door-panel-2">
+<rect fill="#fcf9f4" height="230" rx="1.5" stroke="#ece4d8" stroke-width="1.5" width="84" x="124" y="26"></rect>
+<rect fill="#c2652a" height="70" rx="1.5" width="3" x="131" y="105"></rect>
+<line stroke="#ffffff" stroke-opacity="0.8" stroke-width="0.75" x1="126" x2="126" y1="28" y2="254"></line>
+</g>
+<!-- Door 3 (Bay 3 - Center Right) -->
+<g class="transition-all duration-500 origin-left" id="door-panel-3">
+<rect fill="#fcf9f4" height="230" rx="1.5" stroke="#ece4d8" stroke-width="1.5" width="84" x="212" y="26"></rect>
+<rect fill="#c2652a" height="70" rx="1.5" width="3" x="286" y="105"></rect>
+<line stroke="#ffffff" stroke-opacity="0.8" stroke-width="0.75" x1="214" x2="214" y1="28" y2="254"></line>
+</g>
+<!-- Door 4 (Bay 4 - Right) -->
+<g class="transition-all duration-500 origin-right" id="door-panel-4">
+<rect fill="#f8f4ed" height="230" rx="1.5" stroke="#ece4d8" stroke-width="1.5" width="84" x="300" y="26"></rect>
+<rect fill="#c2652a" height="70" rx="1.5" width="3" x="307" y="105"></rect>
+<line stroke="#ffffff" stroke-opacity="0.8" stroke-width="0.75" x1="302" x2="302" y1="28" y2="254"></line>
+</g>
+<!-- Shadow Gaps Between Doors -->
+<line stroke="#b5a995" stroke-width="1.5" x1="122" x2="122" y1="24" y2="256"></line>
+<line stroke="#b5a995" stroke-width="1.5" x1="210" x2="210" y1="24" y2="256"></line>
+<line stroke="#b5a995" stroke-width="1.5" x1="298" x2="298" y1="24" y2="256"></line>
+<!-- Upper Fascia / Shadowline gap -->
+<rect fill="#a49682" height="4" width="352" x="34" y="22"></rect>
+<!-- Internal schematic indications (revealed when toggled) -->
+<g class="opacity-0 transition-opacity duration-300" id="internal-drawers-hint">
+<rect fill="#c9bba6" height="28" rx="1" stroke="#af9f87" width="72" x="42" y="160"></rect>
+<rect fill="#c9bba6" height="28" rx="1" stroke="#af9f87" width="72" x="42" y="192"></rect>
+<rect fill="#c9bba6" height="28" rx="1" stroke="#af9f87" width="72" x="42" y="224"></rect>
+<line stroke="#9f8f77" stroke-width="2" x1="42" x2="114" y1="70" y2="70"></line>
+</g>
+</svg>
+</div>
+<!-- Overlay Viewport Control Bar -->
+<div class="absolute bottom-3 right-3 flex items-center bg-surface-container-lowest/90 backdrop-blur-md rounded-lg p-1 shadow-md gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition" title="Rotate view" type="button">
+<span class="material-symbols-outlined text-[19px]">3d_rotation</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container transition" title="Reset Camera" type="button">
+<span class="material-symbols-outlined text-[19px]">zoom_in</span>
+</button>
+<div class="w-[1px] h-4 bg-outline-variant mx-1"></div>
+<button class="px-2.5 py-1 text-xs font-medium text-on-surface hover:text-primary rounded hover:bg-surface-container transition flex items-center gap-1.5" id="btn-toggle-doors" type="button">
+<span class="material-symbols-outlined text-[16px]">meeting_room</span>
+<span id="label-toggle-doors">Open doors</span>
+</button>
+<button class="px-2.5 py-1 text-xs font-medium text-on-surface hover:text-primary rounded hover:bg-surface-container transition flex items-center gap-1.5" id="btn-hide-doors" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility_off</span>
+<span>Hide doors</span>
+</button>
+</div>
+</div>
+<!-- Viewport Action Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-5">
+<div class="flex items-center gap-2.5 flex-wrap">
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-medium text-sm hover:opacity-95 transition shadow-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Edit design</span>
+</button>
+<button class="bg-surface-container-low text-on-surface px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-surface-container transition flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">auto_awesome</span>
+<span>Ask AI assistant</span>
+</button>
+</div>
+<button class="bg-surface-container-lowest text-on-surface hover:bg-surface-container-low px-4 py-2.5 rounded-lg text-sm font-medium transition shadow-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Save as new version</span>
+</button>
+</div>
+</section>
+<!-- 2. DESIGN SPECIFICATIONS CARD -->
+<section class="bg-surface-container-lowest rounded-lg p-6 shadow-sm">
+<div class="flex items-center justify-between pb-4 mb-4">
+<h2 class="font-headline text-2xl font-normal text-on-surface tracking-tight">
+            Design specifications
+          </h2>
+<span class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Configured Specs</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-y-5 gap-x-6">
+<div class="space-y-1">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Wardrobe type</div>
+<div class="text-sm font-semibold text-on-surface">Hinged</div>
+</div>
+<div class="space-y-1">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Dimensions</div>
+<div class="text-sm font-semibold text-on-surface">2400 × 2400 × 600 mm</div>
+</div>
+<div class="space-y-1">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Doors</div>
+<div class="text-sm font-semibold text-on-surface">4 full-height hinged doors</div>
+</div>
+<div class="space-y-1 md:col-span-2">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Materials &amp; finish</div>
+<div class="text-sm font-semibold text-on-surface">Example Oak finish (catalog sample)</div>
+</div>
+<div class="space-y-1">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Catalog version</div>
+<div class="text-sm font-mono text-on-surface-variant font-semibold">example-v1</div>
+</div>
+<div class="space-y-1 md:col-span-3">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Selected accessories</div>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-xs text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-primary">lightbulb</span>
+                LED lighting
+              </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-xs text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-primary">inventory_2</span>
+                Soft-close drawers (Bay 1)
+              </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-xs text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px] text-primary">straighten</span>
+                Vertical divider reinforcement (Bay 2)
+              </span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. VALIDATION RESULTS CARD -->
+<section class="bg-surface-container-lowest rounded-lg p-6 shadow-sm">
+<div class="flex items-center justify-between pb-3 mb-4">
+<h2 class="font-headline text-2xl font-normal text-on-surface tracking-tight">
+            Validation results (configured rules)
+          </h2>
+<span class="text-xs font-medium text-on-surface-variant">3 checks evaluated</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="text-xs uppercase tracking-wider text-on-surface-variant bg-surface-container-low/60 rounded">
+<th class="py-2.5 px-3 font-semibold rounded-l">Rule ID</th>
+<th class="py-2.5 px-3 font-semibold">Component</th>
+<th class="py-2.5 px-3 font-semibold">Message</th>
+<th class="py-2.5 px-3 font-semibold text-right rounded-r">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/60">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-3.5 px-3 font-mono text-xs text-on-surface-variant whitespace-nowrap">RULE-EXAMPLE-01</td>
+<td class="py-3.5 px-3 font-semibold text-on-surface whitespace-nowrap">Shelf S-3</td>
+<td class="py-3.5 px-3 text-on-surface-variant text-xs md:text-sm">Load deflection within permissible threshold for 800mm span.</td>
+<td class="py-3.5 px-3 text-right whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                    Passed
+                  </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-3.5 px-3 font-mono text-xs text-on-surface-variant whitespace-nowrap">RULE-EXAMPLE-02</td>
+<td class="py-3.5 px-3 font-semibold text-on-surface whitespace-nowrap">Hinge Clearance Bay 2</td>
+<td class="py-3.5 px-3 text-on-surface-variant text-xs md:text-sm">Minimum 50mm clearance between internal pullout and hinge knuckle verified.</td>
+<td class="py-3.5 px-3 text-right whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                    Passed
+                  </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-3.5 px-3 font-mono text-xs text-on-surface-variant whitespace-nowrap">RULE-EXAMPLE-03</td>
+<td class="py-3.5 px-3 font-semibold text-on-surface whitespace-nowrap">Upper Fascia Panel</td>
+<td class="py-3.5 px-3 text-on-surface-variant text-xs md:text-sm">Ceiling scribe gap is under recommended 40mm tolerance for uneven plaster.</td>
+<td class="py-3.5 px-3 text-right whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                    Warning
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="italic text-xs text-on-surface-variant mt-4 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">info</span>
+          Example rules for development. Passing is not a manufacturing approval.
+        </p>
+</section>
+</div>
+<!-- RIGHT COLUMN (Narrow: 4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- 1. CUSTOMER CONTACT CARD -->
+<section class="bg-surface-container-lowest rounded-lg p-5 shadow-sm">
+<h2 class="font-headline text-xl font-normal text-on-surface tracking-tight mb-4 pb-2 flex items-center justify-between">
+<span>Customer information</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">person</span>
+</h2>
+<div class="space-y-3 text-sm">
+<div class="flex items-start justify-between">
+<span class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Name</span>
+<span class="font-semibold text-on-surface">Sample Customer A</span>
+</div>
+<div class="flex items-start justify-between">
+<span class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Phone</span>
+<span class="text-on-surface font-mono">000-000-0000</span>
+</div>
+<div class="flex items-start justify-between">
+<span class="text-xs uppercase tracking-wider text-on-surface-variant font-medium">Email</span>
+<span class="text-on-surface font-mono text-xs">customer.a@example.com</span>
+</div>
+<div class="pt-3">
+<div class="text-xs uppercase tracking-wider text-on-surface-variant font-medium mb-1.5">Customer notes</div>
+<div class="p-3 bg-surface-container-low rounded-lg text-xs leading-relaxed text-on-surface-variant font-normal">
+              “Looking for warm natural wood feel to complement bedroom floor. Need internal drawers on the left bay for folded garments.”
+            </div>
+</div>
+</div>
+</section>
+<!-- 2. TECHNICAL DOCUMENTS CARD -->
+<section class="bg-surface-container-lowest rounded-lg p-5 shadow-sm">
+<h2 class="font-headline text-xl font-normal text-on-surface tracking-tight mb-4 pb-2 flex items-center justify-between">
+<span>Technical documents</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">folder_open</span>
+</h2>
+<div class="space-y-2.5">
+<!-- Document Row 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">picture_as_pdf</span>
+<div class="truncate">
+<div class="text-xs font-semibold text-on-surface truncate">PDF summary</div>
+<div class="text-[11px] text-on-surface-variant">Tied to version 2</div>
+</div>
+</div>
+<button class="text-on-surface-variant group-hover:text-primary transition-colors p-1" title="Download PDF summary" type="button">
+<span class="material-symbols-outlined text-[19px]">download</span>
+</button>
+</div>
+<!-- Document Row 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">format_list_bulleted</span>
+<div class="truncate">
+<div class="text-xs font-semibold text-on-surface truncate">Bill of materials (preliminary)</div>
+<div class="text-[11px] text-on-surface-variant">Tied to version 2</div>
+</div>
+</div>
+<button class="text-on-surface-variant group-hover:text-primary transition-colors p-1" title="Download preliminary BOM" type="button">
+<span class="material-symbols-outlined text-[19px]">download</span>
+</button>
+</div>
+<!-- Document Row 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">photo_library</span>
+<div class="truncate">
+<div class="text-xs font-semibold text-on-surface truncate">Preview images</div>
+<div class="text-[11px] text-on-surface-variant">Tied to version 2</div>
+</div>
+</div>
+<button class="text-on-surface-variant group-hover:text-primary transition-colors p-1" title="Download previews pack" type="button">
+<span class="material-symbols-outlined text-[19px]">download</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 3. INTERNAL STAFF NOTES -->
+<section class="bg-surface-container-lowest rounded-lg p-5 shadow-sm">
+<div class="mb-3">
+<h2 class="font-headline text-xl font-normal text-on-surface tracking-tight">Internal staff notes</h2>
+<p class="text-[11px] uppercase tracking-wider text-secondary font-semibold mt-0.5">Not visible to the customer</p>
+</div>
+<!-- Notes Stream -->
+<div class="space-y-3 mb-4">
+<!-- Note 1 -->
+<div class="p-3 bg-surface-container-low rounded-lg text-xs">
+<p class="text-on-surface leading-relaxed mb-1.5">
+              Added vertical divider reinforcement in Bay 2 per customer drawer request.
+            </p>
+<div class="flex items-center gap-1.5 text-[11px] text-on-surface-variant font-medium">
+<span>Staff Member</span>
+<span>•</span>
+<span>Oct 28, 2024, 14:15</span>
+</div>
+</div>
+<!-- Note 2 -->
+<div class="p-3 bg-surface-container-low rounded-lg text-xs">
+<p class="text-on-surface leading-relaxed mb-1.5">
+              Awaiting customer response on upper fascia adjustment.
+            </p>
+<div class="flex items-center gap-1.5 text-[11px] text-on-surface-variant font-medium">
+<span>Staff Member</span>
+<span>•</span>
+<span>Oct 29, 2024, 09:30</span>
+</div>
+</div>
+</div>
+<!-- Interactive Input -->
+<form class="space-y-2" id="note-form">
+<textarea class="w-full text-xs p-2.5 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-1 focus:ring-primary shadow-inner resize-none" id="note-input" placeholder="Add an internal note..." rows="2"></textarea>
+<div class="flex justify-end">
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface px-3.5 py-1.5 rounded-lg text-xs font-semibold transition" type="submit">
+              Add note
+            </button>
+</div>
+</form>
+</section>
+<!-- 4. FINAL ACTIONS -->
+<section class="bg-surface-container-lowest rounded-lg p-5 shadow-sm flex flex-col gap-3">
+<button class="w-full bg-primary hover:opacity-95 text-on-primary py-3 rounded-lg font-medium text-sm text-center shadow transition flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[19px]">description</span>
+<span>Create quotation</span>
+</button>
+<a class="inline-flex justify-center items-center gap-1.5 text-xs text-on-surface-variant hover:text-on-surface underline transition pt-1" href="#">
+<span class="material-symbols-outlined text-[15px]">history</span>
+<span>Version history</span>
+</a>
+</section>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    (function() {
+      const toggleDoorsBtn = document.getElementById('btn-toggle-doors');
+      const hideDoorsBtn = document.getElementById('btn-hide-doors');
+      const toggleLabel = document.getElementById('label-toggle-doors');
+      const doors = [
+        document.getElementById('door-panel-1'),
+        document.getElementById('door-panel-2'),
+        document.getElementById('door-panel-3'),
+        document.getElementById('door-panel-4')
+      ];
+      const drawersHint = document.getElementById('internal-drawers-hint');
+      
+      let doorsOpen = false;
+      let doorsHidden = false;
+
+      if (toggleDoorsBtn) {
+        toggleDoorsBtn.addEventListener('click', () => {
+          doorsOpen = !doorsOpen;
+          if (doorsOpen) {
+            doors[0].style.transform = 'skewY(4deg) scaleX(0.35)';
+            doors[1].style.transform = 'skewY(-4deg) scaleX(0.35)';
+            doors[2].style.transform = 'skewY(4deg) scaleX(0.35)';
+            doors[3].style.transform = 'skewY(-4deg) scaleX(0.35)';
+            drawersHint.classList.remove('opacity-0');
+            toggleLabel.textContent = 'Close doors';
+          } else {
+            doors.forEach(d => d.style.transform = 'none');
+            drawersHint.classList.add('opacity-0');
+            toggleLabel.textContent = 'Open doors';
+          }
+        });
+      }
+
+      if (hideDoorsBtn) {
+        hideDoorsBtn.addEventListener('click', () => {
+          doorsHidden = !doorsHidden;
+          doors.forEach(d => {
+            d.style.opacity = doorsHidden ? '0.15' : '1';
+          });
+          drawersHint.classList.toggle('opacity-0', !doorsHidden);
+        });
+      }
+
+      const noteForm = document.getElementById('note-form');
+      const noteInput = document.getElementById('note-input');
+      if (noteForm && noteInput) {
+        noteForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = noteInput.value.trim();
+          if (!val) return;
+          noteInput.value = '';
+          alert('Internal note added to staff audit stream.');
+        });
+      }
+    })();
+  </script>
+</div></main>
+<!-- FOOTER -->
+<footer class="w-full border-t border-outline bg-linen py-6 mt-12">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-subtle-text">
+<div>
+        © 2025 Atelier Joinery Studio. Staff internal administration.
+      </div>
+<div>
+        Protected Staff Workspace • Version 1.4.2
+      </div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { overscroll-behavior: none; }
+  /* utility display classes must not un-hide elements carrying the hidden attribute */
+  [hidden] { display: none !important; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+
+  /* page-level rules carried over from the staff screens */
+body {
+      background-color: #faf5ee;
+      color: #3a302a;
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    input:focus {
+      outline: none;
+      border-color: #c2652a;
+      box-shadow: 0 0 0 3px rgba(194, 101, 42, 0.15);
+    }
+body {
+      background-color: #faf5ee;
+      color: #3a302a;
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-garamond {
+      font-family: 'EB Garamond', serif;
+    }
+    /* Custom scrollbar styling if needed */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d8d0c8;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #faf5ee;
+    }
+}

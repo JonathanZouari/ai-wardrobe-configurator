@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>AI proposal review | Atelier Joinery Studio</title><link href="css/styles.css" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-20 w-full px-6 lg:px-12 flex items-center justify-between gap-6"><a class="flex items-center gap-4 min-w-max" href="index.html"><div class="flex flex-col"><span class="font-headline font-semibold text-lg lg:text-xl text-on-surface tracking-wide leading-none">Atelier Joinery Studio</span><span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-medium mt-0.5">Bespoke Wardrobe Configurator</span></div></a><div class="hidden xl:flex items-center gap-3"><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-xs font-label text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span>2400 × 2400 × 600 mm</span></div><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-xs font-label text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span>Rules: passed (example)</span></div></div><nav class="hidden md:flex items-center gap-1.5 p-1 bg-surface-container-low rounded-xl"><a class="px-3.5 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors rounded-lg flex items-center gap-1.5" href="index.html">1. Start</a><a class="px-3.5 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors rounded-lg flex items-center gap-1.5" href="configurator.html">2. 3D configurator</a><a aria-current="page" class="px-3.5 py-1.5 text-xs font-label transition-colors flex items-center gap-1.5 bg-surface-container-high text-on-surface font-semibold rounded-lg" href="interior.html">3. Interior layout</a><a class="px-3.5 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors rounded-lg flex items-center gap-1.5" href="review.html">4. Review &amp; request</a></nav><div class="flex items-center gap-2.5"><a class="hidden sm:inline-flex px-3.5 py-2 text-xs font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg" href="index.html">Start over</a><a class="px-4 py-2 text-xs font-label font-medium bg-primary text-on-primary hover:bg-primary/90 transition-colors rounded-lg shadow-sm" href="review.html">Request quotation</a></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Status strip -->
+<section class="w-full bg-surface-container-low px-6 lg:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface text-primary text-[11px] font-label font-semibold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+        AI proposal
+      </span>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-xs font-label text-on-surface-variant">
+<span>Based on revision 3 (example)</span>
+</div>
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-surface-container rounded-full text-xs font-label">
+<span class="material-symbols-outlined text-[16px] text-[#4d7c0f]">verified</span>
+<span class="text-on-surface font-medium">Rules: passed (example)</span>
+</div>
+</div>
+</section>
+<!-- Split view -->
+<div class="w-full max-w-[1720px] mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+<!-- LEFT: wardrobe with proposed change highlighted -->
+<div class="xl:col-span-7 flex flex-col gap-4">
+<div class="relative w-full h-[640px] lg:h-[720px] rounded-2xl bg-surface-container-high overflow-hidden shadow-sm flex flex-col">
+<div class="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
+<div class="pointer-events-auto flex items-center gap-1 p-1 bg-surface/90 backdrop-blur-md rounded-xl shadow-sm">
+<button class="px-3 py-1.5 rounded-lg text-xs font-label font-semibold bg-primary text-on-primary transition-all shadow-sm" id="btn-view-iso" type="button">
+              3D view
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-xs font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" id="btn-view-front" type="button">
+              Front view
+            </button>
+<button aria-pressed="true" class="px-3 py-1.5 rounded-lg text-xs font-label bg-primary text-on-primary transition-all flex items-center gap-1" id="btn-toggle-diff" type="button">
+<span class="material-symbols-outlined text-[14px]">layers</span>
+              Show changes
+            </button>
+</div>
+</div>
+<div class="relative w-full h-full flex items-center justify-center bg-gradient-to-b from-surface-container-high via-surface-container to-surface-dim select-none overflow-hidden">
+<div class="relative w-[340px] sm:w-[480px] lg:w-[560px] h-[520px] bg-[#d9cdbe] rounded-sm shadow-xl p-3 flex flex-col justify-between">
+<!-- Width label -->
+<div class="absolute -top-7 left-3 right-3 flex items-center justify-between text-[11px] font-label font-medium text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<div class="flex-1 flex items-center gap-2 px-2">
+<div class="h-px bg-outline w-full"></div>
+<span class="shrink-0 bg-surface px-2 py-0.5 rounded shadow-sm text-on-surface font-semibold">2400 mm wide (example)</span>
+<div class="h-px bg-outline w-full"></div>
+</div>
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+</div>
+<div class="w-full h-4 bg-[#c7baa8] rounded-t-sm shadow-inner"></div>
+<div class="w-full flex-1 grid grid-cols-3 gap-2.5 pt-2 pb-1 bg-[#ede4d8] rounded-sm p-2 shadow-inner relative">
+<!-- Bay 1 (unchanged) -->
+<div class="h-full bg-surface-container-lowest rounded-sm p-2.5 flex flex-col justify-between relative">
+<div class="flex items-center justify-between text-[10px] font-label text-on-surface-variant">
+<span class="font-bold">Bay 1</span>
+<span>Hanging</span>
+</div>
+<div class="w-full h-3 bg-[#e8ded1] rounded-xs shadow-xs mt-2"></div>
+<div class="relative w-full h-1 bg-[#b59a60] my-3 rounded-full"></div>
+<div class="flex-1 flex items-center justify-center opacity-30">
+<span class="material-symbols-outlined text-[72px] text-on-surface-variant font-extralight">dry_cleaning</span>
+</div>
+<div class="w-full h-10 bg-surface-container rounded-xs flex items-center justify-center text-[9px] font-label text-outline">
+                  Shoe storage
+                </div>
+</div>
+<!-- Bay 2 (proposed change) -->
+<div class="h-full bg-surface-container-lowest rounded-sm p-2.5 flex flex-col justify-between relative shadow-md overflow-hidden bg-gradient-to-b from-primary/5 via-transparent to-primary/10">
+<div class="absolute inset-0 pointer-events-none rounded-sm bg-primary/5"></div>
+<div class="flex items-center justify-between text-[10px] font-label relative z-10">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-primary">Bay 2</span>
+<span class="px-1.5 py-0.2 rounded bg-primary text-on-primary text-[9px] font-semibold" id="diff-badge">Modified</span>
+</div>
+</div>
+<!-- LED lighting -->
+<div class="relative mt-2 z-10">
+<div class="w-full h-3 bg-[#dbcbb9] rounded-xs shadow-xs"></div>
+<div class="w-full h-1 bg-[#ffb74d] rounded-full shadow-[0_0_8px_#f59e0b] mt-0.5 relative group cursor-pointer">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-on-surface text-surface text-[9px] rounded whitespace-nowrap shadow-md z-30">
+                      Added: LED lighting
+                    </span>
+</div>
+</div>
+<!-- Hanging space -->
+<div class="relative w-full h-1 bg-[#b59a60] my-2 rounded-full z-10"></div>
+<div class="h-28 flex items-center justify-center opacity-40">
+<span class="material-symbols-outlined text-[54px] text-on-surface font-extralight">checkroom</span>
+</div>
+<!-- Drawers -->
+<div class="space-y-1.5 z-10">
+<div class="relative w-full h-7 bg-[#dfcfbd] rounded-xs shadow-xs p-1 flex items-center justify-between cursor-pointer hover:bg-[#d6c4b0] transition-colors group">
+<div class="w-6 h-0.5 bg-[#968270] mx-auto rounded-full"></div>
+<span class="hidden group-hover:flex absolute left-8 -top-7 px-2 py-1 bg-on-surface text-surface text-[9px] rounded items-center gap-1 shadow-md z-30 whitespace-nowrap">
+<span class="text-primary font-bold">+Added:</span> Soft-close drawer
+                    </span>
+</div>
+<div class="w-full h-7 bg-[#dfcfbd] rounded-xs shadow-xs p-1 flex items-center justify-between cursor-pointer hover:bg-[#d6c4b0] transition-colors">
+<div class="w-6 h-0.5 bg-[#968270] mx-auto rounded-full"></div>
+</div>
+</div>
+<!-- Shoe racks -->
+<div class="space-y-1.5 mt-2 z-10">
+<div class="w-full h-6 bg-[#cfbfa9] rounded-xs transform -skew-y-2 flex items-center justify-between px-2 relative group cursor-pointer">
+<div class="w-full h-0.5 bg-[#b59a60] self-end mb-1 shadow-xs"></div>
+<span class="hidden group-hover:flex absolute -left-2 -top-7 px-2 py-1 bg-on-surface text-surface text-[9px] rounded items-center gap-1 shadow-md z-30 whitespace-nowrap">
+<span class="text-primary font-bold">+Added:</span> Shoe rack
+                    </span>
+</div>
+<div class="w-full h-6 bg-[#cfbfa9] rounded-xs transform -skew-y-2 flex items-center justify-between px-2">
+<div class="w-full h-0.5 bg-[#b59a60] self-end mb-1 shadow-xs"></div>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 z-20" id="diff-pill">
+<span class="px-2 py-0.5 rounded-md bg-primary text-on-primary text-[10px] font-label font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px]">auto_fix_high</span>
+                    +5 added
+                  </span>
+</div>
+</div>
+<!-- Bay 3 (unchanged) -->
+<div class="h-full bg-surface-container-lowest rounded-sm p-2.5 flex flex-col justify-between relative">
+<div class="flex items-center justify-between text-[10px] font-label text-on-surface-variant">
+<span class="font-bold">Bay 3</span>
+<span>Shelves</span>
+</div>
+<div class="space-y-6 mt-3">
+<div class="w-full h-2.5 bg-[#e8ded1] rounded-xs shadow-xs"></div>
+<div class="w-full h-2.5 bg-[#e8ded1] rounded-xs shadow-xs"></div>
+<div class="w-full h-2.5 bg-[#e8ded1] rounded-xs shadow-xs"></div>
+<div class="w-full h-2.5 bg-[#e8ded1] rounded-xs shadow-xs"></div>
+</div>
+<div class="w-full h-14 bg-surface-container rounded-xs flex items-center justify-center text-[10px] font-label text-on-surface-variant/70">
+                  Basket slot
+                </div>
+</div>
+</div>
+<div class="w-full h-5 bg-[#bfb2a0] rounded-b-sm"></div>
+</div>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-2 p-1.5 rounded-xl bg-surface/90 backdrop-blur-md shadow-sm">
+<span class="text-[11px] font-label text-on-surface-variant font-medium ml-2">Doors:</span>
+<button class="px-2.5 py-1 rounded-lg bg-surface text-on-surface-variant hover:text-on-surface text-xs font-label" type="button">Closed</button>
+<button class="px-2.5 py-1 rounded-lg bg-primary text-on-primary text-xs font-label font-medium shadow-xs" type="button">Open</button>
+</div>
+<div class="absolute bottom-4 right-4 z-20 flex items-center gap-1.5 p-1.5 rounded-xl bg-surface/90 backdrop-blur-md shadow-sm text-xs font-label text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">rotate_right</span>
+<span>Drag to rotate • Pinch to zoom</span>
+</div>
+</div>
+</div>
+<!-- Material strip -->
+<div class="w-full bg-surface-container-low rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-lg bg-[#b59a60] shadow-sm flex items-center justify-center text-surface font-semibold text-xs">
+              Oak
+            </div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface">Example Oak finish</span>
+</div>
+</div>
+<div class="h-6 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-lg bg-[#d4af37]/30 flex items-center justify-center text-primary font-semibold text-xs">
+<span class="material-symbols-outlined text-[18px]">tungsten</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface">LED lighting</span>
+</div>
+</div>
+</div>
+<span class="text-xs font-label text-on-surface-variant">Catalog examples</span>
+</div>
+</div>
+<!-- RIGHT: request, validation, changes, decision -->
+<div class="xl:col-span-5 flex flex-col gap-5">
+<!-- Request -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col gap-4 relative overflow-hidden">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">record_voice_over</span>
+</span>
+<span class="font-label text-xs uppercase tracking-wider text-on-surface-variant font-semibold">Your request</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 text-xs font-body text-on-surface leading-relaxed italic">
+          “Reorganise Bay 2 for long coats and shoes, with LED lighting and two soft-close drawers.”
+        </div>
+<div class="space-y-2">
+<div class="flex items-center gap-1.5 text-xs font-semibold text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">psychology</span>
+<span>Proposed change</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed font-body">
+            Bay 2 gets hanging space for long coats, with two drawers below it. Two shoe racks and LED lighting are added to the same bay.
+          </p>
+</div>
+</div>
+<!-- Validation -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]">rule</span>
+</span>
+<h3 class="font-headline text-base text-on-surface font-semibold">Validation results (configured rules)</h3>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#f0fdf4] text-[#166534] text-[11px] font-label font-bold whitespace-nowrap">
+            0 Blocking • 1 Warning
+          </span>
+</div>
+<div class="space-y-2.5">
+<div class="p-3 rounded-xl bg-surface-container-low flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#16a34a] mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface">RULE-EXAMPLE-01 · Hanging rail, Bay 2</span>
+<span class="text-[11px] text-on-surface-variant">The hanging space fits inside the bay.</span>
+</div>
+</div>
+<span class="text-[10px] font-label uppercase tracking-wider px-2 py-0.5 rounded bg-surface text-[#166534] font-bold">Passed</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#16a34a] mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface">RULE-EXAMPLE-02 · Drawers, Bay 2</span>
+<span class="text-[11px] text-on-surface-variant">The drawers do not overlap other components.</span>
+</div>
+</div>
+<span class="text-[10px] font-label uppercase tracking-wider px-2 py-0.5 rounded bg-surface text-[#166534] font-bold">Passed</span>
+</div>
+<div class="p-3 rounded-xl bg-[#fffbeb] flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-[#b45309] mt-0.5">info</span>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-[#92400e]">RULE-EXAMPLE-03 · LED lighting, Bay 2</span>
+<span class="text-[11px] text-[#b45309]">The lighting may need a cable route. Staff can confirm this.</span>
+</div>
+</div>
+<span class="text-[10px] font-label uppercase tracking-wider px-2 py-0.5 rounded bg-[#fef3c7] text-[#92400e] font-bold">Warning</span>
+</div>
+</div>
+<p class="text-[11px] font-label text-on-surface-variant">Example rules. Passing is not a manufacturing approval.</p>
+</div>
+<!-- Component changes -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">difference</span>
+</span>
+<h3 class="font-headline text-base text-on-surface font-semibold">Component changes</h3>
+</div>
+<span class="text-xs font-label text-on-surface-variant">Example data</span>
+</div>
+<div class="divide-y divide-outline-variant/30 text-xs">
+<div class="py-2.5 flex items-center">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-md bg-[#fee2e2] text-[#991b1b] flex items-center justify-center font-bold text-xs">-1</span>
+<div class="flex flex-col">
+<span class="font-medium text-on-surface line-through opacity-70">Bay 2 lower shelf</span>
+<span class="text-[11px] text-on-surface-variant">Removed to make room for the shoe racks</span>
+</div>
+</div>
+</div>
+<div class="py-2.5 flex items-center">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-md bg-[#dcfce7] text-[#166534] flex items-center justify-center font-bold text-xs">+2</span>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Soft-close drawer</span>
+<span class="text-[11px] text-on-surface-variant">Added below the hanging space</span>
+</div>
+</div>
+</div>
+<div class="py-2.5 flex items-center">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-md bg-[#dcfce7] text-[#166534] flex items-center justify-center font-bold text-xs">+2</span>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Shoe rack</span>
+<span class="text-[11px] text-on-surface-variant">Added at the bottom of the bay</span>
+</div>
+</div>
+</div>
+<div class="py-2.5 flex items-center">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-md bg-[#dcfce7] text-[#166534] flex items-center justify-center font-bold text-xs">+1</span>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">LED lighting</span>
+<span class="text-[11px] text-on-surface-variant">Added under the top shelf</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decision -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md flex flex-col gap-4">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<span class="font-headline font-semibold text-base text-on-surface">Review proposal</span>
+</div>
+<span class="text-[11px] font-label text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+            Undo available at any time
+          </span>
+</div>
+<p class="text-xs text-on-surface-variant">
+          Applying commits these changes to the current design. The 3D view updates and you can undo at any time.
+        </p>
+<div class="flex flex-col sm:flex-row items-center gap-3 pt-1" id="decision-actions">
+<button class="w-full sm:flex-1 py-3 px-5 rounded-xl bg-primary text-on-primary font-label font-semibold text-xs flex items-center justify-center gap-2 shadow-sm hover:bg-primary/90 transition-all" id="btn-accept" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+            Accept &amp; apply
+          </button>
+<button class="w-full sm:w-auto py-3 px-4 rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label font-semibold text-xs transition-colors flex items-center justify-center gap-1.5" id="btn-reject" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+            Reject proposal
+          </button>
+</div>
+<div class="hidden" id="proposal-result" role="status"><div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-surface text-xs font-label text-on-surface">
+<span id="result-text"></span>
+<button class="hidden px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label font-semibold text-xs transition-colors" id="btn-undo" type="button">Undo</button>
+</div></div>
+<div class="flex items-center justify-between pt-1 text-xs font-label">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+            Adjust specific parameters
+          </button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+            Request alternative option
+          </button>
+</div>
+<a class="text-xs font-label text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="interior.html">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+          Back to design
+        </a>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-10"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-label text-on-surface-variant"><div>© Atelier Joinery Studio</div><a class="hover:text-on-surface transition-colors" href="staff/sign-in.html">Staff sign in</a></div></footer><script defer src="js/ai-proposal.js"></script></body></html>

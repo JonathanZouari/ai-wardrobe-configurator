@@ -1,0 +1,676 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-background":"#3a302a","on-secondary-fixed-variant":"#504840","on-secondary-fixed":"#2a2420","outline-variant":"#d8d0c8","surface-container-highest":"#e6e0d6","background":"#faf5ee","on-error-container":"#7a1a10","primary-fixed-dim":"#f0a878","error-container":"#fce4e0","inverse-primary":"#f0a878","on-secondary":"#ffffff","on-secondary-container":"#605850","inverse-surface":"#3a302a","tertiary-container":"#d47070","on-primary-fixed-variant":"#8a4518","on-primary":"#ffffff","primary-fixed":"#fbe8d8","on-primary-container":"#fbe8d8","on-tertiary-container":"#3a2020","on-surface-variant":"#605850","surface-tint":"#c2652a","inverse-on-surface":"#faf5ee","error":"#c0392b","on-tertiary-fixed":"#2e1515","surface-container-high":"#ece6dc","surface-container-low":"#f6f0e8","surface":"#faf5ee","on-tertiary-fixed-variant":"#6e3030","on-tertiary":"#ffffff","surface-container":"#f2ece4","primary":"#c2652a","surface-variant":"#ece6dc","outline":"#9a9088","secondary-fixed-dim":"#cec6be","surface-dim":"#dcd6cc","secondary-container":"#eae2da","surface-container-lowest":"#ffffff","primary-container":"#e08850","tertiary":"#8c3c3c","on-primary-fixed":"#401a08","surface-bright":"#faf5ee","on-surface":"#3a302a","tertiary-fixed-dim":"#e8a0a0","on-error":"#ffffff","secondary-fixed":"#eae2da","secondary":"#78706a","tertiary-fixed":"#fce0e0"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{},fontFamily:{headline:["EB Garamond"],display:["EB Garamond"],body:["Manrope"],label:["Manrope"]},fontSize:{}}}}</script></head><body class="bg-surface font-body text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-20 w-full px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-4 min-w-max"><img alt="Atelier Joinery Studio Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBrbgWaSPysknCkNDLJQdwDT1_UgQsFl2pjCnDPzgaivsBk3FiMZ-2pEmdMDSieYa_0bhVnGhvjmXovNv40GXODYBEH6P4qgkQBfOw1abmaiiuR3DowNpbg3QgA6Y6Nw2YmRnlamECneBJuEPXfFX60C8PacKWGFE5v2HlmezfBW7xzxaSQM2YiKZ2blhhdPd2ctrQdctpstW7GRZhTBEnES_wBxQhhegavwxdbGDfz"><div class="flex flex-col"><span class="font-headline font-semibold text-lg lg:text-xl text-on-surface tracking-wide leading-none">Atelier Joinery Studio</span><span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-medium mt-0.5">Bespoke Wardrobe Configurator</span></div></div><div class="hidden xl:flex items-center gap-3"><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-xs font-label text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span>2400 × 2400 × 600 mm</span></div><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-xs font-label text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span>Rules: Passing</span></div></div><nav class="hidden md:flex items-center gap-1.5 p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-surface-container-high text-on-surface font-semibold rounded-lg"><a class="px-3.5 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors rounded-lg flex items-center gap-1.5" data-path="configurator-studio" href="#"><span class="font-medium">1.</span> 3D Studio Configurator</a><a class="px-3.5 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors rounded-lg flex items-center gap-1.5" data-path="interior-layout" href="#"><span class="font-medium">2.</span> Interior Layout</a><a class="px-3.5 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors rounded-lg flex items-center gap-1.5" data-path="review-quotation" href="#"><span class="font-medium">3.</span> Review &amp; Quotation</a></nav><div class="flex items-center gap-2.5"><button class="hidden sm:inline-flex px-3.5 py-2 text-xs font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg" type="button">Reset</button><button class="hidden sm:inline-flex px-3.5 py-2 text-xs font-label text-on-surface hover:bg-surface-container transition-colors rounded-lg" type="button">Save Draft</button><button class="px-4 py-2 text-xs font-label font-medium bg-primary text-on-primary hover:bg-primary/90 transition-colors rounded-lg shadow-sm" type="button">Request Quotation</button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Sub-Header Architectural Meta Strip -->
+<div class="w-full bg-surface-container-low px-6 lg:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-medium">Bespoke Project</span>
+<span class="text-xs font-semibold text-on-surface">Residence Van Der Rohe • Wardrobe 02</span>
+</div>
+<div class="h-3.5 w-px bg-outline-variant/60 hidden sm:block"></div>
+<div class="hidden sm:flex items-center gap-2 text-xs font-label text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-primary">forest</span>
+<span>Carpathian White Oak (19mm Core)</span>
+</div>
+<div class="h-3.5 w-px bg-outline-variant/60 hidden md:block"></div>
+<div class="hidden md:flex items-center gap-1.5 text-xs font-label text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-medium text-on-surface">32mm System Matrix:</span>
+<span class="font-mono text-[11px]">71 holes / bay</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded text-xs font-label text-on-surface">
+<span class="material-symbols-outlined text-primary text-[14px]">verified</span>
+<span class="font-medium">Deterministic Rules: Valid</span>
+<span class="text-[10px] text-on-surface-variant font-mono">(0 Blockers)</span>
+</div>
+<span class="text-xs font-label text-on-surface-variant hidden lg:inline">Auto-saved 14s ago</span>
+</div>
+</div>
+<!-- Main 3-Column Studio Workspace -->
+<div class="w-full grid grid-cols-1 xl:grid-cols-12 min-h-[calc(100vh-140px)]">
+<!-- 1. LEFT SIDEBAR: Component & Hardware Catalog (FR-02 & FR-04) -->
+<aside class="xl:col-span-3 bg-surface-container-low/70 p-5 lg:p-6 flex flex-col gap-5 overflow-y-auto max-h-[calc(100vh-140px)]">
+<!-- Catalog Header -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-label uppercase tracking-widest text-primary font-semibold">Joinery Modules</span>
+<span class="text-[11px] font-mono text-on-surface-variant">10 Components</span>
+</div>
+<h2 class="font-headline text-2xl text-on-surface font-normal">Component Catalog</h2>
+<p class="text-xs text-on-surface-variant leading-relaxed">Precision modules engineered with CNC-milled 32mm hole indexing and Blum hardware standards.</p>
+</div>
+<!-- Search Input -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-10 pr-3.5 py-2.5 bg-surface-container-lowest rounded-lg text-xs font-body text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" placeholder="Search components, Blum runners..." type="text">
+</div>
+<!-- Category Filter Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+<button class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-primary text-on-primary shadow-sm whitespace-nowrap">All</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">Shelving</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">Rails</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">Drawers</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">Lighting</button>
+</div>
+<!-- Drag Hint Micro-banner -->
+<div class="bg-surface-container px-3.5 py-2.5 rounded-lg flex items-start gap-2.5 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">touch_app</span>
+<p class="text-[11px] text-on-surface-variant leading-tight">
+<strong class="text-on-surface font-medium">Drag any component</strong> directly into Bay 1, 2, or 3. Elements magnetically lock to 32mm incremental hole pins.
+        </p>
+</div>
+<!-- Draggable Component Cards List -->
+<div class="flex flex-col gap-2.5">
+<!-- Component 1: Solid Oak Adjustable Shelf -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">table_rows</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Solid Oak Adjustable Shelf</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">19mm Core • Brass anti-tip pins</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Span: 800mm</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Max: 30kg</span>
+</div>
+</div>
+</div>
+<!-- Component 2: Heavy Overcoat Hanging Rail -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">checkroom</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Solid Satin Brass Overcoat Rail</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">Oval profile • Silicone acoustic strip</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Clearance: 1200mm</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Max: 45kg</span>
+</div>
+</div>
+</div>
+<!-- Component 3: Blum MOVENTO Shallow Drawer Unit -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">inbox</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Blum MOVENTO Shallow Drawer</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">140mm H • Soft-close tip-on integrated</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">40kg slides</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Dovetail Oak</span>
+</div>
+</div>
+</div>
+<!-- Component 4: Blum MOVENTO Deep Linen Drawer -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">archive</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Blum MOVENTO Deep Linen Box</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">280mm H • Solid dovetail joint construction</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Full-extension</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Linen Storage</span>
+</div>
+</div>
+</div>
+<!-- Component 5: Slanted Solid Timber Shoe Shelf (Active Item) -->
+<div class="group bg-primary-fixed/50 p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">roller_skating</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-xs text-on-surface truncate">Slanted Timber Shoe Shelf</span>
+<span class="text-[10px] font-label font-bold text-primary uppercase">Active Drag</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">22° pitch • Brushed satin brass lip</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary font-medium">3 Pairs / bay</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant">Depth 340mm</span>
+</div>
+</div>
+</div>
+<!-- Component 6: Pull-Out Velvet Trouser Rack -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">tune</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Pull-Out Velvet Trouser Rack</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">8 Anodized rails • Dampened slide glide</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Capacity: 16 pairs</span>
+</div>
+</div>
+</div>
+<!-- Component 7: Milled Recessed LED Micro-Channel -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">highlight</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Recessed LED Channel (3000K)</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">Milled flush profile with PIR motion trigger</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">CRI 95+</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Concealed Wire</span>
+</div>
+</div>
+</div>
+<!-- Component 8: Jewelry Insert Tray -->
+<div class="group bg-surface-container-lowest p-3.5 rounded-lg shadow-sm hover:shadow-md transition-all cursor-grab active:cursor-grabbing hover:-translate-y-0.5 flex items-start gap-3 relative">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">diamond</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-medium text-xs text-on-surface truncate">Felt-Lined Jewelry Insert Tray</span>
+<span class="material-symbols-outlined text-outline text-[16px] group-hover:text-primary">drag_indicator</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">Charcoal felt • Watch pillows &amp; ring slots</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">Custom Fit 800mm</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- 2. CENTER CANVAS: Millwork Elevation & Snap-Grid Editor -->
+<main class="xl:col-span-6 bg-surface p-4 lg:p-6 flex flex-col gap-4 overflow-y-auto">
+<!-- View Controls & Drafting Ribbon -->
+<div class="w-full bg-surface-container-lowest p-3 rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg">
+<button class="px-3 py-1.5 text-xs font-label font-medium bg-surface-container-highest text-on-surface rounded flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">grid_view</span>
+<span>2D Elevation (Grid)</span>
+</button>
+<button class="px-3 py-1.5 text-xs font-label text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">view_in_ar</span>
+<span>Axonometric 3D</span>
+</button>
+</div>
+<!-- Snap Options -->
+<div class="flex items-center gap-3">
+<label class="flex items-center gap-1.5 text-xs font-label text-on-surface cursor-pointer">
+<input checked="" class="accent-primary rounded w-3.5 h-3.5" type="checkbox">
+<span class="font-medium">32mm Drill Matrix</span>
+</label>
+<label class="hidden sm:flex items-center gap-1.5 text-xs font-label text-on-surface-variant cursor-pointer">
+<input checked="" class="accent-primary rounded w-3.5 h-3.5" type="checkbox">
+<span>Clearances</span>
+</label>
+<div class="h-4 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Undo (Cmd+Z)">
+<span class="material-symbols-outlined text-[18px]">undo</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Redo">
+<span class="material-symbols-outlined text-[18px]">redo</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Zoom to fit">
+<span class="material-symbols-outlined text-[18px]">fit_screen</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Orthographic Canvas Container -->
+<div class="relative w-full bg-surface-container-lowest rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col items-center select-none overflow-hidden">
+<!-- Architectural Top Scribe Callout -->
+<div class="w-full flex items-center justify-between text-[11px] font-mono text-outline mb-2 px-10">
+<span>TOP SCRIBE: 60mm CLEARANCE</span>
+<span>TOTAL CARCASS SPAN: 2400mm</span>
+<span>CEILING HEIGHT: 2600mm</span>
+</div>
+<div class="relative flex w-full max-w-[620px] justify-center">
+<!-- Left Dimension Elevation Ruler -->
+<div class="w-12 flex flex-col justify-between items-end pr-2 text-[10px] font-mono text-on-surface-variant select-none py-1">
+<div class="flex items-center gap-1"><span>2400</span><span class="w-2 h-px bg-outline"></span></div>
+<div class="flex items-center gap-1"><span>2050</span><span class="w-2 h-px bg-outline"></span></div>
+<div class="flex items-center gap-1"><span>1850</span><span class="w-2 h-px bg-outline"></span></div>
+<div class="flex items-center gap-1 font-semibold text-primary"><span>0850</span><span class="w-3 h-0.5 bg-primary"></span></div>
+<div class="flex items-center gap-1"><span>0600</span><span class="w-2 h-px bg-outline"></span></div>
+<div class="flex items-center gap-1"><span>0300</span><span class="w-2 h-px bg-outline"></span></div>
+<div class="flex items-center gap-1"><span>0080</span><span class="w-2 h-px bg-outline"></span></div>
+<div class="flex items-center gap-1"><span>0000</span><span class="w-2 h-px bg-outline"></span></div>
+</div>
+<!-- The 3-Bay Solid Oak Carcass Graphic Frame -->
+<div class="relative w-full aspect-[1/1.02] max-w-[540px] bg-surface-container-low rounded-lg p-2.5 shadow-md flex gap-2">
+<!-- Outer Carcass Girth Notations (Backdrop Woodgrain Simulation) -->
+<div class="absolute -top-3 left-0 right-0 h-2 bg-surface-container-high rounded-t"></div>
+<div class="absolute -bottom-3 left-0 right-0 h-3 bg-surface-container-highest rounded-b flex items-center justify-center">
+<span class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest">Plinth Base 80mm</span>
+</div>
+<!-- ================= BAY 1 (800mm W) ================= -->
+<div class="flex-1 bg-surface-container rounded flex flex-col justify-between p-2 relative">
+<!-- Bay Header Marker -->
+<div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] font-mono text-on-surface-variant font-medium">BAY 1 • 800mm</div>
+<!-- 32mm System Drill Hole Matrix (Left & Right Stile) -->
+<div class="absolute inset-y-4 left-1.5 w-1 flex flex-col justify-between opacity-35 pointer-events-none">
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+</div>
+<div class="absolute inset-y-4 right-1.5 w-1 flex flex-col justify-between opacity-35 pointer-events-none">
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+</div>
+<!-- Top Hat Shelf (+2050mm) -->
+<div class="w-full flex flex-col items-center">
+<div class="w-full h-3 bg-surface-container-highest rounded-sm shadow-xs flex items-center justify-between px-2">
+<span class="text-[8px] font-mono text-on-surface-variant">19mm Core</span>
+</div>
+<div class="h-8 flex items-center justify-center">
+<span class="text-[9px] font-mono text-outline">Overhead Travel Storage (+2050)</span>
+</div>
+</div>
+<!-- Brass Hanging Rail for Overcoats (+1850mm) -->
+<div class="relative w-full flex flex-col items-center my-auto pt-2 pb-14">
+<div class="w-full h-2.5 bg-gradient-to-r from-primary/70 via-primary-container to-primary/70 rounded-full shadow-inner relative flex items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-surface-container-lowest shadow-xs"></span>
+</div>
+<!-- Stylized Hanging Silhouette -->
+<div class="mt-2 text-center flex flex-col items-center opacity-60">
+<span class="material-symbols-outlined text-outline-variant text-[44px]">dry_cleaning</span>
+<span class="text-[9px] font-mono text-on-surface-variant">Full-Drop Rail (+1850)</span>
+<span class="text-[8px] font-mono text-outline">Clearance: 1250mm</span>
+</div>
+</div>
+<!-- Lower Shoe Tray (+150mm) -->
+<div class="w-full h-7 bg-surface-container-high rounded flex items-center justify-between px-2 shadow-xs">
+<span class="text-[9px] font-label text-on-surface-variant">Open Luggage Plinth</span>
+<span class="text-[8px] font-mono text-outline">+150mm</span>
+</div>
+</div>
+<!-- ================= BAY 2 (800mm W) [ACTIVE DROP TARGET] ================= -->
+<div class="flex-1 bg-surface-container-lowest rounded relative p-2 flex flex-col justify-between shadow-inner ring-2 ring-primary/40">
+<!-- Active Bay Banner -->
+<div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] font-mono text-primary font-bold">BAY 2 • ACTIVE TARGET</div>
+<!-- 32mm System Drill Hole Matrix (Left & Right Stile) with interactive highlight -->
+<div class="absolute inset-y-4 left-1.5 w-1 flex flex-col justify-between pointer-events-none">
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary ring-2 ring-primary/20"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary ring-2 ring-primary/20"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+</div>
+<div class="absolute inset-y-4 right-1.5 w-1 flex flex-col justify-between pointer-events-none">
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary ring-2 ring-primary/20"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary ring-2 ring-primary/20"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+<span class="w-1 h-1 rounded-full bg-primary/40"></span>
+</div>
+<!-- Top Shirt Rail (+2000mm) -->
+<div class="w-full flex flex-col items-center pt-2">
+<div class="w-full h-2 bg-secondary-fixed-dim rounded-full flex items-center justify-between px-2">
+<span class="text-[8px] font-mono text-on-secondary-fixed">Brass Endstop</span>
+</div>
+<div class="text-[9px] font-mono text-on-surface-variant mt-1">Shirt Rail (+2000)</div>
+</div>
+<!-- INTERACTIVE SNAP ZONE (Hole #24 Snapping Target) -->
+<div class="relative w-full my-auto py-3">
+<!-- Dashed Drop Target Boundary Box -->
+<div class="w-full h-24 rounded-lg bg-primary-fixed/20 flex flex-col items-center justify-center p-2 relative">
+<div class="flex items-center gap-1.5 text-primary text-xs font-label font-semibold">
+<span class="material-symbols-outlined text-[18px] animate-bounce">add_circle</span>
+<span>Drop Target Active</span>
+</div>
+<span class="text-[10px] font-mono text-primary mt-1">Snaps to Pin 24 • Y: +850mm</span>
+<!-- Floating Dragged Ghost Component Overlay -->
+<div class="absolute -top-1 left-2 right-2 bg-surface-container-lowest p-2 rounded shadow-xl flex items-center justify-between pointer-events-none">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">roller_skating</span>
+<div class="flex flex-col">
+<span class="text-[11px] font-semibold text-on-surface">Slanted Oak Shoe Shelf</span>
+<span class="text-[9px] font-mono text-on-surface-variant">Pitch: 22° • Satin Lip</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary font-mono text-[9px] font-bold">H: +850mm</span>
+<span class="text-[8px] font-mono text-on-surface-variant mt-0.5">Clearance: 250mm OK</span>
+</div>
+</div>
+</div>
+<!-- Distance Metric Callout lines -->
+<div class="flex items-center justify-between text-[8px] font-mono text-primary px-1 mt-1">
+<span>Hanger clearance: 980mm</span>
+<span>Drawer clearance: 250mm</span>
+</div>
+</div>
+<!-- Bottom 2 Blum MOVENTO Drawers (+300 to +600mm) -->
+<div class="w-full flex flex-col gap-1 pb-1">
+<!-- Shallow Top Drawer -->
+<div class="w-full h-11 bg-surface-container-high rounded shadow-xs flex items-center justify-between px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-8 h-1 bg-surface-container-highest rounded-full"></span>
+<span class="text-[9px] font-medium text-on-surface">Blum 140mm</span>
+</div>
+<span class="text-[8px] font-mono text-on-surface-variant">+600mm</span>
+</div>
+<!-- Deep Linen Bottom Drawer -->
+<div class="w-full h-14 bg-surface-container-high rounded shadow-xs flex items-center justify-between px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-8 h-1 bg-surface-container-highest rounded-full"></span>
+<span class="text-[9px] font-medium text-on-surface">Blum Deep 280mm</span>
+</div>
+<span class="text-[8px] font-mono text-on-surface-variant">+300mm</span>
+</div>
+</div>
+</div>
+<!-- ================= BAY 3 (800mm W) ================= -->
+<div class="flex-1 bg-surface-container rounded flex flex-col justify-between p-2 relative">
+<!-- Bay Header Marker -->
+<div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] font-mono text-on-surface-variant font-medium">BAY 3 • 800mm</div>
+<!-- 32mm System Drill Hole Matrix (Left & Right Stile) -->
+<div class="absolute inset-y-4 left-1.5 w-1 flex flex-col justify-between opacity-35 pointer-events-none">
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+</div>
+<div class="absolute inset-y-4 right-1.5 w-1 flex flex-col justify-between opacity-35 pointer-events-none">
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+</div>
+<!-- 4 Adjustable Linen Shelves with 400mm Spacing -->
+<div class="w-full flex flex-col gap-5 pt-2">
+<!-- Shelf 1 -->
+<div class="w-full">
+<div class="w-full h-2.5 bg-surface-container-highest rounded-sm shadow-xs flex items-center justify-end px-1.5">
+<span class="text-[7px] font-mono text-outline">400mm</span>
+</div>
+</div>
+<!-- Shelf 2 -->
+<div class="w-full">
+<div class="w-full h-2.5 bg-surface-container-highest rounded-sm shadow-xs flex items-center justify-end px-1.5">
+<span class="text-[7px] font-mono text-outline">400mm</span>
+</div>
+</div>
+<!-- Shelf 3 -->
+<div class="w-full">
+<div class="w-full h-2.5 bg-surface-container-highest rounded-sm shadow-xs flex items-center justify-end px-1.5">
+<span class="text-[7px] font-mono text-outline">400mm</span>
+</div>
+</div>
+<!-- Shelf 4 -->
+<div class="w-full">
+<div class="w-full h-2.5 bg-surface-container-highest rounded-sm shadow-xs flex items-center justify-end px-1.5">
+<span class="text-[7px] font-mono text-outline">400mm</span>
+</div>
+</div>
+</div>
+<!-- Laundry Hamper / Basket Slide at bottom -->
+<div class="w-full h-16 bg-surface-container-high rounded p-2 flex flex-col justify-between shadow-xs">
+<div class="flex items-center justify-between">
+<span class="text-[9px] font-medium text-on-surface">Integrated Laundry Basket</span>
+<span class="material-symbols-outlined text-[14px] text-outline">local_laundry_service</span>
+</div>
+<div class="flex items-center justify-between text-[8px] font-mono text-on-surface-variant">
+<span>Canvas insert on timber glide</span>
+<span>+080mm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Carcass Bottom Dimension Callouts -->
+<div class="w-full max-w-[540px] flex items-center justify-between text-[11px] font-mono text-on-surface-variant mt-4 pt-2">
+<div class="w-1/3 text-center">◄ 800 mm ►</div>
+<div class="w-1/3 text-center font-bold text-primary">◄ 800 mm (Active) ►</div>
+<div class="w-1/3 text-center">◄ 800 mm ►</div>
+</div>
+<!-- Live Snapping Feedback Banner -->
+<div class="w-full mt-4 bg-surface-container-low px-4 py-2.5 rounded-lg flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-on-surface font-semibold">Live Snap Feedback:</span>
+<span class="text-on-surface-variant">Bay 2 • Y: 850mm • 32mm Grid Pin #24</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check</span>
+              Zero Obstruction Detected
+            </span>
+<button class="px-2.5 py-1 bg-primary text-on-primary rounded text-[11px] font-label font-medium hover:bg-primary/90 transition-colors shadow-xs">Commit Placement</button>
+</div>
+</div>
+</div>
+<!-- Workshop Joinery Specifications Bento Strip -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex items-center gap-3">
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-[10px] font-label uppercase tracking-wider text-on-surface-variant font-medium">Bore Spacing</span>
+<span class="text-xs font-semibold text-on-surface truncate">System 32 (Ø 5.0mm)</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex items-center gap-3">
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-[10px] font-label uppercase tracking-wider text-on-surface-variant font-medium">Drawer Hardware</span>
+<span class="text-xs font-semibold text-on-surface truncate">Blum MOVENTO 760H</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex items-center gap-3">
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-[10px] font-label uppercase tracking-wider text-on-surface-variant font-medium">Load Deflection</span>
+<span class="text-xs font-semibold text-on-surface truncate">DIN 68874-1 Class L50</span>
+</div>
+</div>
+</div>
+</main>
+<!-- 3. RIGHT INSPECTOR PANEL: Selected Element & Deterministic Rules -->
+<aside class="xl:col-span-3 bg-surface-container-low/70 p-5 lg:p-6 flex flex-col justify-between gap-6 overflow-y-auto max-h-[calc(100vh-140px)]">
+<div class="flex flex-col gap-5">
+<!-- Inspector Title -->
+<div class="flex items-center justify-between pb-1">
+<div class="flex flex-col">
+<span class="text-[11px] font-label uppercase tracking-widest text-primary font-semibold">Element Properties</span>
+<h3 class="font-headline text-2xl text-on-surface font-normal">Bay 2 Inspector</h3>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] font-mono text-on-surface-variant">ID: MOD-SHOE-800</span>
+</div>
+<!-- Selected Element Card -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-medium text-xs text-on-surface">Slanted Oak Shoe Shelf</span>
+</div>
+<span class="text-[10px] font-label uppercase px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-bold">Selected</span>
+</div>
+<!-- Position Slider and Direct Millimeter Input -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between text-xs font-label">
+<span class="text-on-surface-variant">Elevation from Plinth</span>
+<div class="flex items-center gap-1">
+<input class="w-14 px-1.5 py-0.5 text-right font-mono text-xs bg-surface-container rounded text-on-surface focus:outline-none focus:ring-1 focus:ring-primary font-semibold" type="number" value="850">
+<span class="font-mono text-on-surface-variant text-[11px]">mm</span>
+</div>
+</div>
+<input class="accent-primary cursor-pointer w-full h-1.5 bg-surface-container-high rounded-lg" max="2200" min="100" step="32" type="range" value="850">
+<div class="flex justify-between text-[9px] font-mono text-outline">
+<span>Pin 03 (100mm)</span>
+<span>Pin 24 (850mm)</span>
+<span>Pin 68 (2200mm)</span>
+</div>
+</div>
+<!-- Bay Assignment Selector -->
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-label text-on-surface-variant">Assigned Section</span>
+<div class="grid grid-cols-3 gap-1.5 pt-0.5">
+<button class="py-1 text-xs font-label bg-surface-container text-on-surface-variant rounded hover:text-on-surface">Bay 1</button>
+<button class="py-1 text-xs font-label bg-primary text-on-primary font-medium rounded shadow-xs">Bay 2</button>
+<button class="py-1 text-xs font-label bg-surface-container text-on-surface-variant rounded hover:text-on-surface">Bay 3</button>
+</div>
+</div>
+<!-- Joinery Specifications -->
+<div class="flex flex-col gap-2 pt-2 bg-surface-container-low p-2.5 rounded-lg text-xs font-label">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Material</span>
+<span class="font-medium text-on-surface">FSC European Oak (19mm)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Retaining Rail</span>
+<span class="font-medium text-on-surface">Solid Satin Brass Rod</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Pitch Angle</span>
+<span class="font-medium text-on-surface">22° Ergonomic Incline</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Fixing Hardware</span>
+<span class="font-medium text-on-surface">Ø5mm Brass Dowels</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="px-2.5 py-1.5 text-xs font-label bg-surface-container hover:bg-surface-container-high text-on-surface rounded flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+<span>Duplicate</span>
+</button>
+<button class="px-2.5 py-1.5 text-xs font-label bg-surface-container hover:bg-error-container hover:text-error text-on-surface rounded flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">delete</span>
+<span>Remove</span>
+</button>
+</div>
+</div>
+<!-- Deterministic Joinery Rules (FR-05 Verification Engine) -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-semibold">Joinery Validation (FR-05)</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Rule 1 -->
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-on-surface">32mm Hole Center Index</span>
+<span class="text-[11px] text-on-surface-variant">Exact center match at pin #24 (y = 850.0mm).</span>
+</div>
+</div>
+<!-- Rule 2 -->
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-on-surface">Deflection &amp; Load Tolerance</span>
+<span class="text-[11px] text-on-surface-variant">Calculated: 0.42mm deflection under 18kg. Under max 1.20mm limit.</span>
+</div>
+</div>
+<!-- Rule 3 -->
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-on-surface">Blum Slide Travel Clearance</span>
+<span class="text-[11px] text-on-surface-variant">250mm overhead clearance above 140mm drawer box. Zero clash.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detail Lighting Addon Toggle -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px]">lightbulb</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-on-surface">3000K LED Under-Shelf Milled Strip</span>
+<span class="text-[10px] text-on-surface-variant">+€65 • Recessed flush frosted extrusion</span>
+</div>
+</div>
+<input checked="" class="accent-primary rounded w-4 h-4 cursor-pointer" type="checkbox">
+</div>
+</div>
+<!-- Navigation & Step Handoff Actions -->
+<div class="flex flex-col gap-2 pt-2">
+<a class="w-full py-3 bg-primary text-on-primary hover:bg-primary/95 transition-all text-xs font-label font-semibold rounded-lg shadow-sm flex items-center justify-center gap-2 group" href="#">
+<span>Proceed to Step 3: Review &amp; Quotation</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<a class="w-full py-2.5 bg-surface-container hover:bg-surface-container-high transition-colors text-xs font-label font-medium text-on-surface rounded-lg flex items-center justify-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[15px]">arrow_back</span>
+<span>Back to Spatial Envelope (Step 1)</span>
+</a>
+</div>
+</aside>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-10"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-label text-on-surface-variant"><div>© 2025 Atelier Joinery Studio. Handcrafted Architectural Woodwork.</div><div class="flex items-center gap-6"><a class="hover:text-on-surface transition-colors" href="#">Material Catalog</a><a class="hover:text-on-surface transition-colors" href="#">Structural Tolerances</a><a class="hover:text-on-surface transition-colors" href="#">Consultation Services</a></div></div></footer>
+
+<div class="fixed inset-0 z-50 bg-on-surface/25 backdrop-blur-sm flex justify-end"><div class="w-full max-w-[420px] h-full bg-surface-container-lowest shadow-2xl border-l border-outline-variant/60 flex flex-col justify-between overflow-hidden"><div class="px-6 py-5 border-b border-outline-variant/60 flex items-start justify-between gap-4 bg-surface-container-low/50"><div class="flex flex-col"><span class="text-[10px] font-label uppercase tracking-widest text-primary font-semibold">BESPOKE SPECIFICATION</span><h2 class="font-headline text-2xl text-on-surface font-normal mt-0.5">Materials &amp; Finishes</h2><p class="text-xs text-on-surface-variant mt-0.5">Customize timber, hardware &amp; interior linings</p></div><button type="button" class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" aria-label="Close drawer"><span class="material-symbols-outlined text-[20px]">close</span></button></div><div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6"><div class="flex flex-col gap-3"><div class="flex items-center justify-between"><span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-semibold">Carcass &amp; Frontals (Timber)</span><span class="text-[10px] font-mono text-outline">19mm Core</span></div><div class="grid grid-cols-2 gap-3"><div class="relative p-3 rounded-xl border-2 border-primary bg-primary-fixed/15 flex flex-col gap-2 cursor-pointer shadow-xs"><div class="flex items-center justify-between"><span class="w-7 h-7 rounded-lg bg-[#d8c3a5] border border-outline-variant/60 shadow-inner"></span><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span></div><div class="flex flex-col"><span class="text-xs font-semibold text-on-surface leading-tight">European White Oak</span><span class="text-[10px] text-on-surface-variant mt-0.5 leading-snug">19mm Core • 5% Matt Lacquer</span></div><span class="text-[10px] font-mono font-semibold text-primary mt-auto pt-1">+€0 / Base</span></div><div class="relative p-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-outline flex flex-col gap-2 cursor-pointer transition-colors"><div class="flex items-center justify-between"><span class="w-7 h-7 rounded-lg bg-[#543d2b] border border-outline-variant/60 shadow-inner"></span></div><div class="flex flex-col"><span class="text-xs font-semibold text-on-surface leading-tight">Smoked European Walnut</span><span class="text-[10px] text-on-surface-variant mt-0.5 leading-snug">Thermal Fumed Deep Grain</span></div><span class="text-[10px] font-mono font-medium text-on-surface-variant mt-auto pt-1">+€480</span></div><div class="relative p-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-outline flex flex-col gap-2 cursor-pointer transition-colors"><div class="flex items-center justify-between"><span class="w-7 h-7 rounded-lg bg-[#e8dccb] border border-outline-variant/60 shadow-inner"></span></div><div class="flex flex-col"><span class="text-xs font-semibold text-on-surface leading-tight">Natural Ash Veneer</span><span class="text-[10px] text-on-surface-variant mt-0.5 leading-snug">Quarter-Sawn Pale Finish</span></div><span class="text-[10px] font-mono font-medium text-on-surface-variant mt-auto pt-1">+€220</span></div><div class="relative p-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-outline flex flex-col gap-2 cursor-pointer transition-colors"><div class="flex items-center justify-between"><span class="w-7 h-7 rounded-lg bg-[#dfd7cb] border border-outline-variant/60 shadow-inner"></span></div><div class="flex flex-col"><span class="text-xs font-semibold text-on-surface leading-tight">Belgian Raw Linen</span><span class="text-[10px] text-on-surface-variant mt-0.5 leading-snug">Acoustic Absorptive Infill</span></div><span class="text-[10px] font-mono font-medium text-on-surface-variant mt-auto pt-1">+€340</span></div></div></div><div class="h-px bg-outline-variant/50"></div><div class="flex flex-col gap-3"><span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-semibold">Hardware &amp; Edge Pulls</span><div class="flex flex-col gap-2"><div class="p-3 rounded-xl border-2 border-primary bg-primary-fixed/15 flex items-center justify-between cursor-pointer"><div class="flex items-center gap-3"><span class="w-5 h-5 rounded-full bg-[#b8925a] border border-outline-variant/60 shrink-0"></span><span class="text-xs font-semibold text-on-surface">Solid Satin Patinated Brass</span></div><div class="flex items-center gap-2"><span class="text-[11px] font-mono font-semibold text-primary">Included</span><span class="material-symbols-outlined text-primary text-[16px]">check_circle</span></div></div><div class="p-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-outline flex items-center justify-between cursor-pointer transition-colors"><div class="flex items-center gap-3"><span class="w-5 h-5 rounded-full bg-[#242424] border border-outline-variant/60 shrink-0"></span><span class="text-xs font-medium text-on-surface">Anodized Matte Black</span></div><span class="text-[11px] font-mono text-on-surface-variant">+€120</span></div><div class="p-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest hover:border-outline flex items-center justify-between cursor-pointer transition-colors"><div class="flex items-center gap-3"><span class="w-5 h-5 rounded-full bg-[#c4c7ca] border border-outline-variant/60 shrink-0"></span><span class="text-xs font-medium text-on-surface">Brushed Stainless Steel</span></div><span class="text-[11px] font-mono text-on-surface-variant">+€90</span></div></div></div><div class="h-px bg-outline-variant/50"></div><div class="flex flex-col gap-4"><span class="text-[11px] font-label uppercase tracking-widest text-on-surface-variant font-semibold">Drawer Linings &amp; Lighting</span><div class="flex flex-col gap-2"><span class="text-xs font-label text-on-surface-variant">Drawer Lining</span><div class="flex flex-wrap items-center gap-2"><button type="button" class="px-3 py-1.5 rounded-full text-xs font-label font-semibold bg-primary text-on-primary shadow-xs">Sand Velvet</button><button type="button" class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors">Saddle Leather</button><button type="button" class="px-3 py-1.5 rounded-full text-xs font-label font-medium bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors">Natural Oak</button></div></div><div class="p-3.5 rounded-xl border border-outline-variant/60 bg-surface-container-low/60 flex items-center justify-between gap-3"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-primary text-[20px]">lightbulb</span><div class="flex flex-col"><span class="text-xs font-semibold text-on-surface">3000K Recessed Micro-LED</span><span class="text-[10px] font-mono text-on-surface-variant">+€185 • Flush milled channel</span></div></div><button type="button" role="switch" aria-checked="true" class="w-10 h-5.5 rounded-full bg-primary p-0.5 flex items-center justify-end transition-colors shrink-0"><span class="w-4.5 h-4.5 rounded-full bg-on-primary shadow-sm"></span></button></div></div></div><div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant/60 flex items-center justify-between gap-4"><div class="flex flex-col"><span class="text-[10px] font-label uppercase tracking-wider text-on-surface-variant">Material Upgrade</span><span class="text-sm font-mono font-bold text-on-surface">+€185</span></div><button type="button" class="px-5 py-2.5 bg-primary text-on-primary hover:bg-primary/90 transition-colors rounded-lg text-xs font-label font-semibold shadow-sm">Apply Finishes</button></div></div></div></body></html>

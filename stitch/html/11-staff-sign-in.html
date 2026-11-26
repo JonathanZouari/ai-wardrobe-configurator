@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Sign-In — Atelier Joinery Studio</title>
+  <!-- Google Fonts: EB Garamond & Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sahara-primary': '#c2652a',
+            'sahara-primary-hover': '#aa5420',
+            'sahara-bg': '#faf5ee',
+            'sahara-card': '#ffffff',
+            'sahara-text': '#3a302a',
+            'sahara-muted': '#605850',
+            'sahara-border': '#d8d0c8',
+            'sahara-error': '#c0392b',
+            'sahara-error-bg': '#fdf2f2',
+            'sahara-tag-bg': '#f2ebe0',
+          },
+          fontFamily: {
+            serif: ['"EB Garamond"', 'serif'],
+            sans: ['"Manrope"', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          },
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(58, 48, 42, 0.05), 0 2px 6px -1px rgba(58, 48, 42, 0.02)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #faf5ee;
+      color: #3a302a;
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    input:focus {
+      outline: none;
+      border-color: #c2652a;
+      box-shadow: 0 0 0 3px rgba(194, 101, 42, 0.15);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#c2652a]/15 selection:text-[#3a302a]">
+
+  <!-- Header -->
+  <header class="w-full border-b border-[#d8d0c8]/60 bg-[#faf5ee]/80 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+      <!-- Brand & Workspace Label -->
+      <div class="flex items-center gap-3.5">
+        <span class="font-serif text-2xl tracking-normal text-[#3a302a] font-normal">
+          Atelier Joinery Studio
+        </span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium tracking-wide uppercase bg-[#f2ebe0] text-[#605850] border border-[#d8d0c8]/50">
+          Staff Workspace
+        </span>
+      </div>
+
+      <!-- Back Link -->
+      <a href="#" class="inline-flex items-center gap-2 text-sm text-[#605850] hover:text-[#c2652a] transition-colors py-2 group">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Back to configurator</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex items-center justify-center px-6 py-12">
+    <div class="w-full max-w-[420px]">
+      
+      <!-- Card Container -->
+      <div class="bg-white rounded-custom border border-[#d8d0c8] p-8 md:p-10 shadow-soft">
+        
+        <!-- Header in Card -->
+        <div class="mb-7">
+          <h1 class="font-serif text-3xl font-normal text-[#3a302a] tracking-tight leading-tight">
+            Staff sign in
+          </h1>
+          <p class="text-sm text-[#605850] mt-2 font-normal leading-relaxed">
+            For carpentry staff only. Customers do not need an account.
+          </p>
+        </div>
+
+        <!-- Inline Error Message Example -->
+        <div class="mb-6 p-3.5 rounded-custom bg-[#fdf2f2] border border-[#c0392b]/25 flex items-start gap-2.5" role="alert">
+          <svg class="w-4 h-4 text-[#c0392b] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" stroke-width="1.75" />
+            <line x1="12" y1="8" x2="12" y2="12" stroke-width="1.75" stroke-linecap="round" />
+            <circle cx="12" cy="16" r="0.75" fill="currentColor" stroke-width="1" />
+          </svg>
+          <span class="text-xs font-medium text-[#c0392b] leading-relaxed">
+            Incorrect email or password.
+          </span>
+        </div>
+
+        <!-- Form -->
+        <form class="space-y-5" onsubmit="event.preventDefault();">
+          <!-- Email Field -->
+          <div>
+            <label for="email" class="block text-xs font-medium uppercase tracking-wider text-[#605850] mb-2">
+              Email
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email"
+              placeholder="name@atelierjoinery.com"
+              class="w-full px-3.5 py-2.5 bg-white border border-[#d8d0c8] rounded-custom text-sm text-[#3a302a] placeholder-[#605850]/50 transition-all duration-150"
+              autocomplete="email"
+            >
+          </div>
+
+          <!-- Password Field with Show/Hide -->
+          <div>
+            <label for="password" class="block text-xs font-medium uppercase tracking-wider text-[#605850] mb-2">
+              Password
+            </label>
+            <div class="relative">
+              <input 
+                type="password" 
+                id="password" 
+                name="password"
+                placeholder="••••••••••••"
+                class="w-full pl-3.5 pr-11 py-2.5 bg-white border border-[#d8d0c8] rounded-custom text-sm text-[#3a302a] placeholder-[#605850]/50 transition-all duration-150"
+                autocomplete="current-password"
+              >
+              <button 
+                type="button" 
+                id="togglePassword"
+                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#605850] hover:text-[#3a302a] transition-colors focus:outline-none"
+                aria-label="Toggle password visibility"
+              >
+                <!-- Eye Icon (Hide / Show) -->
+                <svg id="eyeIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <svg id="eyeSlashIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Primary Submit Button -->
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              class="w-full bg-[#c2652a] hover:bg-[#aa5420] text-white font-medium py-3 px-4 rounded-custom text-sm transition duration-150 ease-in-out shadow-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#c2652a]/40 focus:ring-offset-2"
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-8 text-center">
+    <p class="text-xs text-[#605850]/80 tracking-wide font-normal">
+      Access is restricted to authorised staff.
+    </p>
+  </footer>
+
+  <!-- Interactive script for password toggle -->
+  <script>
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    const eyeSlashIcon = document.getElementById('eyeSlashIcon');
+
+    if (togglePasswordBtn && passwordInput) {
+      togglePasswordBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        eyeIcon.classList.toggle('hidden', isPassword);
+        eyeSlashIcon.classList.toggle('hidden', !isPassword);
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&amp;family=Manrope:wght@300..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"outline":"#9a9088","tertiary-fixed-dim":"#e8a0a0","surface-container-lowest":"#ffffff","surface-bright":"#faf5ee","primary-fixed":"#fbe8d8","on-secondary":"#ffffff","primary-fixed-dim":"#f0a878","on-background":"#3a302a","tertiary-fixed":"#fce0e0","on-tertiary-container":"#3a2020","surface-container-highest":"#e6e0d6","tertiary":"#8c3c3c","surface-container":"#f2ece4","on-secondary-container":"#605850","primary":"#c2652a","on-surface-variant":"#605850","primary-container":"#e08850","on-primary-fixed":"#401a08","on-secondary-fixed":"#2a2420","on-tertiary":"#ffffff","inverse-surface":"#3a302a","secondary-fixed-dim":"#cec6be","on-error":"#ffffff","surface-variant":"#ece6dc","surface-tint":"#c2652a","secondary":"#78706a","surface-container-low":"#f6f0e8","on-primary-fixed-variant":"#8a4518","surface":"#faf5ee","inverse-primary":"#f0a878","surface-dim":"#dcd6cc","on-error-container":"#7a1a10","error":"#c0392b","outline-variant":"#d8d0c8","inverse-on-surface":"#faf5ee","background":"#faf5ee","on-primary-container":"#fbe8d8","surface-container-high":"#ece6dc","secondary-fixed":"#eae2da","secondary-container":"#eae2da","on-primary":"#ffffff","on-surface":"#3a302a","tertiary-container":"#d47070","on-secondary-fixed-variant":"#504840","error-container":"#fce4e0","on-tertiary-fixed":"#2e1515","on-tertiary-fixed-variant":"#6e3030"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{},"fontFamily":{"headline":["EB Garamond"],"display":["EB Garamond"],"body":["Manrope"],"label":["Manrope"]},"fontSize":{}}}}</script></head><body class="bg-background font-body text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)]"><div class="h-20 w-full px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-6"><a class="group flex flex-col" data-path="configurator-studio" href="#"><span class="font-headline text-2xl font-normal tracking-tight text-on-surface group-hover:text-primary transition-colors">Atelier Joinery Studio</span><span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary font-semibold">Bespoke Wardrobe Configurator</span></a><div class="hidden xl:flex items-center gap-3 pl-6 border-l border-outline-variant/60"><div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg text-xs font-label text-on-surface"><span class="material-symbols-outlined text-[16px] text-secondary">straighten</span><span class="font-medium tracking-wide">2400 × 2400 × 600 mm</span></div><div class="flex items-center gap-1.5 bg-surface-container-low px-3 py-1.5 rounded-lg text-xs font-label text-on-surface"><span class="h-2 w-2 rounded-full bg-primary"></span><span class="font-medium">Rules: Passing</span></div></div></div><nav class="hidden lg:flex items-center p-1.5 rounded-xl bg-surface-container-low gap-1" data-active-classes="bg-primary text-on-primary font-semibold shadow-[0_2px_8px_rgba(194,101,42,0.25)]"><a class="px-4 py-2 rounded-lg text-xs font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all flex items-center gap-2" data-path="configurator-studio" href="#"><span class="text-[11px] opacity-60 font-semibold">01</span><span>3D Studio</span></a><div class="w-3 h-px bg-outline-variant/50"></div><a class="px-4 py-2 rounded-lg text-xs font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all flex items-center gap-2" data-path="interior-layout" href="#"><span class="text-[11px] opacity-60 font-semibold">02</span><span>Interior Layout</span></a><div class="w-3 h-px bg-outline-variant/50"></div><a class="px-4 py-2 rounded-lg text-xs font-label text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all flex items-center gap-2" data-path="review-quotation" href="#"><span class="text-[11px] opacity-60 font-semibold">03</span><span>Review &amp; Quotation</span></a></nav><div class="flex items-center gap-3"><button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-label font-medium text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">restart_alt</span><span>Reset</span></button><button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-label font-medium text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">bookmark_border</span><span>Save Draft</span></button><button class="inline-flex items-center gap-2 bg-primary text-on-primary px-4 py-2.5 rounded-lg text-xs font-label font-semibold tracking-wide shadow-[0_2px_12px_rgba(194,101,42,0.2)] hover:bg-primary-container hover:text-on-primary-container transition-all" type="button"><span>Submit Quotation Request</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background flex-1"><div class="flex flex-col w-full">
+<!-- Sub-Header Status Banner -->
+<section class="w-full bg-surface-container-low px-6 lg:px-12 py-5 shadow-sm">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+<div class="flex items-center gap-2.5">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary font-headline text-sm font-semibold">03</span>
+<div>
+<h1 class="font-headline text-xl text-on-surface tracking-tight font-medium">Residence Van Der Rohe • Wardrobe 02</h1>
+<p class="font-label text-[11px] text-secondary tracking-wider uppercase">Revision v2.1-committed • Dossier Hash: <span class="text-on-surface font-mono font-semibold">#ATELIER-VD-9482</span></p>
+</div>
+</div>
+<div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+<div class="inline-flex items-center gap-2 bg-surface px-3 py-1.5 rounded-lg shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label text-xs font-medium text-on-surface">Status: Preliminary Design Package • Ready for Appraisal</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container rounded-lg text-xs font-label text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-semibold tracking-wide">Deterministic Engine: Verified</span>
+<span class="text-secondary font-mono text-[11px] pl-1">(0 Blockers)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Dossier Workspace -->
+<main class="w-full px-6 lg:px-12 py-10">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT / MAIN SECTION (8 cols): Technical Documentation & Parametric BOM -->
+<div class="lg:col-span-7 xl:col-span-8 space-y-10">
+<!-- 1. Interactive Snapshot Gallery & 3D Documentation -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-8 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+<div>
+<span class="font-label text-[10px] tracking-[0.25em] uppercase text-primary font-bold">Inspection Dossier • Section 01</span>
+<h2 class="font-headline text-2xl lg:text-3xl text-on-surface font-normal tracking-tight mt-1">Parametric Architectural Previews</h2>
+</div>
+<span class="font-label text-xs text-secondary">3 Generated Viewports • Millimetric Precision</span>
+</div>
+<!-- Preview Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Perspective A: Exterior Isometric -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container-low flex flex-col">
+<div class="relative h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Editorial architectural render of bespoke 3-bay white oak wardrobe with flush doors and warm brushed brass cylindrical handles in a minimalist sunlit linen room, soft afternoon light, high craftsmanship timber joinery, 8k resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqDU1RqNvGufPP8qJd832cnZ2ycCOIu-3sWXJWITplvV-SNoZdQ93UYrdeOwtz2fnypG_Zg1A2i2ImIN7C_BPKCPstTdrzkbDpolpwpV0d0Ku6iz4jccVxP58S1uIS74bX6JaJu35AviNVkqYliME4uqQ6VYeSz2XqFEVBnmO3xb1UQtaln7cuM8Rz7qEnIpV1cCvstiNgY_ojyZ0V8kjzaEllijKONtaYbXGW8y8"/>
+<span class="absolute top-3 left-3 px-2 py-1 bg-surface/90 backdrop-blur-md rounded text-[10px] font-label font-bold text-on-surface uppercase tracking-wider">A • Exterior Facade</span>
+</div>
+<div class="p-3.5 bg-surface-container-low">
+<p class="font-label text-xs font-semibold text-on-surface">Flush Hinged White Oak</p>
+<p class="font-body text-[11px] text-on-surface-variant mt-0.5">Continuous grain crown match, 4 doors with brushed brass cylindrical edge pulls.</p>
+</div>
+</div>
+<!-- Perspective B: Interior Cutaway -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container-low flex flex-col">
+<div class="relative h-56 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Technical architectural cutaway view showing the interior of a luxury oak wardrobe: long overcoat section, solid dovetail jewelry drawer bank, brass shoe tiers, and integrated recessed 3000K LED millwork lighting channel, clean warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8onqqlS4V0jQLMJ1KYivGnCA83ucowCfCWbSSD23QAiJXLSDV1wuYsz4dpjX6KF38YhrpnFDpWwQ_HVKvVGRWBoadz41WVYJZUl9Rzx7UOZH53I25KevSsZ4Pk-UiUBQZ4IiydY-he1ez1CXoW3JEGzERonNu051Q-839BnBZFcH8ybxix28b58QO-yXpg4Q4sJxVyCNtLt87p9QkkFRR6oZsMpv9otf4CDjZBR4"/>
+<span class="absolute top-3 left-3 px-2 py-1 bg-surface/90 backdrop-blur-md rounded text-[10px] font-label font-bold text-primary uppercase tracking-wider">B • Interior Layout</span>
+</div>
+<div class="p-3.5 bg-surface-container-low">
+<p class="font-label text-xs font-semibold text-on-surface">3-Bay Fitted Joinery</p>
+<p class="font-body text-[11px] text-on-surface-variant mt-0.5">Overcoat plinth, Blum Movento double jewelry tiers, brass shoe rails, 3000K LED.</p>
+</div>
+</div>
+<!-- Perspective C: Elevation Schematic -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container flex flex-col">
+<div class="relative h-56 w-full p-4 flex flex-col justify-between bg-surface-container-high/60">
+<span class="self-start px-2 py-1 bg-surface/90 backdrop-blur-md rounded text-[10px] font-label font-bold text-on-surface uppercase tracking-wider">C • Elevation Schematic</span>
+<!-- Stylized CAD Wireframe Vector -->
+<div class="w-full h-36 flex items-center justify-center py-1">
+<svg class="w-full h-full text-on-surface/80" fill="none" stroke="currentColor" viewbox="0 0 240 180">
+<!-- Outer carcass -->
+<rect height="150" stroke-dasharray="0" stroke-width="1.5" width="200" x="20" y="15"></rect>
+<!-- Bays dividers -->
+<line stroke-dasharray="2 2" stroke-width="1.2" x1="86.6" x2="86.6" y1="15" y2="165"></line>
+<line stroke-dasharray="2 2" stroke-width="1.2" x1="153.3" x2="153.3" y1="15" y2="165"></line>
+<!-- Bay 1 components -->
+<line stroke-width="0.8" x1="20" x2="86.6" y1="40" y2="40"></line>
+<line stroke-dasharray="1 1" stroke-width="0.8" x1="20" x2="86.6" y1="46" y2="46"></line>
+<!-- Bay 2 drawers & shelves -->
+<rect height="18" stroke-width="0.8" width="59" x="90" y="80"></rect>
+<rect height="18" stroke-width="0.8" width="59" x="90" y="100"></rect>
+<line stroke-width="1" x1="90" x2="149" y1="130" y2="137"></line>
+<line stroke-width="1" x1="90" x2="149" y1="145" y2="152"></line>
+<!-- Bay 3 shelves & hamper -->
+<line stroke-width="0.8" x1="153.3" x2="220" y1="50" y2="50"></line>
+<line stroke-width="0.8" x1="153.3" x2="220" y1="80" y2="80"></line>
+<rect height="42" stroke-dasharray="2 2" stroke-width="0.8" width="52" x="160" y="115"></rect>
+<!-- Dimension arrow top -->
+<line marker-end="url(#arrow)" stroke-width="0.6" x1="20" x2="220" y1="8" y2="8"></line>
+<text fill="currentColor" font-family="Manrope" font-size="7" text-anchor="middle" x="120" y="6">2,400 mm</text>
+<!-- Dimension arrow side -->
+<text fill="currentColor" font-family="Manrope" font-size="7" text-anchor="middle" transform="rotate(-90 10 95)" x="10" y="95">2,400 mm</text>
+</svg>
+</div>
+<div class="flex items-center justify-between text-[10px] font-mono text-secondary pt-1">
+<span>3× 800mm Bays</span>
+<span>19mm Core / 80mm Base</span>
+</div>
+</div>
+<div class="p-3.5 bg-surface-container-low">
+<p class="font-label text-xs font-semibold text-on-surface">Millimetric Elevation</p>
+<p class="font-body text-[11px] text-on-surface-variant mt-0.5">Verified clearances for baseboard scribing and ceiling shadow line.</p>
+</div>
+</div>
+</div>
+<!-- Action Strip -->
+<div class="mt-6 pt-6 bg-surface-container-low rounded-lg p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-2 px-3 py-2 bg-surface text-on-surface hover:text-primary rounded-lg text-xs font-label font-medium transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">picture_as_pdf</span>
+<span>Download PDF Spec Sheet (12 Pages)</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3 py-2 bg-surface text-on-surface hover:text-primary rounded-lg text-xs font-label font-medium transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">imagesmode</span>
+<span>Export High-Res Renders (.PNG)</span>
+</button>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono font-medium text-secondary hover:text-on-surface transition-colors" id="copyTokenBtn" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+<span>Copy Token: #ATELIER-VD-9482</span>
+</button>
+</div>
+</div>
+<!-- 2. Parametric Bill of Materials (BOM) Table -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-8 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
+<div>
+<span class="font-label text-[10px] tracking-[0.25em] uppercase text-primary font-bold">Engineering Output • Section 02</span>
+<h2 class="font-headline text-2xl lg:text-3xl text-on-surface font-normal tracking-tight mt-1">Parametric Bill of Materials (BOM)</h2>
+</div>
+<span class="font-label text-xs text-secondary font-mono">Precision Tolerance ±0.5 mm • Metric Joinery</span>
+</div>
+<!-- Structured Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body text-xs">
+<thead>
+<tr class="bg-surface-container text-on-secondary-container font-label uppercase tracking-wider text-[10px]">
+<th class="py-3 px-4 rounded-l-lg">Item &amp; Description</th>
+<th class="py-3 px-3">Dimensions (L × W × T mm)</th>
+<th class="py-3 px-3 text-center">Qty</th>
+<th class="py-3 px-4 rounded-r-lg">Joinery &amp; Mill Specification</th>
+</tr>
+</thead>
+<!-- Group 1: Carcass & Primary Panels -->
+<tbody class="divide-y divide-transparent">
+<tr class="bg-surface-container-low/60">
+<td class="py-2.5 px-4 font-label text-[11px] font-bold text-primary uppercase tracking-wider" colspan="4">
+                    01. Carcass Structure &amp; External Millwork Panels
+                  </td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">External Uprights (Gables)</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">2320 × 580 × 19</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">2</td>
+<td class="py-3 px-4 text-secondary">FSC European White Oak Core • 1mm solid oak edge-banded 4 sides</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Internal Bay Partitions</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">2320 × 560 × 19</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">2</td>
+<td class="py-3 px-4 text-secondary">CNC 32mm system pre-drilled for 5mm brass shelf pins</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Top &amp; Bottom Structural Decks</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">2362 × 580 × 19</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">2</td>
+<td class="py-3 px-4 text-secondary">Lamello Clamex P-14 detachable pre-milled anchor slots</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Flush Oak Veneer Doors</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">2312 × 592 × 19</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">4</td>
+<td class="py-3 px-4 text-secondary">Crown-cut sequential sequence • 5% clear matte waterborne lacquer</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Structural Base Plinth &amp; Top Scribe</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">2400 × 80 × 19 / 60 Infill</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">1 kit</td>
+<td class="py-3 px-4 text-secondary">Recessed kickboard with 4x Hafele Axilo levelling adjusters</td>
+</tr>
+<!-- Group 2: Internal Modules & Joinery -->
+<tr class="bg-surface-container-low/60">
+<td class="py-2.5 px-4 font-label text-[11px] font-bold text-primary uppercase tracking-wider" colspan="4">
+                    02. Internal Joinery, Organizers &amp; Shelving
+                  </td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Solid Oak Fixed &amp; Adjustable Shelves</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">762 × 560 × 19</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">7</td>
+<td class="py-3 px-4 text-secondary">Pre-rebated front for recessed LED extrusion; solid 3mm lip</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Slanted Shoe Display Tiers</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">762 × 380 × 19 (18° rake)</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">2</td>
+<td class="py-3 px-4 text-secondary">Solid brushed satin brass retaining stop-rod (8mm dia.)</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Jewelry &amp; Watch Drawers (Dovetail)</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">762 × 500 × 120</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">2</td>
+<td class="py-3 px-4 text-secondary">Solid maple dovetail box • Sand velvet lining insert • Blum MOVENTO</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Pull-Out Canvas Laundry Hamper</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">762 × 480 × 450</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">1</td>
+<td class="py-3 px-4 text-secondary">Unbleached natural linen basket on bespoke slide frame</td>
+</tr>
+<!-- Group 3: Hardware & Electrical Integration -->
+<tr class="bg-surface-container-low/60">
+<td class="py-2.5 px-4 font-label text-[11px] font-bold text-primary uppercase tracking-wider" colspan="4">
+                    03. Architectural Hardware &amp; Integrated Electrics
+                  </td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Blum CLIP top BLUMOTION 110° Hinges</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">Onyx Black / Soft Close</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">12</td>
+<td class="py-3 px-4 text-secondary">Zero-protrusion hinge arm for unobstructed internal drawer pull</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">Bespoke Brass Wardrobe Hanging Rails</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">760 × 30 × 15 (Oval)</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">2</td>
+<td class="py-3 px-4 text-secondary">Solid satin brass with silicone silent anti-rattle top dampener</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-3 px-4 font-medium text-on-surface">3000K Linear LED Lighting System</td>
+<td class="py-3 px-3 font-mono text-on-surface-variant text-[11px]">24V • 9.6W/m • CRI 95+</td>
+<td class="py-3 px-3 text-center font-mono font-semibold text-on-surface">7.2 m</td>
+<td class="py-3 px-4 text-secondary">Black anodized recessed mini-profiles with opal milky diffusers + driver</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Workshop Disclaimer -->
+<div class="mt-6 flex items-start gap-3 p-4 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">info</span>
+<p class="font-body text-xs text-on-surface-variant leading-relaxed">
+<strong class="font-semibold text-on-surface">Workshop Engineering Note:</strong> This preliminary Bill of Materials is generated deterministically from the canonical 3D engine. Final timber cut-lists remain subject to the manual on-site laser survey, saw kerf calibration (3.2mm), and wall perimeter scribe allowances (+20mm tolerance).
+            </p>
+</div>
+</div>
+<!-- 3. Deterministic Structural & Compliance Ledger -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-8 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<div>
+<span class="font-label text-[10px] tracking-[0.25em] uppercase text-primary font-bold">Structural Validation • Section 03</span>
+<h2 class="font-headline text-2xl text-on-surface font-normal tracking-tight mt-1">Deterministic Joinery Compliance</h2>
+</div>
+<div class="inline-flex items-center gap-1.5 text-xs font-label text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+<span>All Standards Met</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Badge 1: Deflection -->
+<div class="p-4 rounded-lg bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] uppercase tracking-wider text-secondary">Deflection Stress</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label font-bold bg-surface text-primary">PASSED</span>
+</div>
+<div>
+<div class="text-2xl font-headline text-on-surface font-medium">0.42 mm</div>
+<div class="text-[11px] font-body text-on-surface-variant mt-0.5">Sag @ 35kg distributed load (Limit: 1.20 mm)</div>
+</div>
+<div class="pt-2 font-mono text-[10px] text-secondary">DIN 68874-1 Class 1 Standard</div>
+</div>
+<!-- Badge 2: Collision Engine -->
+<div class="p-4 rounded-lg bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] uppercase tracking-wider text-secondary">Hinge Clearance</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label font-bold bg-surface text-primary">0 CLASHES</span>
+</div>
+<div>
+<div class="text-2xl font-headline text-on-surface font-medium">110° Cleared</div>
+<div class="text-[11px] font-body text-on-surface-variant mt-0.5">Drawers clear door hinges with 14mm safe margin</div>
+</div>
+<div class="pt-2 font-mono text-[10px] text-secondary">Zero-Protrusion Blum Geometry</div>
+</div>
+<!-- Badge 3: Electrical Void -->
+<div class="p-4 rounded-lg bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] uppercase tracking-wider text-secondary">Wiring Pathways</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label font-bold bg-surface text-primary">VERIFIED</span>
+</div>
+<div>
+<div class="text-2xl font-headline text-on-surface font-medium">12 mm Void</div>
+<div class="text-[11px] font-body text-on-surface-variant mt-0.5">Continuous vertical raceway in 18mm rear rebate</div>
+</div>
+<div class="pt-2 font-mono text-[10px] text-secondary">VDE 0100 Safety Pre-routed</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (4 cols): Project Spec Summary & Contact Intake -->
+<div class="lg:col-span-5 xl:col-span-4 space-y-6">
+<!-- Project Summary Sidebar Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-7 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline text-lg text-on-surface font-normal">Specification Summary</h3>
+<span class="font-mono text-xs text-primary font-semibold">Wardrobe 02</span>
+</div>
+<div class="space-y-4 text-xs font-body divide-y divide-surface-container">
+<div class="pt-2 first:pt-0 flex items-center justify-between gap-4">
+<span class="text-secondary font-label">Configuration</span>
+<span class="font-medium text-on-surface text-right">3 Bays • 4 Hinged Doors</span>
+</div>
+<div class="pt-3 flex items-start justify-between gap-4">
+<span class="text-secondary font-label">Primary Finish</span>
+<div class="flex items-center gap-2 text-right">
+<div class="w-4 h-4 rounded bg-[#d6be9f] shadow-inner shrink-0"></div>
+<span class="font-medium text-on-surface">European White Oak (5% Matt)</span>
+</div>
+</div>
+<div class="pt-3 flex items-center justify-between gap-4">
+<span class="text-secondary font-label">Fittings &amp; Accents</span>
+<span class="font-medium text-on-surface text-right">Brushed Satin Solid Brass</span>
+</div>
+<div class="pt-3 flex items-center justify-between gap-4">
+<span class="text-secondary font-label">Total Footprint</span>
+<span class="font-mono text-on-surface text-right">2400W × 2400H × 600D mm</span>
+</div>
+<div class="pt-3 flex items-center justify-between gap-4">
+<span class="text-secondary font-label">Lead Time Est.</span>
+<div class="text-right">
+<span class="font-semibold text-primary">6 – 8 Weeks</span>
+<span class="block text-[11px] text-secondary">from site survey sign-off</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer Contact & Request Submission Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-7 shadow-md relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-primary"></div>
+<div class="mb-5">
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary font-bold">Appraisal Request</span>
+<h3 class="font-headline text-2xl text-on-surface font-normal tracking-tight mt-1">Request Formal Joinery Quotation</h3>
+<p class="font-body text-xs text-on-surface-variant mt-2 leading-relaxed">
+              No account required. Our senior timber consultants evaluate this parametric model, verify site tolerances, and issue an itemized estimate within 2 business days.
+            </p>
+</div>
+<form class="space-y-4" id="quotationForm" onsubmit="event.preventDefault(); handleSubmit();">
+<!-- Full Name -->
+<div class="space-y-1">
+<label class="block font-label text-xs font-medium text-on-surface" for="fullName">Full Name</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface text-on-surface text-xs font-body focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="fullName" name="fullName" required="" type="text" value="Helena Van Der Rohe"/>
+</div>
+<!-- Email Address -->
+<div class="space-y-1">
+<label class="block font-label text-xs font-medium text-on-surface" for="email">Email Address</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface text-on-surface text-xs font-body focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="email" name="email" required="" type="email" value="helena.vanderrohe@arch-studio.com"/>
+</div>
+<!-- Phone / WhatsApp -->
+<div class="space-y-1">
+<label class="block font-label text-xs font-medium text-on-surface" for="phone">Phone / WhatsApp <span class="text-secondary font-normal">(for workshop review)</span></label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface text-on-surface text-xs font-body focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="phone" name="phone" type="tel" value="+31 6 4921 8830"/>
+</div>
+<!-- Installation Postal Code / City -->
+<div class="space-y-1">
+<label class="block font-label text-xs font-medium text-on-surface" for="location">Installation Postal Code &amp; City</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface text-on-surface text-xs font-body focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="location" name="location" required="" type="text" value="1017 EK, Amsterdam"/>
+</div>
+<!-- Project Scope / Site Conditions -->
+<div class="space-y-1">
+<label class="block font-label text-xs font-medium text-on-surface" for="siteNotes">Site Conditions &amp; Specific Notes</label>
+<textarea class="w-full px-3.5 py-2.5 rounded-lg bg-surface text-on-surface text-xs font-body focus:outline-none focus:ring-2 focus:ring-primary shadow-sm resize-none" id="siteNotes" name="siteNotes" rows="3">Ceiling height 2,620mm with historic plaster cornice. Need shadow gap or bespoke top scribing. Access via standard Amsterdam townhouse stairs.</textarea>
+</div>
+<!-- Checkboxes -->
+<div class="pt-2 space-y-2.5">
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-primary/40 bg-surface accent-primary shrink-0" required="" type="checkbox"/>
+<span class="font-body text-[11px] text-on-surface-variant leading-tight">
+                  I understand this is a preliminary quotation inquiry and not a binding manufacturing run.
+                </span>
+</label>
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-primary/40 bg-surface accent-primary shrink-0" type="checkbox"/>
+<span class="font-body text-[11px] text-on-surface-variant leading-tight">
+                  Email me a PDF technical dossier with high-res millwork renders and cut-sheet.
+                </span>
+</label>
+</div>
+<!-- Primary CTA Button -->
+<div class="pt-3">
+<button class="w-full py-3.5 px-6 rounded-lg bg-primary text-on-primary font-label text-xs font-semibold tracking-wider uppercase transition-all duration-200 hover:bg-primary-container shadow-md flex items-center justify-center gap-2 group" id="submitBtn" type="submit">
+<span>Submit Request for Quotation</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<!-- Confirmation Toast State (Hidden initially) -->
+<div class="hidden p-3 bg-surface-container rounded-lg text-center animate-fade-in" id="confirmationBanner">
+<p class="font-label text-xs font-semibold text-primary flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Quotation Request Transmitted!
+              </p>
+<p class="font-body text-[11px] text-on-surface-variant mt-1">Dossier #ATELIER-VD-9482 assigned to Workshop Senior Joiner.</p>
+</div>
+<!-- Trust & Security Footnote -->
+<div class="pt-4 border-t border-surface-container text-center space-y-1">
+<p class="font-label text-[10px] text-secondary tracking-wide flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span>Encrypted Transfer • Immutable Parametric Snapshot v2.1</span>
+</p>
+<p class="font-body text-[10px] text-on-surface-variant/80">Direct review with master cabinet maker before any workshop commitment.</p>
+</div>
+</form>
+</div>
+<!-- Workshop Atelier Card -->
+<div class="p-5 rounded-xl bg-surface-container-low flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[24px]">precision_manufacturing</span>
+</div>
+<div>
+<h4 class="font-headline text-sm font-medium text-on-surface">Atelier Joinery Fabrication</h4>
+<p class="font-body text-[11px] text-secondary leading-snug mt-0.5">Bespoke cabinetry engineered with 5-axis CNC precision and hand-planed by master woodcrafters.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+  function handleSubmit() {
+    const btn = document.getElementById('submitBtn');
+    const toast = document.getElementById('confirmationBanner');
+    
+    btn.disabled = true;
+    btn.classList.add('opacity-75');
+    btn.innerHTML = `
+      <span class="inline-block animate-spin mr-2">&#9696;</span>
+      <span>Transmitting Dossier...</span>
+    `;
+
+    setTimeout(() => {
+      btn.classList.add('hidden');
+      toast.classList.remove('hidden');
+    }, 900);
+  }
+
+  document.getElementById('copyTokenBtn')?.addEventListener('click', function() {
+    navigator.clipboard?.writeText('#ATELIER-VD-9482');
+    const originalText = this.innerHTML;
+    this.innerHTML = `
+      <span class="material-symbols-outlined text-[15px] text-primary">done</span>
+      <span class="text-primary">Copied to Clipboard!</span>
+    `;
+    setTimeout(() => {
+      this.innerHTML = originalText;
+    }, 2000);
+  });
+</script></main><footer class="w-full bg-surface-container-low mt-auto"><div class="w-full px-6 lg:px-12 py-12"><div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12"><div class="space-y-3"><h3 class="font-headline text-lg text-on-surface tracking-tight font-normal">Atelier Joinery Studio</h3><p class="font-body text-xs text-on-surface-variant leading-relaxed">Crafting precision architectural cabinetry, millwork, and bespoke walk-in wardrobes with heritage joinery standards.</p></div><div class="space-y-2"><span class="font-label text-xs uppercase tracking-widest text-primary font-semibold block">Specification &amp; Timber</span><ul class="space-y-2 text-xs text-on-surface-variant font-body"><li><a class="hover:text-primary transition-colors" data-path="material-catalog" href="#">Hardwood Veneer Catalog</a></li><li><a class="hover:text-primary transition-colors" data-path="material-catalog" href="#">Patinated Brass &amp; Hardware</a></li><li><a class="hover:text-primary transition-colors" data-path="material-catalog" href="#">Integrated LED Millwork Profiles</a></li></ul></div><div class="space-y-2"><span class="font-label text-xs uppercase tracking-widest text-primary font-semibold block">Engineering &amp; Fit</span><ul class="space-y-2 text-xs text-on-surface-variant font-body"><li><span class="block">CNC Tolerance: ±0.5 mm</span></li><li><span class="block">Scribe Margin: 20 mm Perimeter</span></li><li><span class="block">Soft-Close Blumotion Systems</span></li></ul></div><div class="space-y-2"><span class="font-label text-xs uppercase tracking-widest text-primary font-semibold block">Workshop Consultations</span><p class="text-xs text-on-surface-variant leading-relaxed">Our master timber consultants review every submitted specification prior to bench fabrication.</p><a class="inline-flex items-center gap-1 text-xs text-primary font-medium hover:underline pt-1" data-path="workshop-consultation" href="#"><span>Book Studio Visit</span><span class="material-symbols-outlined text-[14px]">arrow_outward</span></a></div></div><div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-label text-on-surface-variant"><p>© 2024 Atelier Joinery Studio Ltd. All bespoke joinery rights reserved.</p><div class="flex items-center gap-6"><a class="hover:text-on-surface transition-colors" href="#">Structural Tolerances</a><a class="hover:text-on-surface transition-colors" href="#">Joinery Warranty</a><a class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a></div></div></div></footer></body></html>

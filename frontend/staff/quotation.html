@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><title>Prepare quotation | Atelier Joinery Studio</title><link href="../css/styles.css" rel="stylesheet"/></head><body class="bg-background font-body text-on-surface min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/60 shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-4"><a class="font-headline text-2xl font-bold tracking-tight text-on-surface" href="requests.html">Atelier Joinery Studio</a><span class="rounded-full bg-secondary-container text-on-secondary-container font-semibold tracking-wider text-[11px] uppercase px-2.5 py-0.5">Staff Workspace</span></div><nav class="hidden md:flex items-center gap-8 h-full"><a aria-current="page" class="transition-colors py-5 text-primary font-semibold border-b-2 border-primary pb-5 pt-5" href="requests.html">Requests</a></nav><div class="flex items-center gap-4 text-sm font-medium"><span class="text-on-surface-variant font-medium">Staff Member</span><span class="text-outline-variant">|</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="sign-in.html">Sign out</a></div></div></header><main class="w-full pt-16 bg-background flex-grow"><div class="flex flex-col w-full max-w-7xl mx-auto px-6 lg:px-12 py-8">
+<!-- Title / Breadcrumb Row -->
+<div class="mb-8">
+<nav class="flex items-center gap-2 text-xs font-medium text-on-surface-variant mb-3">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="requests.html">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Requests
+      </a>
+<span class="text-outline-variant">/</span>
+<span class="font-mono text-on-surface">REQ-0001</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">New quotation</span>
+</nav>
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<h1 class="font-headline text-3xl md:text-4xl font-normal tracking-tight text-on-surface">Prepare quotation</h1>
+<span class="bg-[#eee7dc] text-on-surface-variant text-[11px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full">Sample data</span>
+<span class="bg-[#f3ebe1] text-[#8a532b] text-[11px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full shadow-sm">Draft</span>
+</div>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Quotation Form -->
+<div class="lg:col-span-7 xl:col-span-8">
+<div class="bg-surface-container-lowest p-6 sm:p-8 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between mb-6 pb-3 bg-surface-container-low/40 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 px-6 sm:px-8 pt-6 pb-4 rounded-t-lg">
+<div>
+<h2 class="font-headline text-2xl font-normal text-on-surface">Quotation details</h2>
+<p class="text-xs text-on-surface-variant mt-0.5">Define commercial parameters for this individual client specification</p>
+</div>
+<span class="material-symbols-outlined text-outline">description</span>
+</div>
+<form class="space-y-6" id="quotation-form">
+<!-- Form field 1: Design version -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="design-version">
+              Design version <span class="text-primary">*</span>
+</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/40 bg-no-repeat bg-[right_12px_center] cursor-pointer shadow-sm" id="design-version" name="design_version">
+<option selected="" value="v3">v3 — Staff revision (current)</option>
+<option value="v2">v2 — Staff revision</option>
+<option value="v1">v1 — Original customer submission</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant pointer-events-none absolute right-3 top-2.5 text-[20px]">expand_more</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">info</span>
+              The quotation is linked to this exact version.
+            </p>
+</div>
+<!-- Form field 2: Price & Currency -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5">
+              Price <span class="text-primary">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="sm:col-span-2 relative">
+<input class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm" id="price-amount" name="amount" placeholder="Enter amount" step="any" type="number"/>
+</div>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm cursor-pointer" id="price-currency" name="currency">
+<option disabled="" selected="" value="">Select</option>
+<option value="EUR">EUR</option>
+<option value="USD">USD</option>
+<option value="ILS">ILS</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant pointer-events-none absolute right-3 top-2.5 text-[20px]">expand_more</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mt-1.5 italic">
+              Entered manually by staff. The system does not calculate prices.
+            </p>
+</div>
+<!-- Form field 3: Commercial details and terms -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="commercial-details">
+              Commercial details and terms
+            </label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg p-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm resize-y" id="commercial-details" name="commercial_details" placeholder="What is included, payment terms, notes" rows="4"></textarea>
+</div>
+<!-- Form field 4: Valid until -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="valid-until">
+              Valid until
+            </label>
+<div class="relative sm:w-1/2">
+<input class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm cursor-pointer" id="valid-until" name="valid_until" type="date"/>
+</div>
+</div>
+<!-- Form field 5: Message to customer -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="customer-message">
+              Message to customer
+            </label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg p-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm resize-y" id="customer-message" name="customer_message" placeholder="Personal message or instructions to customer..." rows="3"></textarea>
+</div>
+<!-- Action Buttons -->
+<div class="pt-4 flex flex-wrap items-center gap-3">
+<button class="px-5 py-2.5 bg-surface-container-lowest text-on-surface hover:bg-surface-container-low transition-colors rounded-lg font-medium text-sm shadow-sm flex items-center gap-2" id="save-draft-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">save</span>
+              Save draft
+            </button>
+<button class="px-6 py-2.5 bg-primary text-on-primary hover:bg-[#ab5722] transition-colors rounded-lg font-medium text-sm shadow-sm flex items-center gap-2" id="send-quotation-btn" type="submit">
+<span class="material-symbols-outlined text-[18px]">send</span>
+              Send quotation
+            </button>
+</div>
+<p class="text-xs text-on-surface-variant" id="quotation-status" role="status"></p>
+<!-- Delivery Note -->
+<div class="bg-surface-container-low p-3.5 rounded-lg flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              A quotation is marked as sent only after the delivery provider confirms it. Delivery channel: <span class="font-medium text-on-surface">not configured yet</span>.
+            </p>
+</div>
+</form>
+</div>
+</div>
+<!-- Right Column: Stacked Cards -->
+<div class="lg:col-span-5 xl:col-span-4 space-y-6">
+<!-- Card 1: Request Summary -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container-low/30 -mx-6 -mt-6 px-6 pt-5 rounded-t-lg">
+<h3 class="text-base font-semibold text-on-surface font-headline">Request summary</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">person_outline</span>
+</div>
+<dl class="space-y-3 text-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-low/20 px-2 rounded">
+<dt class="text-on-surface-variant text-xs">Request ID</dt>
+<dd class="font-mono font-medium text-on-surface text-xs">REQ-0001</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Customer name</dt>
+<dd class="font-medium text-on-surface text-xs">Sample Customer A</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Email</dt>
+<dd class="text-on-surface text-xs font-mono">customer.a@example.com</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Phone</dt>
+<dd class="text-on-surface text-xs font-mono">000-000-0000</dd>
+</div>
+</dl>
+</div>
+<!-- Card 2: Design Version -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container-low/30 -mx-6 -mt-6 px-6 pt-5 rounded-t-lg">
+<h3 class="text-base font-semibold text-on-surface font-headline">Design version</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">design_services</span>
+</div>
+<dl class="space-y-3 text-sm mb-5">
+<div class="flex items-center justify-between py-1 bg-surface-container-low/20 px-2 rounded">
+<dt class="text-on-surface-variant text-xs">Version</dt>
+<dd class="font-mono font-medium text-on-surface text-xs">v3</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Wardrobe type</dt>
+<dd class="text-on-surface font-medium text-xs">Hinged</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Dimensions</dt>
+<dd class="text-on-surface font-mono text-xs">2400 × 2400 × 600 mm (example)</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Validation</dt>
+<dd>
+<span class="inline-flex items-center gap-1 bg-[#e6f4ea] text-[#137333] text-[11px] px-2.5 py-0.5 rounded-full font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#137333]"></span>
+                Rules: passed (example)
+              </span>
+</dd>
+</div>
+</dl>
+<div class="pt-3 flex items-center justify-between gap-4">
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[#ab5722] underline underline-offset-4 transition-colors" href="request.html">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+            View design
+          </a>
+
+</div>
+</div>
+<!-- Card 3: Previous Quotations -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container-low/30 -mx-6 -mt-6 px-6 pt-5 rounded-t-lg">
+<h3 class="text-base font-semibold text-on-surface font-headline">Previous quotations <span class="text-[11px] font-normal text-on-surface-variant">(sample data)</span></h3>
+<span class="material-symbols-outlined text-outline text-[20px]">history</span>
+</div>
+<ul class="space-y-3">
+<li class="p-3 bg-surface-container-low/40 rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-mono font-medium text-on-surface">Q-0001</span>
+<span class="text-[11px] text-on-surface-variant">based on v2</span>
+</div>
+<span class="bg-[#e6f4ea] text-[#137333] text-[11px] font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#137333]"></span>
+              Sent (example)
+            </span>
+</li>
+<li class="p-3 bg-surface-container-low/40 rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-mono font-medium text-on-surface">Q-0002</span>
+<span class="text-[11px] text-on-surface-variant">based on v3</span>
+</div>
+<span class="text-[11px] font-medium text-on-surface-variant">Draft</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main><footer class="w-full bg-surface-container-low border-t border-outline-variant/60 py-8"><div class="max-w-7xl mx-auto px-6 lg:px-12 text-xs text-on-surface-variant">Staff internal workspace. Sample data only.</div></footer><script defer src="../js/staff/quotation.js"></script></body></html>

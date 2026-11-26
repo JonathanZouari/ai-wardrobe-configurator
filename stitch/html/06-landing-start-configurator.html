@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "error": "#c0392b",
+        "primary-container": "#e08850",
+        "secondary-fixed-dim": "#cec6be",
+        "surface-container": "#f2ece4",
+        "on-secondary": "#ffffff",
+        "on-secondary-container": "#605850",
+        "surface": "#faf5ee",
+        "tertiary": "#8c3c3c",
+        "surface-container-low": "#f6f0e8",
+        "tertiary-fixed-dim": "#e8a0a0",
+        "primary-fixed-dim": "#f0a878",
+        "on-secondary-fixed": "#2a2420",
+        "on-surface-variant": "#605850",
+        "secondary-container": "#eae2da",
+        "on-secondary-fixed-variant": "#504840",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-highest": "#e6e0d6",
+        "on-tertiary-fixed": "#2e1515",
+        "inverse-primary": "#f0a878",
+        "on-background": "#3a302a",
+        "background": "#faf5ee",
+        "inverse-surface": "#3a302a",
+        "on-error-container": "#7a1a10",
+        "on-primary-container": "#fbe8d8",
+        "surface-variant": "#ece6dc",
+        "inverse-on-surface": "#faf5ee",
+        "outline": "#9a9088",
+        "tertiary-fixed": "#fce0e0",
+        "secondary-fixed": "#eae2da",
+        "surface-tint": "#c2652a",
+        "outline-variant": "#d8d0c8",
+        "on-primary-fixed-variant": "#8a4518",
+        "tertiary-container": "#d47070",
+        "on-error": "#ffffff",
+        "primary": "#c2652a",
+        "secondary": "#78706a",
+        "on-tertiary-fixed-variant": "#6e3030",
+        "surface-container-high": "#ece6dc",
+        "error-container": "#fce4e0",
+        "on-primary": "#ffffff",
+        "on-tertiary-container": "#3a2020",
+        "primary-fixed": "#fbe8d8",
+        "on-surface": "#3a302a",
+        "surface-dim": "#dcd6cc",
+        "on-tertiary": "#ffffff",
+        "surface-bright": "#faf5ee",
+        "on-primary-fixed": "#401a08"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {},
+      "fontFamily": {
+        "headline": [
+          "EB Garamond"
+        ],
+        "display": [
+          "EB Garamond"
+        ],
+        "body": [
+          "Manrope"
+        ],
+        "label": [
+          "Manrope"
+        ]
+      },
+      "fontSize": {}
+    },
+  }
+}</script></head><body class="bg-surface font-body text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><a class="flex items-center gap-2 group" data-path="interior-studio" href="#"><span class="text-2xl font-headline tracking-tight text-on-surface font-normal group-hover:text-primary transition-colors">Atelier Joinery Studio</span></a><nav class="hidden xl:flex items-center gap-7" data-active-classes="text-primary font-medium"><a aria-current="page" class="transition-colors tracking-wide text-primary font-medium" data-path="3d-configurator" href="#">3D Configurator</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors tracking-wide" data-path="interior-studio" href="#">Interior Studio</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors tracking-wide" data-path="bespoke-portfolio" href="#">Bespoke Portfolio</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors tracking-wide" data-path="material-standards" href="#">Material Standards</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors tracking-wide" data-path="joinery-guidelines" href="#">Joinery Guidelines</a></nav><div class="flex items-center gap-5"><a class="text-xs tracking-wider uppercase text-on-surface-variant hover:text-on-surface transition-colors font-medium" data-path="staff-portal-sign-in" href="#">Staff Portal Sign In</a><a class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container text-xs font-semibold tracking-wider uppercase shadow-[0_2px_16px_rgba(58,48,42,0.04)] transition-all" data-path="3d-configurator" href="#">Start Configurator</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]"><div class="flex flex-col w-full">
+<!-- Top Ambient Banner / Hero Section -->
+<section class="relative w-full overflow-hidden bg-surface-container-low pb-20 pt-10 sm:pt-16">
+<!-- Atmospheric subtle warm gradients -->
+<div class="pointer-events-none absolute -top-40 right-0 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl"></div>
+<div class="pointer-events-none absolute -left-20 top-1/2 h-96 w-96 rounded-full bg-primary-container/10 blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+<!-- Breadcrumb & Engineering Status Indicator -->
+<div class="flex flex-wrap items-center justify-between gap-4 pb-8 text-xs tracking-wider uppercase text-on-surface-variant font-medium">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-on-surface font-semibold tracking-widest">Architectural Millwork &amp; Joinery</span>
+<span class="text-outline-variant">/</span>
+<span>Zero-Account Parametric Portal</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant shadow-sm text-[11px]">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Deterministic Rule Engine Verified • Real-time 3D Engine</span>
+</div>
+</div>
+<!-- Hero Grid: Editorial Typography + Showcase Visual -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end pb-12">
+<div class="lg:col-span-7 space-y-6">
+<h1 class="font-headline text-4xl sm:text-5xl lg:text-6xl text-on-surface font-normal tracking-tight leading-[1.08]">
+            Precision Bespoke Wardrobes, <br class="hidden sm:inline"/>
+<span class="italic text-primary">Designed in Real-Time 3D.</span>
+</h1>
+<p class="text-base sm:text-lg text-on-surface-variant max-w-2xl font-light leading-relaxed">
+            Configure luxury hinged or sliding wardrobe suites with millimetric precision, deterministic structural validation, and AI-assisted interior planning. No sign-up or credit card required.
+          </p>
+</div>
+<div class="lg:col-span-5 flex flex-col justify-end gap-4 lg:pl-6">
+<div class="flex items-center gap-6 py-3 px-5 rounded-xl bg-surface shadow-sm">
+<div>
+<span class="block font-headline text-3xl text-on-surface font-normal">±0.5<span class="text-lg">mm</span></span>
+<span class="text-[11px] uppercase tracking-wider text-on-surface-variant font-medium">CNC Tolerance Spec</span>
+</div>
+<div class="h-8 w-px bg-outline-variant/60"></div>
+<div>
+<span class="block font-headline text-3xl text-primary font-normal">100%</span>
+<span class="text-[11px] uppercase tracking-wider text-on-surface-variant font-medium">DIN 68874-1 Verified</span>
+</div>
+<div class="h-8 w-px bg-outline-variant/60"></div>
+<div>
+<span class="block font-headline text-3xl text-on-surface font-normal">0<span class="text-sm">sec</span></span>
+<span class="text-[11px] uppercase tracking-wider text-on-surface-variant font-medium">Anonymous Entry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hero Visual Showcase Card -->
+<div class="relative w-full rounded-2xl overflow-hidden shadow-xl bg-surface-container-highest max-h-[460px] aspect-[21/9]">
+<img alt="Warm luxury sunlit walk-in dressing room joinery suite with integrated warm LEDs and central glass island display" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv1xly0jQvpXop6jelCuKtduRf-F98qGnk3aWfGrZINFD0-08mWFbs2VBinUEUZzAuqLGUzNm2ar9SRPhxfCJPF4svXHwaqxMzZnyHl-0lr1drb4iT029LaJaJmkkS4n2yIxJQopWevrdFjXjpB3SXSUWs7vmOfW1NIWzei0NVJewfRQRLYErfyH0Eiw9RlRgnZvsF4KSia01lNXBDdlcLD8q5D39ChRmxDKRVnSc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/65 via-on-surface/15 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-4 text-surface text-xs">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 rounded-full bg-surface/20 backdrop-blur-md font-medium tracking-wide">
+              Master Dressing Suite • Zurich Alpine Residence
+            </span>
+<span class="hidden sm:inline text-surface/80">Quarter-Sawn Natural Oak • 2700K Recessed Channels</span>
+</div>
+<a class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-surface/90 text-on-surface font-medium hover:bg-surface transition-colors shadow-sm text-xs" data-path="bespoke-portfolio" href="#">
+<span>View Full Portfolio</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Step 01 Configurator Entry Panel -->
+<section class="w-full py-16 -mt-8 relative z-20">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Container Main Card -->
+<div class="bg-surface rounded-2xl shadow-xl p-8 sm:p-12 space-y-12">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6">
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-primary font-semibold text-xs tracking-widest uppercase">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Step 01 • Parametric Scoping</span>
+</div>
+<h2 class="font-headline text-3xl sm:text-4xl text-on-surface font-normal tracking-tight">
+              Wardrobe Architecture &amp; Spatial Envelope
+            </h2>
+<p class="text-sm text-on-surface-variant max-w-xl">
+              Establish structural boundaries. You can refine finishes, internal drawers, pull-out trouser racks, and lighting profiles directly inside the 3D canvas.
+            </p>
+</div>
+<div class="flex items-center gap-2 self-start md:self-auto text-xs text-on-surface-variant bg-surface-container px-3.5 py-2 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-primary">lock_open</span>
+<span>Unsaved session persists locally</span>
+</div>
+</div>
+<!-- 1. Architecture Typology Selection -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="text-xs uppercase tracking-widest font-semibold text-on-surface">
+              1. Select Architecture Typology
+            </label>
+<span class="text-xs text-on-surface-variant">Both systems support full custom interior fittings</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="typology-selector">
+<!-- Option A: Hinged-Door -->
+<label class="relative flex flex-col sm:flex-row gap-5 p-5 rounded-xl cursor-pointer bg-surface-container-low transition-all duration-200 hover:bg-surface-container has-[:checked]:bg-surface-container-highest has-[:checked]:shadow-md">
+<input checked="" class="sr-only peer" id="type-hinged" name="typology" type="radio" value="hinged"/>
+<div class="w-full sm:w-44 h-36 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-highest relative">
+<img alt="Straight hinged door wardrobe in rift-cut oak with tall vertical brushed brass handles and flush reveal" class="w-full h-full object-cover transition-transform duration-300 peer-checked:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4uOTNMJUXvMNgIROGgLQB3pZS0S54Ajl2D_bYKMQLeeF6Ur2CV4li3laYkULJ9rLT1JEsVnz02PXhppmC1wLvvaD6anjgEYGLehLUHabDFwwTgpmUQKBBFi9QhfMCtdf4bd4uCTKLYYwMBVt2uyFg0qQFB4K8Cj3jyQugIwSA9lHFEP2BqX-nsKZnZHc7uPn7CV78rzFZSw4Crm-GGMYVuEiwM1E4Dn11hEnQ2-A"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] tracking-wider uppercase font-semibold bg-surface/90 text-on-surface backdrop-blur-sm">
+                  Flush Reveal
+                </span>
+</div>
+<div class="flex flex-col justify-between flex-1 py-1">
+<div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-xl text-on-surface font-normal">Straight Hinged-Door Wardrobe</h3>
+<div class="w-5 h-5 rounded-full flex items-center justify-center bg-primary text-on-primary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                    Classic 110° Blum soft-close concealed hinges, 18-22mm thick timber doors with flush reveal. Choose from solid patinated brass pulls, integrated milled J-grooves, or touch-latch openings.
+                  </p>
+</div>
+<div class="pt-3 flex flex-wrap gap-2 text-[11px] text-on-surface-variant font-medium">
+<span class="px-2 py-0.5 rounded bg-surface">Bays: 2 - 6 Doors</span>
+<span class="px-2 py-0.5 rounded bg-surface">Max Height: 2,750 mm</span>
+<span class="px-2 py-0.5 rounded bg-surface">Zero Sag Rated</span>
+</div>
+</div>
+</label>
+<!-- Option B: Sliding System -->
+<label class="relative flex flex-col sm:flex-row gap-5 p-5 rounded-xl cursor-pointer bg-surface-container-low transition-all duration-200 hover:bg-surface-container has-[:checked]:bg-surface-container-highest has-[:checked]:shadow-md">
+<input class="sr-only peer" id="type-sliding" name="typology" type="radio" value="sliding"/>
+<div class="w-full sm:w-44 h-36 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-highest relative">
+<img alt="Sliding-door wardrobe system with dark wood fluted acoustic timber slats and woven natural linen door panels" class="w-full h-full object-cover transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHgVU5oZoL7BGmf9B8oc-X-B_Iuu6clZGkXSmZrC-iu9_7060Fy62tfsIxkABrK3Gr8q3l-FTwUnH60fvsLEBZk-eivpWoUOvM8zLCUD1YqYwW4pE-xr4UTMTJ02UHyf8DK4rZa_BMtpI4hUmzTZnB1XoqH6SbiFd8NLFaaWyXNpsv6_R3bC8ntq6KVrV5_hxu2ZTEgHsyf9ssu9g13W4f-Dqgka6ZXQNKByuupO8"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] tracking-wider uppercase font-semibold bg-surface/90 text-on-surface backdrop-blur-sm">
+                  Recessed Track
+                </span>
+</div>
+<div class="flex flex-col justify-between flex-1 py-1">
+<div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-xl text-on-surface font-normal">Sliding Track System</h3>
+<div class="w-5 h-5 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">circle</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                    Floor-to-ceiling concealed rolling system with silent soft-brake dampening. Optimal for rooms with tighter passageway clearances. Accommodates acoustic timber slats or Belgian linen panel inserts.
+                  </p>
+</div>
+<div class="pt-3 flex flex-wrap gap-2 text-[11px] text-on-surface-variant font-medium">
+<span class="px-2 py-0.5 rounded bg-surface">Bays: 2 - 4 Panels</span>
+<span class="px-2 py-0.5 rounded bg-surface">Door Width: Up to 1,400 mm</span>
+<span class="px-2 py-0.5 rounded bg-surface">Flush Inline Track</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- 2. Spatial Envelope & Millimetric Dimensions -->
+<div class="space-y-6 pt-2">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div>
+<label class="text-xs uppercase tracking-widest font-semibold text-on-surface">
+                2. Spatial Envelope &amp; Millimetric Dimensions (FR-01)
+              </label>
+<p class="text-xs text-on-surface-variant mt-0.5">Real-time carcass dimensioning with automatic internal bay partition calculation</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs px-3 py-1 rounded bg-surface-container text-on-surface font-mono font-medium">
+                Volume: <strong id="calculated-volume">3.46</strong> m³
+              </span>
+<span class="text-xs px-3 py-1 rounded bg-primary-fixed text-on-primary-fixed font-semibold tracking-wide">
+                CNC Precision ±0.5 mm
+              </span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Dimension: Width -->
+<div class="bg-surface-container-low p-5 rounded-xl space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-on-surface">Overall Width (W)</span>
+<span class="text-xs text-primary font-semibold" id="bay-indicator">3 Equal 800mm Bays</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors shadow-sm" onclick="adjustDimension('width', -100)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<div class="relative flex-1">
+<input class="w-full text-center font-headline text-2xl py-2 px-3 rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="input-width" max="3600" min="1200" onchange="updateDimensionCalculations()" step="50" type="number" value="2400"/>
+<span class="absolute right-3 top-3 text-xs text-on-surface-variant font-mono">mm</span>
+</div>
+<button class="w-10 h-10 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors shadow-sm" onclick="adjustDimension('width', 100)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="flex justify-between text-[11px] text-on-surface-variant font-mono">
+<span>Min: 1,200 mm</span>
+<span>Max: 3,600 mm</span>
+</div>
+</div>
+<!-- Dimension: Height -->
+<div class="bg-surface-container-low p-5 rounded-xl space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-on-surface">Overall Height (H)</span>
+<span class="text-xs text-on-surface-variant font-medium">Ceiling Scribe: 60mm</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors shadow-sm" onclick="adjustDimension('height', -50)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<div class="relative flex-1">
+<input class="w-full text-center font-headline text-2xl py-2 px-3 rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="input-height" max="2800" min="1800" onchange="updateDimensionCalculations()" step="20" type="number" value="2400"/>
+<span class="absolute right-3 top-3 text-xs text-on-surface-variant font-mono">mm</span>
+</div>
+<button class="w-10 h-10 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors shadow-sm" onclick="adjustDimension('height', 50)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="flex justify-between text-[11px] text-on-surface-variant font-mono">
+<span>Min: 1,800 mm</span>
+<span>Max: 2,800 mm</span>
+</div>
+</div>
+<!-- Dimension: Depth -->
+<div class="bg-surface-container-low p-5 rounded-xl space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-on-surface">Carcass Depth (D)</span>
+<span class="text-xs text-on-surface-variant font-medium">Overcoat Clear: 562mm</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors shadow-sm" onclick="adjustDimension('depth', -25)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<div class="relative flex-1">
+<input class="w-full text-center font-headline text-2xl py-2 px-3 rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="input-depth" max="750" min="450" onchange="updateDimensionCalculations()" step="25" type="number" value="600"/>
+<span class="absolute right-3 top-3 text-xs text-on-surface-variant font-mono">mm</span>
+</div>
+<button class="w-10 h-10 rounded-lg bg-surface hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors shadow-sm" onclick="adjustDimension('depth', 25)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="flex justify-between text-[11px] text-on-surface-variant font-mono">
+<span>Min: 450 mm</span>
+<span>Max: 750 mm</span>
+</div>
+</div>
+</div>
+<!-- Interactive Bay Visualization Sparkline / Elevation Blueprint Strip -->
+<div class="bg-surface-container p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">view_column</span>
+<span class="text-xs text-on-surface font-medium">Internal Bay Layout Distribution:</span>
+</div>
+<!-- Dynamic Bay Blueprint Graphic -->
+<div class="flex items-center gap-1.5 flex-1 max-w-md w-full h-8 px-2 bg-surface rounded-lg" id="bay-blueprint-container">
+<div class="h-6 flex-1 bg-primary/20 rounded flex items-center justify-center text-[10px] font-mono text-on-surface font-semibold">Bay 1 (800mm)</div>
+<div class="h-6 flex-1 bg-primary/20 rounded flex items-center justify-center text-[10px] font-mono text-on-surface font-semibold">Bay 2 (800mm)</div>
+<div class="h-6 flex-1 bg-primary/20 rounded flex items-center justify-center text-[10px] font-mono text-on-surface font-semibold">Bay 3 (800mm)</div>
+</div>
+<span class="text-[11px] text-on-surface-variant font-mono">Substrate: 19mm Multi-Core Core</span>
+</div>
+</div>
+<!-- 3. Starting Method / Pathway Selection (Section 3.1 & FR-02) -->
+<div class="space-y-4 pt-2">
+<div class="flex items-center justify-between">
+<label class="text-xs uppercase tracking-widest font-semibold text-on-surface">
+              3. Choose Your Starting Pathway (FR-02)
+            </label>
+<span class="text-xs text-on-surface-variant">Switch freely anytime inside the editor</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="pathway-cards">
+<!-- Pathway 1: Atelier Templates -->
+<label class="group relative flex flex-col justify-between p-6 rounded-xl cursor-pointer bg-surface-container-low transition-all duration-200 hover:bg-surface-container has-[:checked]:bg-surface-container-highest has-[:checked]:shadow-md">
+<input checked="" class="sr-only peer" name="start_pathway" type="radio" value="templates"/>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+</div>
+<span class="text-[10px] uppercase font-semibold tracking-wider text-primary px-2.5 py-0.5 rounded-full bg-primary-fixed">
+                    Recommended
+                  </span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface font-normal">Predefined Atelier Templates</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                  Start with expertly proportioned layouts: <em>The Master Walk-In</em>, <em>Gentleman’s Suiting &amp; Horology</em>, or <em>Minimalist Linen &amp; Shoe Gallery</em>.
+                </p>
+</div>
+<div class="pt-6 flex items-center justify-between text-xs text-on-surface font-semibold">
+<span class="text-primary group-hover:underline">Explore Curated Modules →</span>
+<span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+</div>
+</label>
+<!-- Pathway 2: AI Co-Pilot Generated -->
+<label class="group relative flex flex-col justify-between p-6 rounded-xl cursor-pointer bg-surface-container-low transition-all duration-200 hover:bg-surface-container has-[:checked]:bg-surface-container-highest has-[:checked]:shadow-md">
+<input class="sr-only peer" name="start_pathway" type="radio" value="ai"/>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+</div>
+<span class="text-[10px] uppercase font-semibold tracking-wider text-secondary px-2.5 py-0.5 rounded-full bg-surface-container">
+                    Joinery AI
+                  </span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface font-normal">AI Co-Pilot Layout</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                  Describe spatial habits and lifestyle inventory in natural phrasing (e.g. “20 winter overcoats, 16 pairs of dress shoes, and dual felt jewelry trays”).
+                </p>
+</div>
+<div class="pt-6 flex items-center justify-between text-xs text-on-surface font-semibold">
+<span class="text-on-surface-variant group-hover:text-primary">Prompt Co-Pilot Studio →</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant">radio_button_unchecked</span>
+</div>
+</label>
+<!-- Pathway 3: Empty Carcass -->
+<label class="group relative flex flex-col justify-between p-6 rounded-xl cursor-pointer bg-surface-container-low transition-all duration-200 hover:bg-surface-container has-[:checked]:bg-surface-container-highest has-[:checked]:shadow-md">
+<input class="sr-only peer" name="start_pathway" type="radio" value="scratch"/>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">grid_4x4</span>
+</div>
+<span class="text-[10px] uppercase font-semibold tracking-wider text-on-surface-variant px-2.5 py-0.5 rounded-full bg-surface">
+                    Pure Custom
+                  </span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface font-normal">Empty Carcass (Scratch)</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                  Start with a pristine millwork frame sized exactly to your dimensions. Drag and snap hanging rails, soft-close dovetailed drawers, and sensor lighting manually.
+                </p>
+</div>
+<div class="pt-6 flex items-center justify-between text-xs text-on-surface font-semibold">
+<span class="text-on-surface-variant group-hover:text-primary">Full Manual Control →</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant">radio_button_unchecked</span>
+</div>
+</label>
+</div>
+</div>
+<!-- 4. Launch Action & Trust Bar -->
+<div class="pt-6 flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="space-y-1.5 text-center lg:text-left">
+<div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-medium text-on-surface-variant">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+                No login or credit card required
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+                Instant 3D orbit &amp; exportable BOM specs
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+                Deterministic manufacturing checks
+              </span>
+</div>
+<p class="text-[11px] text-on-surface-variant">
+              Configured parameters are passed seamlessly to the WebGL rendering canvas.
+            </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+<a class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-semibold tracking-wider uppercase text-on-surface transition-colors" data-path="material-standards" href="#">
+              Explore Timber &amp; Finishes
+            </a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-lg bg-primary hover:bg-primary-container text-xs font-semibold tracking-wider uppercase text-on-primary shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px]" data-path="3d-configurator" href="#" id="btn-launch-studio">
+<span>Launch 3D Configurator Studio</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Standards & Joinery Pillars (Section 6 of PRD) -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 space-y-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-3">
+<span class="text-xs uppercase tracking-widest text-primary font-semibold">Engineering Philosophy</span>
+<h2 class="font-headline text-3xl sm:text-4xl text-on-surface font-normal">
+            Sun-Baked Simplicity Meets <br class="hidden sm:inline"/>
+            Rigorous Joinery Standards.
+          </h2>
+</div>
+<p class="text-xs sm:text-sm text-on-surface-variant max-w-md font-light leading-relaxed">
+          Every Atelier unit generated in our 3D configurator is backed by parametric rules ensuring flawless physical fabrication, hardware collision immunity, and heirloom durability.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Pillar 1 -->
+<div class="bg-surface p-8 rounded-2xl shadow-sm space-y-5 flex flex-col justify-between">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">view_in_ar</span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface font-normal">
+              Synchronized 3D Parametric Engine
+            </h3>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+              Engineered with WebGL/Three.js running at 60 FPS. Experience interactive door opening cycles (110° swing kinematics), shelf height adjustments, and ambient warm LED profile toggles in photorealistic real-time.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-xs text-primary font-medium">
+<span>Hardware collision avoidance</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-surface p-8 rounded-2xl shadow-sm space-y-5 flex flex-col justify-between">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">rule</span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface font-normal">
+              Deterministic Structural Rule Engine
+            </h3>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+              Continuous validation against international millwork criteria: DIN 68874-1 for shelf deflection, Blum hinge load thresholds, and carcass depth tolerances for overcoat hangers and luxury footwear.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-xs text-primary font-medium">
+<span>Zero illegal states allowed</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-surface p-8 rounded-2xl shadow-sm space-y-5 flex flex-col justify-between">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">precision_manufacturing</span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface font-normal">
+              Direct BOM &amp; Master Joinery Review
+            </h3>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+              One-click compilation of a fully broken-down Bill of Materials (BOM), CNC cut-lists, Blum hardware part numbers, and high-res elevation drawings for trade architects and homeowners.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-xs text-primary font-medium">
+<span>Exportable to CAD &amp; PDF</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Curated Material Inspiration Strip -->
+<section class="w-full py-16 bg-surface">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 space-y-8">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div>
+<span class="text-xs uppercase tracking-widest text-primary font-semibold">Tactile Palette</span>
+<h3 class="font-headline text-2xl sm:text-3xl text-on-surface font-normal mt-1">Available Timber &amp; Lining Standards</h3>
+</div>
+<a class="text-xs uppercase tracking-wider text-primary font-semibold hover:underline inline-flex items-center gap-1" data-path="material-standards" href="#">
+<span>Request Sample Swatch Box</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 rounded-xl bg-surface-container-low space-y-3">
+<div class="w-full h-24 rounded-lg bg-surface-container-high overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Macro close up photograph of light quarter sawn white oak veneer with fine straight wood grain lines and warm natural matte oil finish under soft golden daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF_rO4tA2WN-GzAr4BQgFrMpwKHI5bJPZ1Uez6ID8J--Zxn_FcIYkKoSc-Itulw5rUKqEcAGtfP6ycYefEnYB-DbOfpouHPOKzIvtf8191GEnIlSnjGQjqItIm5z1qiRBOD7_t8GbusJrTimCVftxWhxwVnEoOLbkkNzSTWxmUNy_slBCDHQLj_TvOzD7YRk6DdwmjuOcntkDTqqnHEWTD3ZH24zh7zwa0w8Xg87k"/>
+</div>
+<div>
+<span class="text-xs font-semibold text-on-surface block">Quarter-Sawn White Oak</span>
+<span class="text-[11px] text-on-surface-variant">Natural Ultra-Matte Sealant</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low space-y-3">
+<div class="w-full h-24 rounded-lg bg-surface-container-high overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Detailed texture macro of fumed European smoked walnut timber veneer with deep espresso chocolate undertones and subtle golden flecks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiKPu_ZFadKFZzZzF-PGsR3otSzolo_KUj4itVforHGQ0BAEYWegLeJTinSeFxkJJPUSkQHL6heiLDIvsbB4gALOB2FyM80TwziYqubK73D89JvhlHCvIGm9WO_EEGIRFmN5aHjiV9okxF19bg8azU29e1ws83QqIgkfkcgsnvjVWEYRjHiDkHQy85BYroYtwZvuC-CF7iiQkAMsIXc36SD2Mo2bPfJ0JEW4sElKI"/>
+</div>
+<div>
+<span class="text-xs font-semibold text-on-surface block">Smoked European Walnut</span>
+<span class="text-[11px] text-on-surface-variant">Thermal Fumed Deep Grain</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low space-y-3">
+<div class="w-full h-24 rounded-lg bg-surface-container-high overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close up texture of woven Belgian raw linen fabric backing panel with neutral warm beige and oatmeal threads in a tailored architectural wardrobe panel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv9rwI6VEX4m7I0VLhFpeHMP5jbzbrvi94bJ1MtcTSyWaESopdYjYWGGDUb3_ycPhmsYu3FY5ShwpIfeeSeOsWXZUdzAKOqP1mB_9matXOJrMhek1-XogIsF-QPTloyCpzmRqUpdkVyCn6v4MrRAexE-oHT4fyz_nrIrfPIV2pZ6O61EwdL5bIOodlg_IbuT6hRZ3h5gU6w8TsNfT7XlDMjaiuDNLJFYy_elcs7UA"/>
+</div>
+<div>
+<span class="text-xs font-semibold text-on-surface block">Belgian Raw Linen</span>
+<span class="text-[11px] text-on-surface-variant">Acoustic Absorptive Infill</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low space-y-3">
+<div class="w-full h-24 rounded-lg bg-surface-container-high overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Architectural detail of unlacquered brushed brass wardrobe pull hardware showing subtle artisanal patina and warm metallic reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXvdXnIQTa5I-NT_xtV9JrkwsyTKZi4nQpEzPbeKx8Q5hcQN-4NqTPwjQFCBqUeD8uFtamJLkvOvp632hVdql0U8RoVFJbWDqUALvWgTjlp3Z1--8kVZCcO-_lmieZE3x1kOAdOcDmrQEL1zP74Ezl75mITtPPLu8er-Ybr8pNLN6vq7jhK5NK2OcQ_8YXfCxMWmt0OOXQQBXQjyLQ3U5-OLHW6e7LSqFg-TsyYA"/>
+</div>
+<div>
+<span class="text-xs font-semibold text-on-surface block">Patinated Brushed Brass</span>
+<span class="text-[11px] text-on-surface-variant">Hand-Finished Custom Hardware</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Client-side Parametric Dimension Logic script -->
+<script>
+    function updateDimensionCalculations() {
+      const widthInput = document.getElementById('input-width');
+      const heightInput = document.getElementById('input-height');
+      const depthInput = document.getElementById('input-depth');
+      const volumeBadge = document.getElementById('calculated-volume');
+      const bayIndicator = document.getElementById('bay-indicator');
+      const blueprintContainer = document.getElementById('bay-blueprint-container');
+
+      if (!widthInput || !heightInput || !depthInput) return;
+
+      let w = Math.max(1200, Math.min(3600, parseInt(widthInput.value) || 2400));
+      let h = Math.max(1800, Math.min(2800, parseInt(heightInput.value) || 2400));
+      let d = Math.max(450, Math.min(750, parseInt(depthInput.value) || 600));
+
+      widthInput.value = w;
+      heightInput.value = h;
+      depthInput.value = d;
+
+      // Calculate approximate m3
+      const volumeM3 = ((w * h * d) / 1000000000).toFixed(2);
+      if (volumeBadge) {
+        volumeBadge.innerText = volumeM3;
+      }
+
+      // Bay partition heuristics (bays typically 600mm - 900mm wide)
+      let numBays = 2;
+      if (w >= 2800) {
+        numBays = 4;
+      } else if (w >= 1800) {
+        numBays = 3;
+      } else {
+        numBays = 2;
+      }
+
+      const bayWidth = Math.round(w / numBays);
+      if (bayIndicator) {
+        bayIndicator.innerText = `${numBays} Equal ${bayWidth}mm Bays`;
+      }
+
+      // Rebuild blueprint preview strips
+      if (blueprintContainer) {
+        blueprintContainer.innerHTML = '';
+        for (let i = 1; i <= numBays; i++) {
+          const div = document.createElement('div');
+          div.className = 'h-6 flex-1 bg-primary/20 rounded flex items-center justify-center text-[10px] font-mono text-on-surface font-semibold';
+          div.innerText = `Bay ${i} (${bayWidth}mm)`;
+          blueprintContainer.appendChild(div);
+        }
+      }
+
+      // Store in session storage so 3D configurator inherits the parameters instantly
+      try {
+        sessionStorage.setItem('atelier_wardrobe_specs', JSON.stringify({
+          width: w,
+          height: h,
+          depth: d,
+          bays: numBays,
+          typology: document.querySelector('input[name="typology"]:checked')?.value || 'hinged',
+          pathway: document.querySelector('input[name="start_pathway"]:checked')?.value || 'templates'
+        }));
+      } catch(e) {}
+    }
+
+    function adjustDimension(field, delta) {
+      const input = document.getElementById('input-' + field);
+      if (!input) return;
+      input.value = (parseInt(input.value) || 0) + delta;
+      updateDimensionCalculations();
+    }
+
+    // Attach dynamic listeners on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      updateDimensionCalculations();
+
+      document.querySelectorAll('input[name="typology"]').forEach(radio => {
+        radio.addEventListener('change', updateDimensionCalculations);
+      });
+
+      document.querySelectorAll('input[name="start_pathway"]').forEach(radio => {
+        radio.addEventListener('change', updateDimensionCalculations);
+      });
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-low text-on-surface-variant pt-16 pb-12 shadow-[0_1px_8px_rgba(58,48,42,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12"><div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16"><div class="space-y-4"><h3 class="font-headline text-xl text-on-surface tracking-tight font-normal">Atelier Joinery Studio</h3><p class="text-xs leading-relaxed text-on-surface-variant max-w-xs">Architectural millwork, custom dressing suites, and bespoke timber wardrobe systems engineered to sub-millimeter precision.</p></div><div class="space-y-3"><span class="text-xs uppercase tracking-widest text-on-surface font-semibold block">Architectural Millwork</span><ul class="space-y-2 text-xs"><li><span class="text-on-surface-variant">Tolerances: ±0.5mm precision</span></li><li><span class="text-on-surface-variant">Concealed mortise &amp; tenon joinery</span></li><li><span class="text-on-surface-variant">Integrated warm LED profiles (2700K)</span></li><li><span class="text-on-surface-variant">Soft-close dampening cartridges</span></li></ul></div><div class="space-y-3"><span class="text-xs uppercase tracking-widest text-on-surface font-semibold block">Material Catalog</span><ul class="space-y-2 text-xs"><li><a class="hover:text-primary transition-colors" data-path="material-standards" href="#">Quarter-Sawn White Oak</a></li><li><a class="hover:text-primary transition-colors" data-path="material-standards" href="#">Fumed European Walnut</a></li><li><a class="hover:text-primary transition-colors" data-path="material-standards" href="#">Saddle Leather Paneling</a></li><li><a class="hover:text-primary transition-colors" data-path="material-standards" href="#">Aged Patinated Brass Hardware</a></li></ul></div><div class="space-y-3"><span class="text-xs uppercase tracking-widest text-on-surface font-semibold block">Documentation</span><ul class="space-y-2 text-xs"><li><a class="hover:text-primary transition-colors" data-path="joinery-guidelines" href="#">Installation Specifications</a></li><li><a class="hover:text-primary transition-colors" data-path="joinery-guidelines" href="#">Substrate Preparation Guide</a></li><li><a class="hover:text-primary transition-colors" data-path="bespoke-portfolio" href="#">Private Residences Case Studies</a></li><li><a class="hover:text-primary transition-colors" data-path="staff-portal-sign-in" href="#">Architect &amp; Trade Portal</a></li></ul></div></div><div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-on-surface-variant gap-4"><p>© 2025 Atelier Joinery Studio Ltd. All bespoke wardrobe rights reserved.</p><p class="tracking-wide">Sun-Baked Simplicity • London • Zurich • Milan</p></div></div></footer></body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-container":"#3a2020","secondary-fixed":"#eae2da","surface-tint":"#c2652a","on-background":"#3a302a","tertiary-fixed-dim":"#e8a0a0","on-tertiary-fixed":"#2e1515","surface-dim":"#dcd6cc","inverse-primary":"#f0a878","surface-bright":"#faf5ee","on-primary-fixed":"#401a08","secondary-fixed-dim":"#cec6be","surface-container-highest":"#e6e0d6","surface":"#faf5ee","on-primary":"#ffffff","surface-container-lowest":"#ffffff","surface-container-low":"#f6f0e8","on-secondary":"#ffffff","secondary-container":"#eae2da","surface-container":"#f2ece4","surface-container-high":"#ece6dc","on-secondary-container":"#605850","error":"#c0392b","on-surface-variant":"#605850","secondary":"#78706a","primary":"#c2652a","on-secondary-fixed":"#2a2420","on-primary-container":"#fbe8d8","inverse-on-surface":"#faf5ee","surface-variant":"#ece6dc","on-tertiary":"#ffffff","inverse-surface":"#3a302a","on-tertiary-fixed-variant":"#6e3030","background":"#faf5ee","primary-fixed":"#fbe8d8","outline":"#9a9088","on-error":"#ffffff","primary-container":"#e08850","on-surface":"#3a302a","error-container":"#fce4e0","outline-variant":"#d8d0c8","on-secondary-fixed-variant":"#504840","tertiary-fixed":"#fce0e0","tertiary":"#8c3c3c","tertiary-container":"#d47070","on-primary-fixed-variant":"#8a4518","primary-fixed-dim":"#f0a878","on-error-container":"#7a1a10"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{},fontFamily:{headline:["EB Garamond"],display:["EB Garamond"],body:["Manrope"],label:["Manrope"]},fontSize:{}}}}</script></head><body class="bg-background font-body text-on-surface min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/60 shadow-[0_1px_8px_rgba(58,48,42,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-4"><span class="font-headline text-2xl font-bold tracking-tight text-on-surface">Atelier Joinery Studio</span><span class="rounded-full bg-secondary-container text-on-secondary-container font-semibold tracking-wider text-[11px] uppercase px-2.5 py-0.5">STAFF WORKSPACE</span></div><nav class="hidden md:flex items-center gap-8 h-full" data-active-classes="text-primary font-semibold border-b-2 border-primary pb-5 pt-5"><a aria-current="page" class="transition-colors py-5 text-primary font-semibold border-b-2 border-primary pb-5 pt-5" data-path="requests" href="#">Requests</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors py-5" data-path="production-schedule" href="#">Production Schedule</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors py-5" data-path="client-orders" href="#">Client Orders</a><a class="text-sm text-on-surface-variant hover:text-on-surface transition-colors py-5" data-path="inventory" href="#">Inventory &amp; Timber</a></nav><div class="flex items-center gap-4 text-sm font-medium"><span class="text-on-surface-variant font-medium">Staff Member</span><span class="text-outline-variant">|</span><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="login" href="#">Sign out</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-background flex-grow"><div class="flex flex-col w-full max-w-7xl mx-auto px-6 lg:px-12 py-8">
+<!-- Title / Breadcrumb Row -->
+<div class="mb-8">
+<nav class="flex items-center gap-2 text-xs font-medium text-on-surface-variant mb-3">
+<a class="hover:text-primary transition-colors flex items-center gap-1" data-path="requests" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Requests
+      </a>
+<span class="text-outline-variant">/</span>
+<span class="font-mono text-on-surface">REQ-0001</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">New quotation</span>
+</nav>
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<h1 class="font-headline text-3xl md:text-4xl font-normal tracking-tight text-on-surface">Prepare quotation</h1>
+<span class="bg-[#eee7dc] text-on-surface-variant text-[11px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full">Sample data</span>
+<span class="bg-[#f3ebe1] text-[#8a532b] text-[11px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full shadow-sm">Draft</span>
+</div>
+<div class="text-xs text-on-surface-variant flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-primary/70"></span>
+<span>Atelier Joinery Studio • Internal Quoting Engine</span>
+</div>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Quotation Form -->
+<div class="lg:col-span-7 xl:col-span-8">
+<div class="bg-surface-container-lowest p-6 sm:p-8 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between mb-6 pb-3 bg-surface-container-low/40 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 px-6 sm:px-8 pt-6 pb-4 rounded-t-lg">
+<div>
+<h2 class="font-headline text-2xl font-normal text-on-surface">Quotation details</h2>
+<p class="text-xs text-on-surface-variant mt-0.5">Define commercial parameters for this individual client specification</p>
+</div>
+<span class="material-symbols-outlined text-outline">description</span>
+</div>
+<form class="space-y-6" id="quotation-form" onsubmit="event.preventDefault();">
+<!-- Form field 1: Design version -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="design-version">
+              Design version <span class="text-primary">*</span>
+</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/40 bg-no-repeat bg-[right_12px_center] cursor-pointer shadow-sm" id="design-version" name="design_version">
+<option selected="" value="v3">v3 — Staff revision (current)</option>
+<option value="v2">v2 — Initial client submission</option>
+<option value="v1">v1 — Studio conceptual baseline</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant pointer-events-none absolute right-3 top-2.5 text-[20px]">expand_more</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">info</span>
+              The quotation is linked to this exact version.
+            </p>
+</div>
+<!-- Form field 2: Price & Currency -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5">
+              Price <span class="text-primary">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="sm:col-span-2 relative">
+<input class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm" id="price-amount" name="amount" placeholder="Enter amount" step="any" type="number"/>
+</div>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm cursor-pointer" id="price-currency" name="currency">
+<option disabled="" selected="" value="">Select</option>
+<option value="EUR">EUR (€)</option>
+<option value="GBP">GBP (£)</option>
+<option value="USD">USD ($)</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant pointer-events-none absolute right-3 top-2.5 text-[20px]">expand_more</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mt-1.5 italic">
+              Entered manually by staff. The system does not calculate prices.
+            </p>
+</div>
+<!-- Form field 3: Commercial details and terms -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="commercial-details">
+              Commercial details and terms
+            </label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg p-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm resize-y" id="commercial-details" name="commercial_details" placeholder="What is included, payment terms, notes" rows="4"></textarea>
+</div>
+<!-- Form field 4: Valid until -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="valid-until">
+              Valid until
+            </label>
+<div class="relative sm:w-1/2">
+<input class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm cursor-pointer" id="valid-until" name="valid_until" type="date"/>
+</div>
+</div>
+<!-- Form field 5: Message to customer -->
+<div>
+<label class="block font-medium text-sm text-on-surface mb-1.5" for="customer-message">
+              Message to customer
+            </label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface text-sm rounded-lg p-3.5 focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-sm resize-y" id="customer-message" name="customer_message" placeholder="Personal message or instructions to customer..." rows="3"></textarea>
+</div>
+<!-- Action Buttons -->
+<div class="pt-4 flex flex-wrap items-center gap-3">
+<button class="px-5 py-2.5 bg-surface-container-lowest text-on-surface hover:bg-surface-container-low transition-colors rounded-lg font-medium text-sm shadow-sm flex items-center gap-2" id="save-draft-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">save</span>
+              Save draft
+            </button>
+<button class="px-6 py-2.5 bg-primary text-on-primary hover:bg-[#ab5722] transition-colors rounded-lg font-medium text-sm shadow-sm flex items-center gap-2" id="send-quotation-btn" type="submit">
+<span class="material-symbols-outlined text-[18px]">send</span>
+              Send quotation
+            </button>
+</div>
+<!-- Delivery Note -->
+<div class="bg-surface-container-low p-3.5 rounded-lg flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              A quotation is marked as sent only after the delivery provider confirms it. Delivery channel: <span class="font-medium text-on-surface">not configured yet</span>.
+            </p>
+</div>
+</form>
+</div>
+</div>
+<!-- Right Column: Stacked Cards -->
+<div class="lg:col-span-5 xl:col-span-4 space-y-6">
+<!-- Card 1: Request Summary -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container-low/30 -mx-6 -mt-6 px-6 pt-5 rounded-t-lg">
+<h3 class="text-base font-semibold text-on-surface font-headline">Request summary</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">person_outline</span>
+</div>
+<dl class="space-y-3 text-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-low/20 px-2 rounded">
+<dt class="text-on-surface-variant text-xs">Request ID</dt>
+<dd class="font-mono font-medium text-on-surface text-xs">REQ-0001</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Customer name</dt>
+<dd class="font-medium text-on-surface text-xs">Sample Customer A</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Email</dt>
+<dd class="text-on-surface text-xs font-mono">customer.a@example.com</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Phone</dt>
+<dd class="text-on-surface text-xs font-mono">000-000-0000</dd>
+</div>
+</dl>
+</div>
+<!-- Card 2: Design Version -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container-low/30 -mx-6 -mt-6 px-6 pt-5 rounded-t-lg">
+<h3 class="text-base font-semibold text-on-surface font-headline">Design version</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">design_services</span>
+</div>
+<dl class="space-y-3 text-sm mb-5">
+<div class="flex items-center justify-between py-1 bg-surface-container-low/20 px-2 rounded">
+<dt class="text-on-surface-variant text-xs">Version</dt>
+<dd class="font-mono font-medium text-on-surface text-xs">v3</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Wardrobe type</dt>
+<dd class="text-on-surface font-medium text-xs">Hinged</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Dimensions</dt>
+<dd class="text-on-surface font-mono text-xs">2400 × 2400 × 600 mm (example)</dd>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<dt class="text-on-surface-variant text-xs">Validation</dt>
+<dd>
+<span class="inline-flex items-center gap-1 bg-[#e6f4ea] text-[#137333] text-[11px] px-2.5 py-0.5 rounded-full font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#137333]"></span>
+                Rules passed
+              </span>
+</dd>
+</div>
+</dl>
+<div class="pt-3 flex items-center justify-between gap-4">
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[#ab5722] underline underline-offset-4 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+            View design
+          </a>
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[#ab5722] underline underline-offset-4 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">download</span>
+            PDF summary
+          </a>
+</div>
+</div>
+<!-- Card 3: Previous Quotations -->
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex items-center justify-between pb-3 mb-4 bg-surface-container-low/30 -mx-6 -mt-6 px-6 pt-5 rounded-t-lg">
+<h3 class="text-base font-semibold text-on-surface font-headline">Previous quotations</h3>
+<span class="material-symbols-outlined text-outline text-[20px]">history</span>
+</div>
+<ul class="space-y-3">
+<li class="p-3 bg-surface-container-low/40 rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-mono font-medium text-on-surface">Q-0001</span>
+<span class="text-[11px] text-on-surface-variant">based on v2</span>
+</div>
+<span class="bg-[#e6f4ea] text-[#137333] text-[11px] font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#137333]"></span>
+              Sent
+            </span>
+</li>
+<li class="p-3 bg-surface-container-low/40 rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-mono font-medium text-on-surface">Q-0002</span>
+<span class="text-[11px] text-on-surface-variant">based on v3</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-medium text-error flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Delivery failed
+              </span>
+<button class="text-primary text-xs font-semibold hover:text-[#ab5722] underline underline-offset-2 transition-colors" type="button">
+                Retry
+              </button>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Lightweight client interaction state
+  document.getElementById('save-draft-btn')?.addEventListener('click', function() {
+    const btn = this;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-on-surface-variant animate-spin">refresh</span> Saving...';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-[#137333]">check</span> Draft saved';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+      }, 2000);
+    }, 600);
+  });
+
+  document.getElementById('quotation-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const amount = document.getElementById('price-amount').value;
+    const currency = document.getElementById('price-currency').value;
+    
+    if (!amount || !currency) {
+      alert('Please enter a manual price and select a currency before submitting.');
+      return;
+    }
+
+    const sendBtn = document.getElementById('send-quotation-btn');
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Dispatching...';
+    
+    setTimeout(() => {
+      sendBtn.disabled = false;
+      sendBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">send</span> Send quotation';
+      alert('Quotation staged for delivery provider transmission.');
+    }, 900);
+  });
+</script></main><footer class="w-full bg-surface-container-low border-t border-outline-variant/60 py-8"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-on-surface-variant"><p>© 2025 Atelier Joinery Studio. Staff internal administration. • Protected Staff Workspace</p><div class="flex items-center gap-6"><span class="hover:text-on-surface transition-colors">Security Protocol Active</span><span class="hover:text-on-surface transition-colors">Internal Use Only</span></div></div></footer></body></html>

@@ -111,7 +111,9 @@ def _describe(op) -> str:
 
 
 def propose(model: AgentModel, design: Design, conversation: str) -> Proposal:
-    message = json.dumps({"design": _design_summary(design), "conversation": conversation})
+    # The provider's JSON mode requires the word "json" in the input itself, not only in the instructions.
+    message = "Current design and conversation, as JSON:\n" + json.dumps(
+        {"design": _design_summary(design), "conversation": conversation})
     answer_text = model.complete(INSTRUCTIONS, message)
 
     def answer_only(reply: str) -> Proposal:

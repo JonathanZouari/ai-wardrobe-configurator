@@ -3,7 +3,11 @@
 The API key never leaves this module's requests; callers get plain text or an SDP answer.
 """
 
+import logging
+
 import httpx
+
+logger = logging.getLogger(__name__)
 
 OPENAI_BASE_URL = "https://api.openai.com/v1"
 TIMEOUT_SECONDS = 30
@@ -29,6 +33,9 @@ def _post(http: httpx.Client, api_key: str, path: str, payload: dict) -> dict:
         response.raise_for_status()
         return response.json()
     except (httpx.HTTPError, ValueError) as error:
+        # Log only what is needed to diagnose: never the request, the key or the upstream body.
+        status = error.response.status_code if isinstance(error, httpx.HTTPStatusError) else None
+        logger.warning("OpenAI request to %s failed: %s status=%s", path, type(error).__name__, status)
         raise ProviderError(type(error).__name__) from error
 
 

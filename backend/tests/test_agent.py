@@ -48,6 +48,7 @@ def test_the_model_sees_the_current_design_and_the_request():
     instructions, message = model.calls[0]
     assert "add_component" in instructions and "Never invent" in instructions
     assert '"bays": 3' in message and "what do I have?" in message
+    assert "json" in message.lower()  # required by the provider's JSON mode
 
 
 def test_a_clarifying_answer_has_no_operations_and_no_preview():

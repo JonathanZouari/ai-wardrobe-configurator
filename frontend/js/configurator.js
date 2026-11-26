@@ -41,6 +41,8 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
+renderer.domElement.setAttribute('role', 'img');
+renderer.domElement.setAttribute('aria-label', '3D preview of your wardrobe. Every setting shown here can also be changed with the labelled fields beside it.');
 container.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);

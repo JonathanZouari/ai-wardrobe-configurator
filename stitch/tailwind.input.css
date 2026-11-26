@@ -9,6 +9,20 @@
   main > :first-child { margin-top: 0 !important; }
   main > :last-child { margin-bottom: 0 !important; }
 
+  /* accessibility (IS 5568 / WCAG 2.0 AA): visible keyboard focus beats focus:outline-none utilities */
+  :focus-visible { outline: 3px solid #8a4416 !important; outline-offset: 2px; }
+  main:focus { outline: none; }
+  .skip-link {
+    position: fixed; top: 0.5rem; left: 0.5rem; z-index: 100;
+    padding: 0.75rem 1rem; border-radius: 0.5rem;
+    background: #3a302a; color: #faf5ee; font-size: 0.875rem; font-weight: 600;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus { transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
   /* page-level rules carried over from the staff screens */
 body {
       background-color: #faf5ee;
@@ -18,7 +32,7 @@ body {
     }
     input:focus {
       outline: none;
-      border-color: #c2652a;
+      border-color: #9d5222;
       box-shadow: 0 0 0 3px rgba(194, 101, 42, 0.15);
     }
 body {

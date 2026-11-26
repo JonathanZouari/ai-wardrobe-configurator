@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+import { mountAssistant } from './ai/assistant.js';
 import { applyDraftOperations, ensureDraft } from './state/draft.js';
 import { buildWardrobe, disposeWardrobe } from './three/wardrobe.js';
 
@@ -298,5 +299,5 @@ function frame() {
 resize();
 showDoorState();
 status.textContent = 'Loading design…';
-ensureDraft().then(showDesign).catch((error) => { status.textContent = `Could not load the design: ${error.message}`; });
+ensureDraft().then(showDesign).then(() => mountAssistant({ onApplied: showDesign })).catch((error) => { status.textContent = `Could not load the design: ${error.message}`; });
 frame();

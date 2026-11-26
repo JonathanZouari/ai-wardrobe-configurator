@@ -25,6 +25,9 @@ function saveDraft(design) {
   return design;
 }
 
+// Puts back an earlier revision of this draft (undo of an applied proposal).
+export const restoreDraft = (design) => saveDraft(design);
+
 export function clearDraft() {
   try {
     sessionStorage.removeItem(KEY);

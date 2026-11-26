@@ -45,6 +45,22 @@ Frontend: serve the folder with any static server on port 5500 (the origin the b
 python -m http.server 5500 --directory frontend
 ```
 
+## Design assistant (voice and text)
+
+Optional. The configurator and interior pages show an assistant panel: "Start talking" opens a
+GPT-Live voice session in client-delegation mode, and the text box does the same without a microphone.
+Both ask the backend agent for a proposal, which is applied only after you press Accept.
+
+To enable it, put an OpenAI API key in `backend/.env` (never commit it) and restart the backend:
+
+```
+OPENAI_API_KEY=...
+```
+
+Without a key the panel reports that the assistant is not configured and the editor works as usual.
+The microphone needs `http://localhost` / `127.0.0.1` or HTTPS. See `docs/voice-agent-decision.html`
+for why this architecture was chosen.
+
 ## Regenerate the stylesheet
 
 Only needed after changing utility classes in the markup:

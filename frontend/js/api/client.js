@@ -33,3 +33,7 @@ export const createDesign = (wardrobeType, dimensions, materialSelections, templ
 export const getCatalog = () => apiGet('/api/catalog');
 
 export const applyOperations = (design, operations) => apiPost('/api/designs/operations', { design, operations });
+
+export const proposeChanges = (design, conversation) => apiPost('/api/agent/proposals', { design, conversation });
+
+export const startVoiceSession = (sdp) => apiPost('/api/voice/session', { sdp });

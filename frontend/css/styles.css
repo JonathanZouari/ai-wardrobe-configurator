@@ -1224,6 +1224,10 @@ body {
   height: 1px;
 }
 
+.max-h-24 {
+  max-height: 6rem;
+}
+
 .max-h-\[460px\] {
   max-height: 460px;
 }
@@ -1316,6 +1320,10 @@ body {
   width: 2rem;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-9 {
   width: 2.25rem;
 }
@@ -1383,6 +1391,10 @@ body {
 
 .max-w-\[540px\] {
   max-width: 540px;
+}
+
+.max-w-\[calc\(100vw-2rem\)\] {
+  max-width: calc(100vw - 2rem);
 }
 
 .max-w-xl {
@@ -1474,6 +1486,10 @@ body {
 
 .resize {
   resize: both;
+}
+
+.list-disc {
+  list-style-type: disc;
 }
 
 .appearance-none {
@@ -1766,6 +1782,10 @@ body {
 
 .whitespace-nowrap {
   white-space: nowrap;
+}
+
+.whitespace-pre-line {
+  white-space: pre-line;
 }
 
 .rounded {
@@ -2791,6 +2811,10 @@ body {
 
 .pr-9 {
   padding-right: 2.25rem;
+}
+
+.ps-4 {
+  padding-inline-start: 1rem;
 }
 
 .pt-1 {

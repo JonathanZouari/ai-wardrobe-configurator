@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בחירת Voice Agent לקונפיגורטור הארונות</title>
+<style>
+  :root {
+    --bg: #faf5ee; --surface: #ffffff; --soft: #f2ece4; --line: #d8d0c8;
+    --text: #3a302a; --muted: #605850; --accent: #c2652a; --accent-soft: #fbe8d8;
+    --good: #2f6b3a; --good-soft: #e3f1e5; --mid: #8a5a00; --mid-soft: #fbefd2; --bad: #a3271b; --bad-soft: #fce4e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1f1a17; --surface: #2a2420; --soft: #332c27; --line: #4a413a;
+      --text: #f2ece4; --muted: #cec6be; --accent: #f0a878; --accent-soft: #4a2c18;
+      --good: #9fd6a8; --good-soft: #1f3a25; --mid: #f0cf80; --mid-soft: #3d3010; --bad: #f2a59c; --bad-soft: #47201b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 "Segoe UI", Arial, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.3rem; margin: 44px 0 12px; }
+  h3 { font-size: 1rem; margin: 0 0 6px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--muted); max-width: 70ch; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .verdict { border-inline-start: 6px solid var(--accent); margin-top: 20px; }
+  .verdict strong { color: var(--accent); }
+  .wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 720px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  th, td { text-align: start; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: .93rem; }
+  thead th { background: var(--soft); font-size: .85rem; }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  tbody th { font-weight: 600; width: 22%; }
+  .pick { background: var(--accent-soft); }
+  .tag { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: .8rem; font-weight: 600; white-space: nowrap; }
+  .yes { background: var(--good-soft); color: var(--good); }
+  .part { background: var(--mid-soft); color: var(--mid); }
+  .no { background: var(--bad-soft); color: var(--bad); }
+  .src { color: var(--muted); font-size: .85rem; }
+  code { font-family: Consolas, monospace; font-size: .88em; background: var(--soft); padding: 1px 5px; border-radius: 4px; direction: ltr; unicode-bidi: isolate; }
+
+  /* diagrams: boxes and arrows, laid out right to left */
+  .options { display: grid; gap: 14px; }
+  .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+  .box { flex: 1 1 130px; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .88rem; }
+  .box b { display: block; }
+  .box.ours { border-color: var(--accent); background: var(--accent-soft); }
+  .arrow { align-self: center; color: var(--muted); font-size: 1.2rem; padding: 0 2px; }
+  .legend { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--accent-soft); border: 1px solid var(--accent); vertical-align: middle; }
+
+  .arch { display: grid; gap: 10px; }
+  .lane { display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: center; }
+  .lane > span { font-size: .8rem; font-weight: 700; color: var(--muted); }
+  .down { text-align: center; color: var(--muted); font-size: .85rem; }
+
+  .tree { display: grid; gap: 10px; }
+  .q { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .q h3 span { color: var(--accent); }
+  .answers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; margin-top: 8px; }
+  .a { background: var(--soft); border-radius: 8px; padding: 8px 12px; font-size: .9rem; }
+  ol, ul { margin: 0; padding-inline-start: 22px; }
+  li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>איזה Voice Agent נכון לקונפיגורטור הארונות</h1>
+  <p class="lead">מדריך ה-Voice Agents של OpenAI מציג שלוש ארכיטקטורות. המסמך הזה משווה אותן מול הדרישות שכבר קבענו ב-PRD לסוכן העיצוב, וממליץ על אחת.</p>
+
+  <div class="card verdict">
+    <p><strong>ההמלצה: GPT-Live במצב Client delegation.</strong></p>
+    <p>המודל הקולי מנהל רק את השיחה. כל החשיבה, הכלים והולידציה נשארים בסוכן הטקסט שלנו ב-FastAPI, אותו סוכן שממילא צריך לבנות בשלב 5 של ה-PRD. כך יש "מוח" אחד לצ'אט ולקול, והכללים שלנו (ולידציה דטרמיניסטית ואישור מפורש לפני כל שינוי) נאכפים באותו מקום.</p>
+    <p style="margin:0">אם מתברר ש-GPT-Live יקר מדי או לא תומך טוב בעברית, החלופה היא Chained voice pipeline. את Realtime API אני לא ממליץ לאפליקציה הזאת.</p>
+  </div>
+
+  <h2>1. שלוש האפשרויות, כפי שהמדריך מציג אותן</h2>
+  <div class="options">
+    <div class="card pick">
+      <h3>GPT-Live <span class="tag yes">מומלץ</span></h3>
+      <div class="flow">
+        <div class="box">משתמש מדבר ושומע</div><div class="arrow">⇄</div>
+        <div class="box"><b>GPT-Live</b>מקשיב ומדבר בו-זמנית, מנהל את השיחה</div><div class="arrow">⇄</div>
+        <div class="box ours"><b>Backend נפרד</b>חשיבה וכלים. ב-Client delegation זה הסוכן שלנו, עם כל מודל וספק</div>
+      </div>
+      <p class="src" style="margin:8px 0 0">המשתמש יכול להמשיך לדבר ולתקן בזמן שה-backend עובד.</p>
+    </div>
+    <div class="card">
+      <h3>Realtime API</h3>
+      <div class="flow">
+        <div class="box">משתמש מדבר ושומע</div><div class="arrow">⇄</div>
+        <div class="box"><b>מודל אחד בסשן אחד</b>מפענח אודיו, מחליט מה לעשות, מפעיל כלים ועונה בדיבור</div><div class="arrow">⇄</div>
+        <div class="box ours">הכלים שלנו</div>
+      </div>
+      <p class="src" style="margin:8px 0 0">נקודת פתיחה "browser-first" עם <code>RealtimeAgent</code> ו-<code>RealtimeSession</code>; חיבור מהדפדפן ב-WebRTC.</p>
+    </div>
+    <div class="card">
+      <h3>Chained voice pipeline <span class="tag part">חלופה</span></h3>
+      <div class="flow">
+        <div class="box">משתמש מדבר</div><div class="arrow">←</div>
+        <div class="box"><b>1. Speech-to-text</b>דיבור לטקסט</div><div class="arrow">←</div>
+        <div class="box ours"><b>2. סוכן הטקסט</b>הלוגיקה והכלים שלנו</div><div class="arrow">←</div>
+        <div class="box"><b>3. Text-to-speech</b>טקסט לדיבור</div><div class="arrow">←</div>
+        <div class="box">משתמש שומע</div>
+      </div>
+      <p class="src" style="margin:8px 0 0">האפליקציה שולטת בכל שלב; אפשר לבדוק או לשנות את הטקסט באמצע ולהחליף כל רכיב בנפרד.</p>
+    </div>
+  </div>
+  <p class="legend"><span class="swatch"></span> החלק שאנחנו כותבים ומריצים בעצמנו.</p>
+
+  <h2>2. טבלת השוואה כללית</h2>
+  <div class="wrap">
+    <table>
+      <thead><tr><th></th><th>GPT-Live</th><th>Realtime API</th><th>Chained voice pipeline</th></tr></thead>
+      <tbody>
+        <tr><th>מתאים ל… (לפי המדריך)</th><td class="pick">שיחה דו-כיוונית מלאה עם backend נפרד</td><td>דיבור, חשיבה וכלים בסשן אחד</td><td>שליטה בכל שלב של דיבור וטקסט</td></tr>
+        <tr><th>למה לבחור (לפי המדריך)</th><td class="pick">שומרים את תהליך הטקסט הקיים ובוחרים לו backend באופן עצמאי, והשיחה ממשיכה בינתיים</td><td>מודל אחד שמפענח, מחליט ועונה בדיבור</td><td>אפשר לבדוק ולשנות טקסט ביניים ולהחליף כל רכיב</td></tr>
+        <tr><th>איפה ה"מוח"</th><td class="pick">אצלנו (Client delegation) או במודל Responses של OpenAI</td><td>בתוך המודל הקולי</td><td>אצלנו</td></tr>
+        <tr><th>הפרעות ותיקונים תוך כדי דיבור</th><td class="pick">כן, גם בזמן שה-backend עובד</td><td>כן, הסשן מטפל בהן</td><td>המדריך לא מפרט</td></tr>
+        <tr><th>מה צריך לבנות</th><td class="pick">חיבור קולי + חיבור delegation לסוכן שלנו</td><td>סוכן קולי נפרד עם הגדרת כלים משלו</td><td>שלושה שלבים שאנחנו מחברים ומתזמנים</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>3. התאמה לדרישות שכבר קבענו ב-PRD</h2>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>דרישה</th><th>GPT-Live + Client delegation</th><th>Realtime API</th><th>Chained pipeline</th></tr></thead>
+      <tbody>
+        <tr><th>סוכן אחד לצ'אט ולקול (FR-06)</th><td class="pick"><span class="tag yes">מתאים</span> הקול הוא רק ממשק לסוכן הטקסט</td><td><span class="tag no">לא מתאים</span> נוצר סוכן שני שמחליט בעצמו, וצריך לשמור שיתנהג כמו הראשון</td><td><span class="tag yes">מתאים</span></td></tr>
+        <tr><th>ולידציה דטרמיניסטית לפני שמציגים הצעה (FR-05)</th><td class="pick"><span class="tag yes">מתאים</span> ההצעה נבנית ונבדקת אצלנו לפני שהיא חוזרת</td><td><span class="tag part">חלקי</span> אפשרי דרך כלים, אבל ההחלטה מתי לקרוא להם אצל המודל</td><td><span class="tag yes">מתאים</span> הדוגמה במדריך היא בדיוק בדיקה לפני דיבור</td></tr>
+        <tr><th>שום שינוי בלי אישור מפורש (FR-06)</th><td class="pick"><span class="tag yes">מתאים</span> האישור נשאר כפתור באפליקציה, והשרת מבצע</td><td><span class="tag part">חלקי</span> תלוי בכך שלא נחשוף למודל כלי שמבצע שינוי</td><td><span class="tag yes">מתאים</span></td></tr>
+        <tr><th>אי-תלות בספק AI (סעיף 7.1)</th><td class="pick"><span class="tag part">חלקי</span> שכבת הקול של OpenAI, המוח של כל ספק</td><td><span class="tag no">לא מתאים</span> הכול אצל ספק אחד</td><td><span class="tag yes">מתאים</span> כל רכיב ניתן להחלפה</td></tr>
+        <tr><th>שיחה טבעית בזמן עריכת ארון</th><td class="pick"><span class="tag yes">מתאים</span> אפשר לדבר בזמן שהולידציה רצה</td><td><span class="tag yes">מתאים</span></td><td><span class="tag part">חלקי</span> תור אחרי תור, והמתנה לשלושה שלבים</td></tr>
+        <tr><th>כשל בספק לא שובר את העורך (FR-06)</th><td class="pick"><span class="tag yes">מתאים</span> הקול נופל, הצ'אט והעורך ממשיכים</td><td><span class="tag part">חלקי</span> הסוכן הקולי כולו נופל</td><td><span class="tag yes">מתאים</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src">העמודות "מתאים / חלקי / לא מתאים" הן ההערכה שלי מול ה-PRD, לא טענה של המדריך.</p>
+
+  <h2>4. איך זה ייראה אצלנו</h2>
+  <div class="card arch">
+    <div class="lane"><span>דפדפן</span>
+      <div class="flow"><div class="box">מיקרופון ורמקול</div><div class="box ours">עורך ותלת-ממד</div><div class="box ours">כרטיס הצעה: Accept / Reject / Undo</div></div></div>
+    <div class="down">↕ אודיו &nbsp;·&nbsp; ↕ API רגיל</div>
+    <div class="lane"><span>שכבת קול</span>
+      <div class="flow"><div class="box"><b>GPT-Live</b>שומע, מדבר, אומר "בודק…" ומעביר בקשות הלאה</div></div></div>
+    <div class="down">↕ Client delegation</div>
+    <div class="lane"><span>FastAPI שלנו</span>
+      <div class="flow">
+        <div class="box ours"><b>סוכן העיצוב</b>אותו סוכן של צ'אט הטקסט</div><div class="arrow">←</div>
+        <div class="box ours"><b>כלים לקריאה והצעה בלבד</b><code>get_design_state</code> <code>get_catalog</code> <code>validate_design</code> <code>propose_operations</code></div><div class="arrow">←</div>
+        <div class="box ours"><b>מנוע ולידציה</b>דטרמיניסטי</div>
+      </div></div>
+    <div class="down">↓ הצעה שעברה ולידציה חוזרת לדפדפן ולקול</div>
+    <div class="lane"><span>ביצוע</span>
+      <div class="flow"><div class="box ours">המשתמש לוחץ Accept</div><div class="arrow">←</div><div class="box ours">השרת בודק גרסה ומריץ ולידציה שוב</div><div class="arrow">←</div><div class="box ours">הפעולות מוחלות, גרסה חדשה, התלת-ממד מתעדכן</div></div></div>
+  </div>
+  <p class="legend">לסוכן, בקול או בטקסט, אין כלי שמשנה את העיצוב. הוא יכול רק להציע; הביצוע עובר דרך נקודת הקצה של הפעולות שכבר קיימת, אחרי אישור.</p>
+
+  <h2>5. תרשים החלטה</h2>
+  <div class="tree">
+    <div class="q"><h3><span>1.</span> האם צריך שהקול והצ'אט יחזירו את אותן הצעות, עם אותם כללים?</h3>
+      <div class="answers"><div class="a"><b>כן</b> (זה המצב אצלנו) ← המשך לשאלה 2</div><div class="a"><b>לא, עוזר קולי עצמאי ופשוט</b> ← Realtime API</div></div></div>
+    <div class="q"><h3><span>2.</span> האם חשוב שהמשתמש ידבר ויתקן באופן חופשי בזמן שהמערכת בודקת?</h3>
+      <div class="answers"><div class="a"><b>כן</b> ← <strong>GPT-Live + Client delegation</strong></div><div class="a"><b>לא, מספיק "שאלה ואז תשובה"</b> ← המשך לשאלה 3</div></div></div>
+    <div class="q"><h3><span>3.</span> האם חייבים להחליף ספק לכל שלב, או לשמור ולבדוק כל טקסט לפני שהוא נאמר?</h3>
+      <div class="answers"><div class="a"><b>כן</b> ← Chained voice pipeline</div><div class="a"><b>לא</b> ← GPT-Live + Client delegation</div></div></div>
+  </div>
+
+  <h2>6. סדר פיתוח מוצע</h2>
+  <ol>
+    <li><b>שלב 4 ב-PRD:</b> מנוע הולידציה. בלי זה אין לסוכן על מה להישען.</li>
+    <li><b>שלב 5 ב-PRD:</b> סוכן הטקסט עם הכלים, כרטיס ההצעה, אישור, דחייה וביטול. זה ה"מוח" שהקול יתחבר אליו.</li>
+    <li><b>הוכחת היתכנות קולית:</b> חיבור GPT-Live לסוכן ב-Client delegation על תרחיש אחד ("הוסף שתי מגירות בתא השמאלי"), ומדידת זמן התגובה הנשמע.</li>
+    <li><b>החלטה:</b> להמשיך עם GPT-Live או לעבור ל-Chained, לפי עלות, איכות בעברית וזמני תגובה.</li>
+  </ol>
+
+  <h2>7. מה צריך לדעת לפני שמתחילים</h2>
+  <ul>
+    <li><b>קול לא מופיע ב-PRD.</b> זו הרחבת היקף, וספק AI בתשלום עדיין לא אושר שם. כדאי לעדכן את ה-PRD לפני הפיתוח.</li>
+    <li><b>אין במדריך מחירים או מספרי latency.</b> הוא נותן רק שיטת מדידה, ולכן ההמלצה מבוססת על התאמה ארכיטקטונית ולא על עלות.</li>
+    <li><b>תמיכה בעברית לא נבדקה.</b> המדריך לא מזכיר שפות, וזה קריטי אם עוברים לעברית בהמשך.</li>
+    <li><b>קראתי רק את עמוד המדריך הראשי.</b> את מדריכי ההמשך (GPT-Live, delegation, WebRTC) לא קראתי, ולכן פרטי החיבור, שמות המודלים והמגבלות עדיין לא מאומתים.</li>
+    <li><b>פרטיות.</b> אודיו של לקוחות יישלח לספק חיצוני; ה-PRD דורש לצמצם מידע אישי שנשלח לספקי AI ולקבוע הודעת פרטיות.</li>
+  </ul>
+
+  <p class="src" style="margin-top:28px">מקור: <span dir="ltr">developers.openai.com/api/docs/guides/voice-agents</span>, נקרא ב-26.11.2026. שמות הארכיטקטורות, "מתאים ל…" ו"למה לבחור" לקוחים מהמדריך; כל השאר הוא ניתוח מול ה-PRD של הפרויקט.</p>
+</main>
+</body>
+</html>

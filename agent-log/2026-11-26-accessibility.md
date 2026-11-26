@@ -43,6 +43,11 @@ the user.
   email, address, reply time). They are legally required.
 - Manual screen-reader testing (NVDA/VoiceOver) and a 200% zoom check were not done.
 - The 3D view cannot be rotated from the keyboard (documented as a limitation in the statement).
-- Not done yet: the security-review skill, commit, push, and the PR into `dev`.
 - The deletion of `backend/.env.example` in the working tree came from the user, not this task. It was
   not touched.
+
+## Shipped
+Commit 3f1ac41 on `feature/accessibility`. The user's GitHub account has no write access to the
+upstream repo, so with the user's approval it was pushed to the fork
+`alonhengel-lgtm/ai-wardrobe-configurator` (git remote `fork`). PR #8 into `dev`:
+https://github.com/JonathanZouari/ai-wardrobe-configurator/pull/8. Security review: no findings.

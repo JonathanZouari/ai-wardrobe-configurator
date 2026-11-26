@@ -4,7 +4,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-import { createDesign } from './api/client.js';
+import { applyDraftOperations, ensureDraft } from './state/draft.js';
 import { buildWardrobe, disposeWardrobe } from './three/wardrobe.js';
 
 // Example limits, mirrored from the backend catalog only to clamp the inputs before a request.
@@ -16,30 +16,15 @@ const REQUEST_DELAY_MS = 120;
 const $ = (id) => document.getElementById(id);
 const clamp = (field, value) => Math.min(LIMITS[field][1], Math.max(LIMITS[field][0], Math.round(value) || DEFAULTS[field]));
 
-function initialRequest() {
-  let stored = {};
-  try {
-    stored = JSON.parse(sessionStorage.getItem('atelier_wardrobe_specs')) ?? {};
-  } catch (e) {
-    // No stored choices from the start page: use the defaults.
-  }
-  const query = new URLSearchParams(location.search);
-  const type = query.get('type') ?? stored.typology;
-  return {
-    type: type === 'sliding' ? 'sliding' : 'hinged',
-    dimensions: Object.fromEntries(Object.keys(LIMITS).map((f) => [f, clamp(f, Number(stored[f]))])),
-    materials: { carcass: 'oak', doors: 'cashmere' },
-    view: { doorsOpen: query.get('doors') === 'open', doorsHidden: query.get('doors') === 'hidden' },
-  };
-}
-
-let { type, dimensions, materials, view } = initialRequest();
+const query = new URLSearchParams(location.search);
+let view = { doorsOpen: query.get('doors') === 'open', doorsHidden: query.get('doors') === 'hidden' };
 let design = null;
+let dimensions = { ...DEFAULTS };
 let wardrobe = null;
 let openness = new Map(); // component id -> { current, target } in 0..1
 let cameraGoal = null;
-let requestSeq = 0;
-let requestTimer = null;
+let pending = new Map(); // operation key -> operation, sent together as one batch
+let commitTimer = null;
 
 // ---------- scene ----------
 const container = $('three-canvas-container');
@@ -123,19 +108,28 @@ function renderDesign() {
   updateLabels();
 }
 
-function requestDesign() {
-  clearTimeout(requestTimer);
-  requestTimer = setTimeout(async () => {
-    const seq = ++requestSeq;
+function showDesign(next) {
+  design = next;
+  dimensions = { ...design.dimensions_mm };
+  status.textContent = '';
+  syncInputs();
+  showType();
+  showMaterials();
+  renderDesign();
+}
+
+// Queue an edit; rapid edits of the same kind collapse into the latest one.
+function commit(key, operation) {
+  pending.set(key, operation);
+  clearTimeout(commitTimer);
+  commitTimer = setTimeout(async () => {
+    const operations = [...pending.values()];
+    pending = new Map();
     try {
-      const result = await createDesign(type, dimensions, materials);
-      if (seq !== requestSeq) return; // a newer request superseded this one
-      design = result;
-      status.textContent = '';
-      renderDesign();
+      showDesign(await applyDraftOperations(operations));
     } catch (error) {
-      if (seq !== requestSeq) return;
-      status.textContent = `Could not load the design: ${error.message}`;
+      if (design) showDesign(design); // put the controls back on the last valid design
+      status.textContent = `Could not update the design: ${error.message}`;
     }
   }, REQUEST_DELAY_MS);
 }
@@ -144,15 +138,14 @@ function requestDesign() {
 function updateLabels() {
   const { width, height, depth } = design.dimensions_mm;
   const { bays, count } = design.door_configuration;
-  const bayShelves = design.components.filter((c) => c.id.startsWith('shelf-top-'));
   $('label-width-overlay').textContent = `${width} mm`;
   $('label-height-overlay').textContent = `${height} mm`;
   $('label-depth-overlay').textContent = `${depth} mm`;
   $('calculated-bay-width-summary').textContent = `${bays} bays`;
   $('bay-badge').textContent = `${bays} bays`;
-  bayShelves.forEach((shelf, i) => {
+  design.layout.bays.forEach((bay, i) => {
     const label = $(`bay${i + 1}-width-label`);
-    if (label) label.textContent = `${shelf.size_mm.x}mm`;
+    if (label) label.textContent = `${bay.width_mm}mm`;
   });
   $('door-count-text').textContent = `${count} ${design.wardrobe_type} doors`;
 }
@@ -167,7 +160,7 @@ function syncInputs() {
 function setDimension(field, value) {
   dimensions = { ...dimensions, [field]: clamp(field, value) };
   syncInputs();
-  requestDesign();
+  commit('dimensions', { op: 'set_dimensions', dimensions_mm: dimensions });
 }
 
 Object.keys(LIMITS).forEach((field) => {
@@ -178,43 +171,35 @@ document.querySelectorAll('[data-step-dim]').forEach((btn) => {
   btn.addEventListener('click', () => setDimension(btn.dataset.stepDim, dimensions[btn.dataset.stepDim] + Number(btn.dataset.step)));
 });
 
-const carcassTitles = { oak: 'Example Oak finish', walnut: 'Example Walnut finish', linen: 'Example Linen finish' };
-document.querySelectorAll('[data-carcass]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    materials = { ...materials, carcass: btn.dataset.carcass };
-    $('selected-carcass-title').textContent = carcassTitles[btn.dataset.carcass];
-    document.querySelectorAll('[data-carcass]').forEach((b) => {
-      b.classList.toggle('ring-2', b === btn);
-      b.classList.toggle('ring-primary', b === btn);
-    });
-    requestDesign();
+const TITLES = {
+  carcass: { oak: 'Example Oak finish', walnut: 'Example Walnut finish', linen: 'Example Linen finish' },
+  doors: { cashmere: 'Example light finish', fluted: 'Example fluted finish', umber: 'Example dark finish' },
+};
+function showMaterials() {
+  const { carcass, doors } = design.material_selections;
+  $('selected-carcass-title').textContent = TITLES.carcass[carcass];
+  $('selected-door-title').textContent = TITLES.doors[doors];
+  document.querySelectorAll('[data-carcass]').forEach((btn) => {
+    btn.classList.toggle('ring-2', btn.dataset.carcass === carcass);
+    btn.classList.toggle('ring-primary', btn.dataset.carcass === carcass);
   });
-});
-
-const doorTitles = { cashmere: 'Example light finish', fluted: 'Example fluted finish', umber: 'Example dark finish' };
-document.querySelectorAll('input[name="door-finish"]').forEach((radio) => {
-  radio.addEventListener('change', () => {
-    materials = { ...materials, doors: radio.value };
-    $('selected-door-title').textContent = doorTitles[radio.value];
-    requestDesign();
-  });
-});
+  document.querySelectorAll('input[name="door-finish"]').forEach((radio) => { radio.checked = radio.value === doors; });
+}
+const setMaterial = (slot, key) => commit(`material:${slot}`, { op: 'set_material', slot, key });
+document.querySelectorAll('[data-carcass]').forEach((btn) => btn.addEventListener('click', () => setMaterial('carcass', btn.dataset.carcass)));
+document.querySelectorAll('input[name="door-finish"]').forEach((radio) => radio.addEventListener('change', () => setMaterial('doors', radio.value)));
 
 // ---------- wardrobe type ----------
 const typeButtons = { hinged: $('type-hinged'), sliding: $('type-sliding') };
 function showType() {
   Object.entries(typeButtons).forEach(([key, btn]) => {
-    const active = key === type;
+    const active = key === design?.wardrobe_type;
     ['bg-surface-container-high', 'text-on-surface', 'font-semibold'].forEach((c) => btn.classList.toggle(c, active));
     btn.classList.toggle('text-on-surface-variant', !active);
   });
 }
 Object.entries(typeButtons).forEach(([key, btn]) => {
-  btn.addEventListener('click', () => {
-    type = key;
-    showType();
-    requestDesign();
-  });
+  btn.addEventListener('click', () => commit('type', { op: 'set_wardrobe_type', wardrobe_type: key }));
 });
 
 // ---------- doors and drawers (view state only) ----------
@@ -311,9 +296,7 @@ function frame() {
 }
 
 resize();
-syncInputs();
-showType();
 showDoorState();
 status.textContent = 'Loading design…';
-requestDesign();
+ensureDraft().then(showDesign).catch((error) => { status.textContent = `Could not load the design: ${error.message}`; });
 frame();

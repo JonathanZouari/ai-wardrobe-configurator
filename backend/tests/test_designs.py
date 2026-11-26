@@ -37,11 +37,11 @@ def test_component_ids_are_unique_and_stable_between_builds():
 def test_bays_fill_the_interior_width_exactly():
     design = build_design("hinged", Dimensions(width=2555, height=2400, depth=600))
     partitions = by_type(design, "partition")
-    shelves = [c for c in by_type(design, "shelf") if c.id.startswith("shelf-top")]
+    shelves = design.layout.bays
 
     assert len(shelves) == len(partitions) + 1
     interior = 2555 - 2 * catalog.BOARD_THICKNESS_MM
-    assert sum(s.size_mm.x for s in shelves) + sum(p.size_mm.x for p in partitions) == interior
+    assert sum(b.width_mm for b in shelves) + sum(p.size_mm.x for p in partitions) == interior
 
 
 def test_hinged_design_has_two_alternating_doors_per_bay():

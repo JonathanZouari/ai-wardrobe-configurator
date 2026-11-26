@@ -23,8 +23,13 @@ export const apiPost = (path, payload) => request(path, {
 
 export const getHealth = () => apiGet('/api/health');
 
-export const createDesign = (wardrobeType, dimensions, materialSelections) => apiPost('/api/designs', {
+export const createDesign = (wardrobeType, dimensions, materialSelections, template) => apiPost('/api/designs', {
   wardrobe_type: wardrobeType,
   dimensions_mm: dimensions,
   material_selections: materialSelections,
+  template,
 });
+
+export const getCatalog = () => apiGet('/api/catalog');
+
+export const applyOperations = (design, operations) => apiPost('/api/designs/operations', { design, operations });

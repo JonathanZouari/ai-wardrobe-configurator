@@ -10,9 +10,10 @@ Make the site meet the accessibility conditions (see the design), with a concise
 - New tests: `backend/tests/test_frontend_accessibility.py`, `frontend/tests/describe.test.mjs`.
 
 ## Verified
-- pytest 231 passed; node tests passed.
+- pytest 231 passed; node tests 8 of 8 passed.
 - axe-core 4.10.2 (wcag2a, wcag2aa), 12 pages at 1440 and 640 px: 0 violations (baseline 220 nodes).
-- Playwright keyboard / zoom / backend-down script: 56 of 56 on the last run.
+- Playwright keyboard / zoom / backend-down script: 56 of 56 in one run. After restarting the backend
+  on this branch's code, 55 of 56: the failure was the local static server resetting stylesheet requests.
 - Security review by the author, inline: only textContent DOM writes, no new external resources,
   no findings.
 - Tools lived outside the repo (session scratchpad): Playwright for Python driving Edge, its bundled

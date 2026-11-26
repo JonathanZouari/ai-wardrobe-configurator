@@ -51,3 +51,20 @@ Commit 3f1ac41 on `feature/accessibility`. The user's GitHub account has no writ
 upstream repo, so with the user's approval it was pushed to the fork
 `alonhengel-lgtm/ai-wardrobe-configurator` (git remote `fork`). PR #8 into `dev`:
 https://github.com/JonathanZouari/ai-wardrobe-configurator/pull/8. Security review: no findings.
+
+## Follow-up: what the law requires, built in the site itself
+The user asked for the requirements to be implemented, not only described. Added on the same branch:
+- **Keyboard control of the 3D view** (WCAG 2.1.1): the canvas is focusable (`role="application"`);
+  arrow keys rotate and `+`/`-` zoom, clamped to the same limits as OrbitControls.
+  Code: `js/configurator.js`.
+- **Accessibility menu** on all 12 pages (`js/a11y-menu.js`, styles in `stitch/tailwind.input.css`
+  outside `@layer`). It offers text size 100–150% (scales the root font size, so rem-based layout
+  scales with it), high contrast, underline links, readable font and stop animations, plus reset and
+  a link to the statement. Choices are saved in localStorage (`a11y-preferences`). Escape closes the
+  menu and returns focus to its button.
+- The statement was updated to describe the menu and the 3D keys.
+Verified in headless Edge: every page opens the menu by keyboard; axe finds 0 violations with the
+menu open; Escape works; the options apply and persist across pages; reset works; no horizontal
+scroll at 720px width (equivalent to 200% zoom); arrow keys change the 3D render and do not scroll
+the page. pytest 73 passed, node tests 5 passed.
+Still open: the contact placeholders in the statement, and manual screen-reader testing.

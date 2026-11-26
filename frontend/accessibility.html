@@ -24,6 +24,8 @@
 <li>Form fields and icon buttons have text labels that screen readers announce.</li>
 <li>Status and error messages are announced to screen readers as they appear.</li>
 <li>Images carry text alternatives, and the 3D preview has a text description.</li>
+<li>An accessibility menu on every page enlarges text, raises contrast, underlines links, switches to a plain font and stops animations.</li>
+<li>The 3D preview can be rotated and zoomed with the keyboard.</li>
 <li>The site respects the operating system's "reduce motion" setting.</li>
 <li>The design assistant accepts typed requests as well as voice.</li>
 </ul>
@@ -34,6 +36,8 @@
 <ul class="list-disc pl-6 space-y-2">
 <li>Press <kbd>Tab</kbd> to move forward and <kbd>Shift</kbd>+<kbd>Tab</kbd> to move back. Press <kbd>Enter</kbd> or <kbd>Space</kbd> to activate a button.</li>
 <li>Press <kbd>Tab</kbd> once after a page loads to reach the "Skip to main content" link.</li>
+<li>Open the accessibility menu with the round button at the bottom-left of every page. Your choices are remembered on this device.</li>
+<li>In the 3D preview, press <kbd>Tab</kbd> until the view is focused, then use the arrow keys to rotate it and <kbd>+</kbd> or <kbd>-</kbd> to zoom.</li>
 <li>To enlarge text, use your browser's zoom (<kbd>Ctrl</kbd>+<kbd>+</kbd>, or <kbd>Cmd</kbd>+<kbd>+</kbd> on a Mac).</li>
 </ul>
 </section>
@@ -41,7 +45,7 @@
 <section class="space-y-3" aria-labelledby="limits">
 <h2 id="limits" class="font-headline text-2xl font-normal">Known limitations and alternatives</h2>
 <ul class="list-disc pl-6 space-y-2">
-<li><strong>3D preview:</strong> rotating the 3D model needs a mouse or touch. Every dimension and finish shown in it can also be set with the labelled fields beside it, and the interior layout page lists each component as a button.</li>
+<li><strong>3D preview:</strong> a screen reader cannot describe the picture in detail. Every dimension and finish shown in it is also available in the labelled fields beside it, and the interior layout page lists each component as a button.</li>
 <li><strong>Voice conversation with the assistant:</strong> spoken replies have no live captions. Use the text box in the assistant panel instead; its replies appear as text.</li>
 <li><strong>Staff area:</strong> the internal staff workspace has not yet been fully reviewed.</li>
 </ul>
@@ -62,4 +66,4 @@
 </article>
 </main>
 <footer class="w-full bg-surface-container-low mt-auto"><div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-label text-on-surface-variant"><p>© Atelier Joinery Studio</p><div class="flex items-center gap-6"><a aria-current="page" class="text-on-surface font-medium" href="accessibility.html">Accessibility statement</a><a class="hover:text-on-surface transition-colors" href="staff/sign-in.html">Staff sign in</a></div></div></footer>
-</body></html>
+<script defer src="js/a11y-menu.js"></script></body></html>

@@ -81,7 +81,20 @@ const PALETTE = {
 const status = document.createElement('p');
 status.className = 'absolute inset-x-0 top-1/2 text-center text-sm text-on-surface-variant pointer-events-none';
 status.setAttribute('role', 'status');
-container.appendChild(status);
+container.after(status); // outside the 3D view, whose role="img" would hide it from screen readers
+
+// The 3D view's text alternative: what the picture shows, in words.
+function describeView() {
+  const { width, height, depth } = design.dimensions_mm;
+  const { bays, count } = design.door_configuration;
+  const parts = design.components.filter((c) => ['shelf', 'rail', 'drawer'].includes(c.type));
+  const tally = ['shelf', 'rail', 'drawer'].map((type) => [type, parts.filter((c) => c.type === type).length]).filter(([, n]) => n);
+  const names = { shelf: 'shelves', rail: 'hanging rails', drawer: 'drawers' };
+  const inside = tally.length ? tally.map(([type, n]) => `${n} ${names[type]}`).join(', ') : 'no interior components';
+  const doors = view.doorsHidden ? 'doors hidden' : view.doorsOpen ? 'doors open' : 'doors closed';
+  container.setAttribute('aria-label', `3D view: ${design.wardrobe_type} wardrobe, ${width} by ${height} by ${depth} mm, `
+    + `${bays} bays, ${count} doors (${doors}), ${inside}. Finish: ${TITLES.carcass[design.material_selections.carcass]}.`);
+}
 
 // ---------- design -> scene ----------
 function renderDesign() {
@@ -149,6 +162,7 @@ function updateLabels() {
     if (label) label.textContent = `${bay.width_mm}mm`;
   });
   $('door-count-text').textContent = `${count} ${design.wardrobe_type} doors`;
+  describeView();
 }
 
 function syncInputs() {
@@ -183,6 +197,7 @@ function showMaterials() {
   document.querySelectorAll('[data-carcass]').forEach((btn) => {
     btn.classList.toggle('ring-2', btn.dataset.carcass === carcass);
     btn.classList.toggle('ring-primary', btn.dataset.carcass === carcass);
+    btn.setAttribute('aria-pressed', String(btn.dataset.carcass === carcass));
   });
   document.querySelectorAll('input[name="door-finish"]').forEach((radio) => { radio.checked = radio.value === doors; });
 }
@@ -197,6 +212,7 @@ function showType() {
     const active = key === design?.wardrobe_type;
     ['bg-surface-container-high', 'text-on-surface', 'font-semibold'].forEach((c) => btn.classList.toggle(c, active));
     btn.classList.toggle('text-on-surface-variant', !active);
+    btn.setAttribute('aria-pressed', String(active));
   });
 }
 Object.entries(typeButtons).forEach(([key, btn]) => {
@@ -208,6 +224,9 @@ function showDoorState() {
   $('door-action-text').textContent = view.doorsOpen ? 'Close Doors' : 'Open Doors';
   $('btn-inspect-interior').classList.toggle('bg-primary', view.doorsHidden);
   $('btn-inspect-interior').classList.toggle('text-on-primary', view.doorsHidden);
+  $('btn-toggle-doors').setAttribute('aria-pressed', String(view.doorsOpen));
+  $('btn-inspect-interior').setAttribute('aria-pressed', String(view.doorsHidden));
+  if (design) describeView();
 }
 
 function toggleDoors() {
@@ -248,6 +267,26 @@ function setCameraPreset(mode) {
 }
 ['persp', 'front', 'bays', 'iso'].forEach((mode) => $(`cam-${mode}`).addEventListener('click', () => setCameraPreset(mode)));
 
+// Keyboard alternative to dragging: arrows orbit, + and - zoom, while the 3D view has focus.
+const ORBIT_STEP = Math.PI / 24;
+container.addEventListener('keydown', (e) => {
+  const offset = camera.position.clone().sub(controls.target);
+  const spherical = new THREE.Spherical().setFromVector3(offset);
+  const turns = { ArrowLeft: [-ORBIT_STEP, 0], ArrowRight: [ORBIT_STEP, 0], ArrowUp: [0, -ORBIT_STEP], ArrowDown: [0, ORBIT_STEP] };
+  if (e.key in turns) {
+    spherical.theta += turns[e.key][0];
+    spherical.phi = Math.min(controls.maxPolarAngle, Math.max(0.1, spherical.phi + turns[e.key][1]));
+  } else if (['+', '=', '-', '_'].includes(e.key)) {
+    const factor = ['+', '='].includes(e.key) ? 0.9 : 1.1;
+    spherical.radius = Math.min(controls.maxDistance, Math.max(controls.minDistance, spherical.radius * factor));
+  } else {
+    return;
+  }
+  e.preventDefault();
+  cameraGoal = null;
+  camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));
+});
+
 $('btn-snapshot').addEventListener('click', () => {
   renderer.render(scene, camera);
   const link = document.createElement('a');
@@ -259,16 +298,28 @@ $('btn-snapshot').addEventListener('click', () => {
 // ---------- tabs ----------
 const TABS = ['structure', 'materials', 'copilot'];
 const ACTIVE_TAB = ['bg-surface-container-lowest', 'text-on-surface', 'font-semibold', 'shadow-sm'];
-function switchTab(active) {
+function switchTab(active, focus = false) {
   TABS.forEach((tab) => {
     const on = tab === active;
+    $(`tab-${tab}-btn`).setAttribute('aria-selected', String(on));
+    $(`tab-${tab}-btn`).tabIndex = on ? 0 : -1;
+    if (on && focus) $(`tab-${tab}-btn`).focus();
     ACTIVE_TAB.forEach((c) => $(`tab-${tab}-btn`).classList.toggle(c, on));
     $(`tab-${tab}-btn`).classList.toggle('text-on-surface-variant', !on);
     $(`tab-${tab}-content`).classList.toggle('hidden', !on);
     $(`tab-${tab}-content`).classList.toggle('flex', on);
   });
 }
-TABS.forEach((tab) => $(`tab-${tab}-btn`).addEventListener('click', () => switchTab(tab)));
+TABS.forEach((tab, index) => {
+  $(`tab-${tab}-btn`).addEventListener('click', () => switchTab(tab));
+  // Arrow keys move between tabs, Home and End jump to the ends (WAI-ARIA tabs pattern).
+  $(`tab-${tab}-btn`).addEventListener('keydown', (e) => {
+    const next = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: TABS.length - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    switchTab(TABS[(next + TABS.length) % TABS.length], true);
+  });
+});
 
 // ---------- loop ----------
 function resize() {

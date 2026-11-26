@@ -47,6 +47,7 @@ export function mountAssistant({ onApplied }) {
   const panel = el('section', 'fixed bottom-4 left-4 z-50 w-80 max-w-[calc(100vw-2rem)] bg-surface-container-lowest rounded-xl shadow-xl p-4 flex flex-col gap-3 text-on-surface');
   panel.setAttribute('aria-label', 'Design assistant');
   const status = el('p', 'text-[11px] text-on-surface-variant min-h-[1rem]');
+  status.dir = 'auto';
   status.setAttribute('role', 'status');
   const transcript = el('p', 'text-xs text-on-surface-variant max-h-24 overflow-y-auto whitespace-pre-line');
   transcript.dir = 'auto'; // Hebrew or English, whichever the conversation is in
@@ -82,6 +83,7 @@ export function mountAssistant({ onApplied }) {
 
     reject.addEventListener('click', () => {
       card.hidden = true;
+      input.focus(); // the focused button just disappeared
       say('Proposal rejected. Your design was not changed.');
       tellVoice('The customer rejected the proposal. The design was not changed.');
     });
@@ -102,11 +104,13 @@ export function mountAssistant({ onApplied }) {
       undo.addEventListener('click', () => {
         onApplied(restoreDraft(before));
         card.hidden = true;
+        input.focus();
         say('Change undone.');
         tellVoice('The customer undid the change. The design is back to how it was.');
       });
       card.replaceChildren(el('p', 'text-xs text-on-surface', 'Proposal applied. You can undo this change.'), undo);
-      say('');
+      undo.focus();
+      say('Proposal applied. You can undo this change.');
       tellVoice('The customer accepted the proposal and it has been applied.');
     });
   }
@@ -118,7 +122,7 @@ export function mountAssistant({ onApplied }) {
     try {
       const proposal = await proposeChanges(await ensureDraft(), conversation());
       if (proposal.operations.length) showProposal(proposal);
-      say(proposal.operations.length ? 'Review the proposed change below.' : '');
+      say(proposal.operations.length ? `${proposal.reply} Review the proposed change below.` : proposal.reply);
       return proposal.reply;
     } catch (error) {
       say(`The assistant could not answer: ${error.message}`);

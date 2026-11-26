@@ -61,11 +61,25 @@ if (new URLSearchParams(location.search).has('new')) clearDraft();
 const existing = loadDraft();
 if (existing) showExistingDraft(existing);
 
+// Screen reader users hear the value a +/- button set, and when a typed value was corrected.
+const note = document.createElement('p');
+note.className = 'sr-only';
+note.setAttribute('role', 'status');
+launch.parentElement.appendChild(note);
+const NAMES = { width: 'Width', height: 'Height', depth: 'Depth' };
+
 document.querySelectorAll('button[data-field]').forEach((btn) => {
   btn.addEventListener('click', () => {
     const field = btn.dataset.field;
     input(field).value = clamp(field, (parseInt(input(field).value, 10) || 0) + Number(btn.dataset.delta));
+    note.textContent = `${NAMES[field]} ${input(field).value} mm`;
   });
 });
-document.querySelectorAll('input[type="number"]').forEach((el) => el.addEventListener('change', readDimensions));
+document.querySelectorAll('input[type="number"]').forEach((el) => el.addEventListener('change', () => {
+  const field = el.id.replace('input-', '');
+  const typed = el.value;
+  readDimensions();
+  const { min, max } = LIMITS[field];
+  note.textContent = String(el.value) === typed ? '' : `${NAMES[field]} must be between ${min} and ${max} mm. It was set to ${el.value} mm.`;
+}));
 launch.addEventListener('click', start);

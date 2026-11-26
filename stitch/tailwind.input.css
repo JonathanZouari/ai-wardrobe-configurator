@@ -18,8 +18,8 @@ body {
     }
     input:focus {
       outline: none;
-      border-color: #c2652a;
-      box-shadow: 0 0 0 3px rgba(194, 101, 42, 0.15);
+      border-color: #9a4a19;
+      box-shadow: 0 0 0 3px rgba(154, 74, 25, 0.15);
     }
 body {
       background-color: #faf5ee;
@@ -42,4 +42,31 @@ body {
     ::-webkit-scrollbar-track {
       background: #faf5ee;
     }
+}
+
+/* ---------- Accessibility (IS 5568 / WCAG 2.0 AA). Kept outside the Tailwind layers. ---------- */
+.skip-link {
+  position: absolute; left: 1rem; top: -100px; z-index: 1000;
+  padding: 0.75rem 1.25rem; border-radius: 0.5rem;
+  background: #3a302a; color: #ffffff; font-weight: 600; font-size: 0.875rem;
+}
+.skip-link:focus { top: 1rem; }
+main:focus { outline: none; }
+/* A visible focus indicator on everything, overriding focus:outline-none utilities. */
+:focus-visible {
+  outline: 3px solid #9a4a19 !important;
+  outline-offset: 2px !important;
+}
+/* Picture cards wrap a visually hidden radio or checkbox: show the focus on the card. */
+label:has(> input.sr-only:focus-visible),
+label:has(input.sr-only:focus-visible) {
+  outline: 3px solid #9a4a19;
+  outline-offset: 3px;
+}
+a.underline, main p a, main li a { text-underline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+  }
 }
